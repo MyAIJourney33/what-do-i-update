@@ -1,0 +1,148 @@
+{
+ "updated": "2026-11-19",
+ "plain": {
+  "CVE-2026-125350": {
+   "title": "Update Chrome and restart it",
+   "why": "Google fixed a flaw hackers are already using. A booby-trapped web page could run code inside your browser. Fixed Nov 9, 2026: you need version 157.0.8103.50 or newer.",
+   "source": "Google security advisory, Nov 9, 2026",
+   "for": {
+    "edge": {
+     "title": "Update Edge and restart it",
+     "why": "Microsoft fixed the same flaw hackers are using in Chrome. A booby-trapped web page could run code inside your browser. Edge updates itself, but only finishes after a restart."
+    },
+    "chromebook": {
+     "title": "Update your Chromebook and restart it",
+     "why": "Google fixed a flaw hackers are already using in the browser built into Chromebooks. A booby-trapped web page could run code on it."
+    },
+    "other-chromium": {
+     "title": "Update Brave, Opera or Vivaldi",
+     "why": "These browsers are built on Chrome, which has a flaw hackers are already using. Install your browser's latest update and restart it."
+    }
+   }
+  },
+  "CVE-2026-124194": {
+   "title": "Update Outlook",
+   "why": "Hackers are using an Outlook flaw that can let something risky happen without asking you first. Install the latest Office update.",
+   "source": "CISA, added Nov 10, 2026"
+  },
+  "CVE-2026-96951": {
+   "title": "Run Windows Update and restart",
+   "why": "Hackers are using a Windows flaw to get around a built-in security protection. The fix comes through Windows Update.",
+   "source": "CISA, added Oct 13, 2026"
+  },
+  "CVE-2024-27834": {
+   "title": "Make sure your Apple devices are up to date",
+   "why": "An older Apple and Safari flaw is now being used by hackers. If your iPhone, iPad or Mac is on the latest version, you're already protected.",
+   "source": "CISA, added Nov 4, 2026"
+  },
+  "CVE-2024-10441": {
+   "title": "Update your Synology drive",
+   "why": "Hackers are using a flaw in Synology's software to take over drives remotely. Install the latest update from the drive's Control Panel.",
+   "source": "CISA, added Nov 18, 2026"
+  }
+ },
+ "items": [
+  {
+   "id": "apple-outage-2026-11",
+   "date": "2026-11-17",
+   "title": "Apple Pay, iCloud and the App Store went down",
+   "affects": [
+    "iphone",
+    "ipad",
+    "mac",
+    "apple-watch",
+    "apple-tv"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "An outage after a bad update at Apple, not a hack. Nothing to update on your devices. Ignore texts or calls saying your Apple ID is locked and asking for a code.",
+   "if_not": "Nothing for you to do.",
+   "source": "ABC News live updates, Nov 17, 2026"
+  },
+  {
+   "id": "outage-wave-2026-11",
+   "date": "2026-11-17",
+   "title": "Bank and airline outages, Nov 12–17",
+   "affects": [
+    "bank"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Banks, Schwab, United and the FAA all had outages. Every company that gave a cause blamed a technical fault, not an attack. An outage doesn't move your money. If you get a call or text 'fixing' your account, hang up and call the number on your card.",
+   "if_not": "Nothing for you to do.",
+   "source": "FOX Television Stations, Nov 17, 2026; FourWeekMBA outage tally, Nov 2026"
+  },
+  {
+   "id": "m365-outage-2026-11",
+   "date": "2026-11-12",
+   "title": "Microsoft 365 down for almost 24 hours",
+   "affects": [
+    "microsoft-account",
+    "outlook"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "An outage, not a hack. Nothing to update. Ignore emails asking you to \"restore\" your mailbox.",
+   "if_not": "Nothing for you to do.",
+   "source": "Microsoft incident MO1550821"
+  },
+  {
+   "id": "freezers-2026-11",
+   "date": "2026-11-05",
+   "title": "U.S. warns of hacks on store freezers",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Commercial refrigeration in grocery stores and cold storage, not home fridges.",
+   "source": "Reuters, Nov 5, 2026"
+  },
+  {
+   "id": "android-nov-2026",
+   "date": "2026-11-03",
+   "title": "Android's November update fixes a no-tap flaw",
+   "affects": [
+    "android",
+    "samsung-galaxy",
+    "pixel"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Google fixed a serious flaw that needs no tap from you. Hackers aren't using it yet. Install the update when your phone offers it and check the security patch level says November 5, 2026 or later.",
+   "if_not": "Nothing for you to do.",
+   "source": "Android Security Bulletin, November 2026 (published Nov 2, 2026)"
+  },
+  {
+   "id": "binance-2026-10",
+   "date": "2026-10-29",
+   "title": "$6.3 billion stolen from Binance",
+   "affects": [
+    "crypto-exchange"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "If you use Binance: the exchange says it refilled affected wallets. Ignore messages offering refunds or asking you to \"verify\" your account.",
+   "if_not": "Nothing for you to do.",
+   "source": "TRM Labs; Binance"
+  },
+  {
+   "id": "gcloud-london-2026-10",
+   "date": "2026-10-20",
+   "title": "Google Cloud outage in London",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Hit UK banks and services. Backup power failed; nothing for you to update.",
+   "source": "Technology Magazine"
+  },
+  {
+   "id": "android-sms-2026-10",
+   "date": "2026-10-01",
+   "title": "Android \"SMS of Death\" text bug",
+   "affects": [
+    "android",
+    "samsung-galaxy",
+    "pixel"
+   ],
+   "verdict": "do_now",
+   "if_affected": "One hidden text can crash calling, including 911. Install the October update (Android 14–17). Android 12 and 13 won't get a fix: plan to replace the phone.",
+   "if_not": "You don't have an Android phone.",
+   "source": "PBX Science",
+   "date_label": "October 2026"
+  }
+ ]
+}

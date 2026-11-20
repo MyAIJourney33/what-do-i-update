@@ -1,0 +1,9 @@
+{
+  "name": "What Do I Update?",
+  "short_name": "Update?",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#F6F5F1",
+  "theme_color": "#1D4ED8",
+  "description": "Plain-English alerts for the devices you own. Your list stays on your phone."
+}

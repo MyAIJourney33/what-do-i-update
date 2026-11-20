@@ -1,0 +1,1108 @@
+{
+ "products": [
+  {
+   "id": "iphone",
+   "name": "iPhone",
+   "category": "Phone",
+   "how_to_update": "Settings › General › Software Update",
+   "aliases": [
+    "apple phone",
+    "ios"
+   ],
+   "eol": "iphone"
+  },
+  {
+   "id": "ipad",
+   "name": "iPad",
+   "category": "Tablet",
+   "how_to_update": "Settings › General › Software Update",
+   "aliases": [
+    "apple tablet",
+    "ipados"
+   ],
+   "eol": "ipad"
+  },
+  {
+   "id": "apple-watch",
+   "name": "Apple Watch",
+   "category": "Wearable",
+   "how_to_update": "On your iPhone: Watch app › General › Software Update",
+   "aliases": [
+    "watch",
+    "iwatch",
+    "watchos"
+   ],
+   "eol": "apple-watch"
+  },
+  {
+   "id": "galaxy-watch",
+   "name": "Samsung Galaxy Watch",
+   "category": "Wearable",
+   "how_to_update": "Galaxy Wearable app on your phone › Watch settings › Watch software update",
+   "news_only": true,
+   "aliases": [
+    "samsung watch",
+    "galaxy watch",
+    "wear os"
+   ],
+   "eol": "samsung-galaxy-watch"
+  },
+  {
+   "id": "pixel-watch",
+   "name": "Google Pixel Watch",
+   "category": "Wearable",
+   "how_to_update": "On the watch: Settings › System › System updates",
+   "news_only": true,
+   "aliases": [
+    "pixel watch",
+    "wear os"
+   ],
+   "eol": "pixel-watch"
+  },
+  {
+   "id": "fitbit",
+   "name": "Fitbit",
+   "category": "Wearable",
+   "how_to_update": "Fitbit app › tap your device › tap Update if it is offered (keep the tracker near your phone)",
+   "news_only": true,
+   "aliases": [
+    "fitbit charge",
+    "fitbit versa",
+    "fitness tracker"
+   ]
+  },
+  {
+   "id": "garmin",
+   "name": "Garmin watch",
+   "category": "Wearable",
+   "how_to_update": "Garmin Connect app › tap the device › System › Software Update",
+   "news_only": true,
+   "aliases": [
+    "garmin",
+    "forerunner",
+    "fenix",
+    "vivoactive"
+   ]
+  },
+  {
+   "id": "apple-tv",
+   "name": "Apple TV",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › System › Software Updates › Update Software",
+   "aliases": [
+    "appletv",
+    "tvos"
+   ]
+  },
+  {
+   "id": "roku",
+   "name": "Roku TV or streaming stick",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › System › System update › Check now",
+   "news_only": true,
+   "aliases": [
+    "roku tv",
+    "tcl roku",
+    "hisense roku",
+    "onn",
+    "roku stick",
+    "roku ultra"
+   ]
+  },
+  {
+   "id": "fire-tv",
+   "name": "Amazon Fire TV or Fire Stick",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › My Fire TV › About › Check for Updates, then Install Update",
+   "news_only": true,
+   "aliases": [
+    "fire stick",
+    "firestick",
+    "fire tv",
+    "insignia fire tv",
+    "toshiba fire tv"
+   ]
+  },
+  {
+   "id": "samsung-tv",
+   "name": "Samsung smart TV",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › Support › Software Update › Update Now (newer models: Settings › All Settings › Support). Turn on Auto Update.",
+   "news_only": true,
+   "aliases": [
+    "samsung tv",
+    "tizen",
+    "frame tv"
+   ]
+  },
+  {
+   "id": "lg-tv",
+   "name": "LG smart TV",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › All Settings › Support › Software Update. Turn on Automatic update.",
+   "news_only": true,
+   "aliases": [
+    "lg tv",
+    "webos",
+    "lg oled"
+   ]
+  },
+  {
+   "id": "google-tv",
+   "name": "Google TV, Chromecast or Android TV",
+   "category": "TV and streaming",
+   "how_to_update": "Settings › System › About › System update",
+   "news_only": true,
+   "aliases": [
+    "chromecast",
+    "google tv",
+    "android tv",
+    "tcl google tv",
+    "hisense google tv",
+    "sony tv",
+    "bravia",
+    "onn google tv"
+   ],
+   "eol": "chromecast"
+  },
+  {
+   "id": "vizio-tv",
+   "name": "Vizio TV",
+   "category": "TV and streaming",
+   "how_to_update": "Updates itself when on Wi-Fi. To check: Menu › System › Check for Updates",
+   "news_only": true,
+   "aliases": [
+    "vizio",
+    "smartcast"
+   ]
+  },
+  {
+   "id": "android",
+   "name": "Android phone (any brand)",
+   "category": "Phone",
+   "how_to_update": "Settings › System › Software update (also: Settings › Security › Google Play system update)",
+   "caveat": "Chipset flaws (Qualcomm, Arm Mali, MediaTek) only affect phones with that chip. Say 'may affect you' unless the user's model is known.",
+   "aliases": [
+    "android phone",
+    "oneplus",
+    "tcl phone",
+    "cricket",
+    "metro"
+   ]
+  },
+  {
+   "id": "samsung-galaxy",
+   "name": "Samsung Galaxy",
+   "category": "Phone",
+   "how_to_update": "Settings › Software update › Download and install",
+   "aliases": [
+    "galaxy",
+    "samsung phone",
+    "galaxy s",
+    "galaxy a",
+    "galaxy z",
+    "fold",
+    "flip"
+   ],
+   "eol": "samsung-mobile"
+  },
+  {
+   "id": "galaxy-tab",
+   "name": "Samsung Galaxy Tab",
+   "category": "Tablet",
+   "how_to_update": "Settings › Software update › Download and install",
+   "aliases": [
+    "samsung tablet",
+    "galaxy tablet",
+    "tab s",
+    "tab a"
+   ],
+   "runs": [
+    "android",
+    "samsung-galaxy"
+   ],
+   "eol": "samsung-galaxy-tab"
+  },
+  {
+   "id": "fire-tablet",
+   "name": "Amazon Fire tablet",
+   "category": "Tablet",
+   "how_to_update": "Settings › Device Options › System Updates › Check Now",
+   "news_only": true,
+   "aliases": [
+    "fire hd",
+    "kindle fire",
+    "kids tablet"
+   ]
+  },
+  {
+   "id": "kindle",
+   "name": "Kindle e-reader",
+   "category": "Tablet",
+   "how_to_update": "Updates itself over Wi-Fi. To check: Settings › the ⋮ menu › Update Your Kindle (greyed out means you are up to date)",
+   "news_only": true,
+   "aliases": [
+    "kindle paperwhite",
+    "ereader",
+    "e-reader"
+   ],
+   "eol": "kindle"
+  },
+  {
+   "id": "pixel",
+   "name": "Google Pixel",
+   "category": "Phone",
+   "how_to_update": "Settings › System › Software update",
+   "aliases": [
+    "google phone"
+   ],
+   "eol": "pixel"
+  },
+  {
+   "id": "motorola",
+   "name": "Motorola phone",
+   "category": "Phone",
+   "how_to_update": "Settings › System › System updates",
+   "aliases": [
+    "moto",
+    "moto g",
+    "razr",
+    "edge phone"
+   ],
+   "runs": [
+    "android"
+   ],
+   "eol": "motorola-mobility"
+  },
+  {
+   "id": "windows",
+   "name": "Windows PC",
+   "category": "Computer",
+   "how_to_update": "Start › Settings › Windows Update › Check for updates, then restart",
+   "aliases": [
+    "pc",
+    "laptop",
+    "desktop",
+    "windows 10",
+    "windows 11",
+    "dell",
+    "hp laptop",
+    "lenovo",
+    "acer"
+   ],
+   "eol": "windows"
+  },
+  {
+   "id": "surface",
+   "name": "Microsoft Surface",
+   "category": "Computer",
+   "how_to_update": "Start › Settings › Windows Update › Check for updates, then restart. Surface firmware comes through Windows Update too.",
+   "aliases": [
+    "surface pro",
+    "surface laptop",
+    "surface go",
+    "surface book"
+   ],
+   "runs": [
+    "windows",
+    "edge"
+   ],
+   "eol": "surface"
+  },
+  {
+   "id": "mac",
+   "name": "Mac",
+   "category": "Computer",
+   "how_to_update": "Apple menu › System Settings › General › Software Update",
+   "aliases": [
+    "macbook",
+    "imac",
+    "macos",
+    "apple computer"
+   ],
+   "eol": "macos"
+  },
+  {
+   "id": "chromebook",
+   "name": "Chromebook",
+   "category": "Computer",
+   "how_to_update": "Settings › About ChromeOS › Check for updates, then restart",
+   "aliases": [
+    "chromeos",
+    "school laptop"
+   ]
+  },
+  {
+   "id": "asus-pc",
+   "name": "ASUS laptop or desktop",
+   "category": "Computer",
+   "how_to_update": "Use MyASUS app › System Update (ASUS Live Update is retired; uninstall it if present)"
+  },
+  {
+   "id": "chrome",
+   "name": "Chrome",
+   "category": "Browser",
+   "how_to_update": "Computer: ⋮ › Help › About Google Chrome › Relaunch. Phone: app store › Chrome › Update",
+   "aliases": [
+    "google chrome"
+   ]
+  },
+  {
+   "id": "edge",
+   "name": "Microsoft Edge",
+   "category": "Browser",
+   "how_to_update": "… menu › Help and feedback › About Microsoft Edge › Restart",
+   "caveat": "Edge is built on Chromium. Chromium flaws usually reach Edge too, but Microsoft ships the fix a few days after Google.",
+   "aliases": [
+    "microsoft edge"
+   ]
+  },
+  {
+   "id": "other-chromium",
+   "name": "Brave, Opera or Vivaldi",
+   "category": "Browser",
+   "how_to_update": "Open the browser's menu › About › let it update › Relaunch",
+   "caveat": "Built on Chromium; each company ships Google's fix on its own schedule."
+  },
+  {
+   "id": "safari",
+   "name": "Safari",
+   "category": "Browser",
+   "how_to_update": "Safari updates with your iPhone, iPad or Mac software update",
+   "caveat": "On iPhone and iPad, every browser (including Chrome) uses Apple's WebKit, so WebKit flaws affect all of them."
+  },
+  {
+   "id": "firefox",
+   "name": "Firefox",
+   "category": "Browser",
+   "how_to_update": "☰ menu › Help › About Firefox › Restart to update"
+  },
+  {
+   "id": "office",
+   "name": "Microsoft Office (Word, Excel, PowerPoint)",
+   "category": "App",
+   "how_to_update": "Open Word › File › Account › Update Options › Update Now",
+   "aliases": [
+    "word",
+    "excel",
+    "powerpoint",
+    "microsoft 365 apps"
+   ]
+  },
+  {
+   "id": "outlook",
+   "name": "Outlook (desktop app)",
+   "category": "App",
+   "how_to_update": "Outlook › File › Office Account › Update Options › Update Now",
+   "aliases": [
+    "email app"
+   ]
+  },
+  {
+   "id": "whatsapp",
+   "name": "WhatsApp",
+   "category": "App",
+   "how_to_update": "App Store or Google Play › WhatsApp › Update",
+   "aliases": [
+    "whats app"
+   ]
+  },
+  {
+   "id": "adobe-reader",
+   "name": "Adobe Acrobat / Reader",
+   "category": "App",
+   "how_to_update": "Open Acrobat › Help › Check for Updates"
+  },
+  {
+   "id": "winrar",
+   "name": "WinRAR",
+   "category": "App",
+   "how_to_update": "WinRAR does not update itself: install the newest version from the maker's official site (type the address yourself)"
+  },
+  {
+   "id": "7zip",
+   "name": "7-Zip",
+   "category": "App",
+   "how_to_update": "7-Zip does not update itself: install the newest version from the maker's official site (type the address yourself)"
+  },
+  {
+   "id": "java",
+   "name": "Java",
+   "category": "App",
+   "how_to_update": "Windows: Start › Configure Java › Update tab › Update Now"
+  },
+  {
+   "id": "messaging-apps",
+   "name": "Messaging apps (Telegram, Signal, Messenger, Discord, Snapchat)",
+   "category": "App",
+   "how_to_update": "iPhone: App Store › tap your picture › Update All. Android: Play Store › tap your picture › Manage apps & device › Update all. Computer: open the app and look for Check for updates.",
+   "news_only": true,
+   "aliases": [
+    "telegram",
+    "signal",
+    "messenger",
+    "facebook messenger",
+    "discord",
+    "snapchat",
+    "imessage"
+   ]
+  },
+  {
+   "id": "social-apps",
+   "name": "Social apps (Facebook, Instagram, TikTok, X, YouTube)",
+   "category": "App",
+   "how_to_update": "iPhone: App Store › tap your picture › Update All. Android: Play Store › tap your picture › Manage apps & device › Update all. Computer: open the app and look for Check for updates.",
+   "news_only": true,
+   "aliases": [
+    "facebook",
+    "instagram",
+    "tiktok",
+    "x",
+    "twitter",
+    "threads",
+    "youtube",
+    "reddit",
+    "pinterest"
+   ]
+  },
+  {
+   "id": "video-calls",
+   "name": "Zoom or Microsoft Teams",
+   "category": "App",
+   "how_to_update": "Zoom: tap your picture › Check for Updates. Teams: updates itself; restart it. Phone: update from the app store.",
+   "news_only": true,
+   "aliases": [
+    "zoom",
+    "teams",
+    "microsoft teams",
+    "google meet",
+    "webex"
+   ]
+  },
+  {
+   "id": "ai-apps",
+   "name": "AI chat apps (ChatGPT, Gemini, Claude, Grok)",
+   "category": "App",
+   "how_to_update": "iPhone: App Store › tap your picture › Update All. Android: Play Store › tap your picture › Manage apps & device › Update all. Computer: open the app and look for Check for updates.",
+   "news_only": true,
+   "aliases": [
+    "chatgpt",
+    "gemini",
+    "claude",
+    "grok",
+    "copilot",
+    "ai app"
+   ]
+  },
+  {
+   "id": "password-manager",
+   "name": "Password manager (1Password, Bitwarden, LastPass, iCloud Keychain)",
+   "category": "App",
+   "how_to_update": "iPhone: App Store › tap your picture › Update All. Android: Play Store › tap your picture › Manage apps & device › Update all. Computer: open the app and look for Check for updates.",
+   "news_only": true,
+   "aliases": [
+    "1password",
+    "bitwarden",
+    "lastpass",
+    "dashlane",
+    "keeper",
+    "keychain",
+    "google password manager"
+   ]
+  },
+  {
+   "id": "remote-access",
+   "name": "Remote access app (TeamViewer, AnyDesk, ScreenConnect)",
+   "category": "App",
+   "how_to_update": "iPhone: App Store › tap your picture › Update All. Android: Play Store › tap your picture › Manage apps & device › Update all. Computer: open the app and look for Check for updates.",
+   "caveat": "If a stranger, a pop-up or a caller asked you to install this, someone may be in your computer. Open \"I think I got hacked\".",
+   "aliases": [
+    "teamviewer",
+    "anydesk",
+    "screenconnect",
+    "remote desktop",
+    "logmein"
+   ]
+  },
+  {
+   "id": "notepad-plus",
+   "name": "Notepad++",
+   "category": "App",
+   "how_to_update": "Notepad++ › ? menu › Update Notepad++",
+   "aliases": [
+    "notepad plus plus"
+   ]
+  },
+  {
+   "id": "router-tplink",
+   "name": "TP-Link router",
+   "category": "Wi-Fi router",
+   "how_to_update": "TP-Link Tether or Deco app › your router › Firmware update",
+   "aliases": [
+    "archer",
+    "deco",
+    "tp link"
+   ]
+  },
+  {
+   "id": "router-netgear",
+   "name": "Netgear router",
+   "category": "Wi-Fi router",
+   "how_to_update": "Nighthawk or Orbi app › Settings › Router firmware",
+   "aliases": [
+    "nighthawk",
+    "orbi"
+   ]
+  },
+  {
+   "id": "router-dlink",
+   "name": "D-Link router",
+   "category": "Wi-Fi router",
+   "how_to_update": "D-Link app or the router's settings page › Firmware",
+   "caveat": "Many exploited D-Link models are end-of-life and will never be fixed; the advice is to replace them."
+  },
+  {
+   "id": "router-asus",
+   "name": "ASUS router",
+   "category": "Wi-Fi router",
+   "how_to_update": "ASUS Router app › Settings › Firmware upgrade",
+   "aliases": [
+    "rog router",
+    "zenwifi"
+   ]
+  },
+  {
+   "id": "router-tenda",
+   "name": "Tenda router",
+   "category": "Wi-Fi router",
+   "how_to_update": "Tenda WiFi app › Settings › Firmware upgrade"
+  },
+  {
+   "id": "router-zyxel",
+   "name": "Zyxel router or modem",
+   "category": "Wi-Fi router",
+   "how_to_update": "Router settings page › Maintenance › Firmware"
+  },
+  {
+   "id": "router-ubiquiti",
+   "name": "Ubiquiti (UniFi / AmpliFi)",
+   "category": "Wi-Fi router",
+   "how_to_update": "UniFi app › Settings › Control Plane › Updates"
+  },
+  {
+   "id": "router-isp",
+   "name": "Internet company's box (Xfinity, Spectrum, AT&T…)",
+   "category": "Wi-Fi router",
+   "how_to_update": "Usually updated automatically by your internet company; restart it if they announce a fix",
+   "news_only": true,
+   "aliases": [
+    "xfinity",
+    "comcast",
+    "spectrum",
+    "charter",
+    "at&t",
+    "verizon",
+    "fios",
+    "cox",
+    "t-mobile home internet",
+    "modem",
+    "gateway",
+    "arris",
+    "technicolor",
+    "sagemcom",
+    "arcadyan"
+   ]
+  },
+  {
+   "id": "eero",
+   "name": "Amazon eero",
+   "category": "Wi-Fi router",
+   "how_to_update": "Updates itself. To check: eero app › Settings › Software Updates",
+   "news_only": true,
+   "aliases": [
+    "eero",
+    "eero pro",
+    "mesh wifi"
+   ]
+  },
+  {
+   "id": "google-wifi",
+   "name": "Google Nest Wifi or Google Wifi",
+   "category": "Wi-Fi router",
+   "how_to_update": "Updates itself; there is nothing to install. Keep the Google Home app updated.",
+   "news_only": true,
+   "aliases": [
+    "nest wifi",
+    "google wifi",
+    "mesh wifi"
+   ]
+  },
+  {
+   "id": "linksys",
+   "name": "Linksys router",
+   "category": "Wi-Fi router",
+   "how_to_update": "Linksys app › your network › look for Firmware Update and turn on automatic updates",
+   "news_only": true,
+   "aliases": [
+    "linksys",
+    "velop"
+   ]
+  },
+  {
+   "id": "router-draytek",
+   "name": "DrayTek router",
+   "category": "Wi-Fi router",
+   "how_to_update": "Router's admin page › System Maintenance › Firmware Upgrade",
+   "aliases": [
+    "vigor",
+    "draytek"
+   ]
+  },
+  {
+   "id": "router-trendnet",
+   "name": "TRENDnet router or camera",
+   "category": "Wi-Fi router",
+   "how_to_update": "Router's admin page › Administrator › Firmware upgrade (download only from TRENDnet's own support page)",
+   "aliases": [
+    "trendnet"
+   ]
+  },
+  {
+   "id": "camera-dlink",
+   "name": "D-Link camera or recorder",
+   "category": "Smart home",
+   "how_to_update": "mydlink app › your camera › Firmware"
+  },
+  {
+   "id": "camera-hikvision",
+   "name": "Hikvision camera or recorder",
+   "category": "Smart home",
+   "how_to_update": "Hik-Connect app › your device › Device Upgrade, or the recorder's menu › Maintenance › Upgrade",
+   "caveat": "Many store-brand cameras are made by Hikvision. Check the label or the app you use to view them.",
+   "aliases": [
+    "hik-connect",
+    "hikvision",
+    "security camera",
+    "nvr",
+    "dvr"
+   ]
+  },
+  {
+   "id": "camera-dahua",
+   "name": "Dahua camera or recorder",
+   "category": "Smart home",
+   "how_to_update": "DMSS app › your device › Device Upgrade, or the recorder's menu › System › Upgrade",
+   "caveat": "Some other camera brands use Dahua hardware. Check the label or the app you use to view them.",
+   "aliases": [
+    "dahua",
+    "dmss",
+    "amcrest",
+    "security camera",
+    "nvr",
+    "dvr"
+   ]
+  },
+  {
+   "id": "nas",
+   "name": "Home storage drive (Synology, QNAP)",
+   "category": "Smart home",
+   "how_to_update": "Open the drive's web page › Control Panel › Update",
+   "aliases": [
+    "synology",
+    "qnap",
+    "network drive",
+    "home server"
+   ]
+  },
+  {
+   "id": "ring",
+   "name": "Ring doorbell or camera",
+   "category": "Smart home",
+   "how_to_update": "Updates itself over Wi-Fi. To check: Ring app › your device › Device Health › Firmware should say Up to Date",
+   "news_only": true,
+   "aliases": [
+    "ring doorbell",
+    "ring camera",
+    "ring alarm",
+    "video doorbell"
+   ]
+  },
+  {
+   "id": "blink",
+   "name": "Blink camera",
+   "category": "Smart home",
+   "how_to_update": "Updates itself while the camera is online. Keep the Blink app updated too.",
+   "news_only": true,
+   "aliases": [
+    "blink camera",
+    "blink doorbell",
+    "blink mini"
+   ]
+  },
+  {
+   "id": "wyze",
+   "name": "Wyze camera or plug",
+   "category": "Smart home",
+   "how_to_update": "Wyze app › Account › Firmware Update › Update all",
+   "news_only": true,
+   "aliases": [
+    "wyze cam",
+    "wyze doorbell"
+   ]
+  },
+  {
+   "id": "nest",
+   "name": "Google Nest camera, doorbell or thermostat",
+   "category": "Smart home",
+   "how_to_update": "Updates itself over Wi-Fi; there is nothing to install. Keep the Google Home app updated.",
+   "news_only": true,
+   "aliases": [
+    "nest cam",
+    "nest doorbell",
+    "nest thermostat",
+    "google home",
+    "nest hub",
+    "nest mini"
+   ]
+  },
+  {
+   "id": "arlo",
+   "name": "Arlo camera",
+   "category": "Smart home",
+   "how_to_update": "Arlo app › Settings › My Devices › your camera › Device Info › Firmware (update if offered)",
+   "news_only": true,
+   "aliases": [
+    "arlo pro",
+    "arlo doorbell"
+   ]
+  },
+  {
+   "id": "eufy",
+   "name": "eufy camera or doorbell",
+   "category": "Smart home",
+   "how_to_update": "eufy Security app › your device › Settings › About Device › check firmware",
+   "news_only": true,
+   "aliases": [
+    "eufy security",
+    "eufycam",
+    "anker camera"
+   ]
+  },
+  {
+   "id": "echo",
+   "name": "Amazon Echo or Alexa device",
+   "category": "Smart home",
+   "how_to_update": "Updates itself. To check, say: \"Alexa, check for software updates\"",
+   "news_only": true,
+   "aliases": [
+    "alexa",
+    "echo dot",
+    "echo show"
+   ]
+  },
+  {
+   "id": "kasa-tapo",
+   "name": "TP-Link Kasa or Tapo plug or camera",
+   "category": "Smart home",
+   "how_to_update": "Kasa or Tapo app › your device › Settings › Firmware Update",
+   "news_only": true,
+   "aliases": [
+    "kasa",
+    "tapo",
+    "smart plug",
+    "tapo camera"
+   ]
+  },
+  {
+   "id": "gmail",
+   "name": "Gmail / Google account",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover breaches, outages and scams",
+   "news_only": true,
+   "aliases": [
+    "google account",
+    "youtube account"
+   ]
+  },
+  {
+   "id": "microsoft-account",
+   "name": "Outlook.com / Microsoft 365 account",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover breaches, outages and scams",
+   "news_only": true,
+   "aliases": [
+    "hotmail",
+    "outlook.com",
+    "xbox account",
+    "microsoft 365"
+   ]
+  },
+  {
+   "id": "bank",
+   "name": "Bank or credit union",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover breaches and scams",
+   "news_only": true,
+   "aliases": [
+    "credit union",
+    "chase",
+    "wells fargo",
+    "bank of america",
+    "zelle"
+   ]
+  },
+  {
+   "id": "crypto-exchange",
+   "name": "Crypto exchange (Coinbase, Binance, Kraken…)",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover hacks, outages and scams",
+   "news_only": true,
+   "aliases": [
+    "coinbase",
+    "binance",
+    "kraken",
+    "robinhood crypto",
+    "crypto.com"
+   ]
+  },
+  {
+   "id": "apple-account",
+   "name": "Apple Account (iCloud)",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover breaches, outages and scams",
+   "news_only": true,
+   "aliases": [
+    "apple id",
+    "icloud"
+   ]
+  },
+  {
+   "id": "amazon-account",
+   "name": "Amazon account",
+   "category": "Account",
+   "how_to_update": "Nothing to install; alerts cover breaches, outages and scams",
+   "news_only": true,
+   "aliases": [
+    "amazon",
+    "prime"
+   ]
+  },
+  {
+   "id": "carrier",
+   "name": "Phone carrier (Verizon, AT&T, T-Mobile…)",
+   "category": "Account",
+   "how_to_update": "Nothing to install. Turn on a port-out PIN or number lock in your carrier account to block SIM swaps.",
+   "news_only": true,
+   "aliases": [
+    "verizon",
+    "at&t",
+    "t-mobile",
+    "cricket",
+    "metro",
+    "boost",
+    "mint mobile",
+    "visible",
+    "cell phone company",
+    "sim"
+   ]
+  },
+  {
+   "id": "playstation",
+   "name": "PlayStation",
+   "category": "Game console",
+   "how_to_update": "PS5: Settings › System › System Software › System Software Update and Settings › Update System Software. PS4: Settings › System Software Update.",
+   "news_only": true,
+   "aliases": [
+    "ps5",
+    "ps4",
+    "sony playstation",
+    "psn"
+   ]
+  },
+  {
+   "id": "xbox",
+   "name": "Xbox",
+   "category": "Game console",
+   "how_to_update": "Settings › System › Updates",
+   "news_only": true,
+   "aliases": [
+    "xbox series x",
+    "xbox series s",
+    "xbox one"
+   ]
+  },
+  {
+   "id": "switch",
+   "name": "Nintendo Switch",
+   "category": "Game console",
+   "how_to_update": "System Settings › System › System Update",
+   "news_only": true,
+   "aliases": [
+    "switch 2",
+    "nintendo"
+   ]
+  },
+  {
+   "id": "steam",
+   "name": "Steam or Steam Deck",
+   "category": "Game console",
+   "how_to_update": "Steam Deck: Settings › System › Check for updates. Computer: Steam menu › Check for Steam Client Updates.",
+   "news_only": true,
+   "aliases": [
+    "steam deck",
+    "valve",
+    "pc gaming"
+   ]
+  },
+  {
+   "id": "printer-hp",
+   "name": "HP printer",
+   "category": "Printer",
+   "how_to_update": "On the printer's screen or in the HP Smart app, look for Printer Update and turn on automatic updates",
+   "news_only": true,
+   "aliases": [
+    "hp printer",
+    "deskjet",
+    "officejet",
+    "laserjet",
+    "envy printer",
+    "hp smart"
+   ]
+  },
+  {
+   "id": "printer-canon",
+   "name": "Canon printer",
+   "category": "Printer",
+   "how_to_update": "On the printer's screen, look for Setup › Firmware update (or in the Canon PRINT app)",
+   "news_only": true,
+   "aliases": [
+    "canon printer",
+    "pixma",
+    "imageclass"
+   ]
+  },
+  {
+   "id": "printer-epson",
+   "name": "Epson printer",
+   "category": "Printer",
+   "how_to_update": "On the printer's screen: Settings › Firmware Update (or in the Epson Smart Panel app)",
+   "news_only": true,
+   "aliases": [
+    "epson printer",
+    "ecotank",
+    "workforce"
+   ]
+  },
+  {
+   "id": "printer-brother",
+   "name": "Brother printer",
+   "category": "Printer",
+   "how_to_update": "Brother Mobile Connect app or the printer's screen: look for Firmware Update",
+   "news_only": true,
+   "aliases": [
+    "brother printer",
+    "brother laser"
+   ]
+  },
+  {
+   "id": "paypal-venmo",
+   "name": "PayPal or Venmo",
+   "category": "Money and crypto",
+   "how_to_update": "Nothing to install; keep the app updated. Alerts cover breaches, outages and scams.",
+   "news_only": true,
+   "aliases": [
+    "paypal",
+    "venmo"
+   ]
+  },
+  {
+   "id": "cash-app",
+   "name": "Cash App",
+   "category": "Money and crypto",
+   "how_to_update": "Nothing to install; keep the app updated. Alerts cover breaches, outages and scams.",
+   "news_only": true,
+   "aliases": [
+    "cashapp",
+    "square cash"
+   ]
+  },
+  {
+   "id": "crypto-wallet",
+   "name": "Crypto wallet app (MetaMask, Phantom, Trust, Coinbase Wallet)",
+   "category": "Money and crypto",
+   "how_to_update": "Update only from the official app store or the browser extension store.",
+   "caveat": "No real wallet or support agent will ever ask for your recovery phrase. Anyone who asks is stealing.",
+   "news_only": true,
+   "aliases": [
+    "metamask",
+    "phantom",
+    "trust wallet",
+    "coinbase wallet",
+    "exodus",
+    "rabby",
+    "self custody"
+   ]
+  },
+  {
+   "id": "hardware-wallet",
+   "name": "Ledger or Trezor hardware wallet",
+   "category": "Money and crypto",
+   "how_to_update": "Update firmware only inside Ledger Live or Trezor Suite, with the device plugged in.",
+   "caveat": "Never type your recovery phrase into a computer, phone or website. Real updates never ask for it.",
+   "news_only": true,
+   "aliases": [
+    "ledger",
+    "trezor",
+    "cold wallet",
+    "hardware wallet"
+   ]
+  },
+  {
+   "id": "tesla",
+   "name": "Tesla",
+   "category": "Car",
+   "how_to_update": "Touchscreen: Controls › Software. Updates install over Wi-Fi.",
+   "news_only": true,
+   "aliases": [
+    "model 3",
+    "model y"
+   ]
+  },
+  {
+   "id": "connected-car",
+   "name": "Other car with an app or over-the-air updates",
+   "category": "Car",
+   "how_to_update": "The car's screen: look for Settings › Software update, or ask the dealer at your next service. Keep the car's app updated.",
+   "news_only": true,
+   "aliases": [
+    "ford",
+    "gm",
+    "chevy",
+    "toyota",
+    "honda",
+    "hyundai",
+    "kia",
+    "rivian",
+    "car app",
+    "fordpass",
+    "mychevrolet"
+   ]
+  }
+ ],
+ "category_order": [
+  "Phone",
+  "Tablet",
+  "Computer",
+  "Browser",
+  "Wearable",
+  "TV and streaming",
+  "Game console",
+  "Smart home",
+  "Wi-Fi router",
+  "Printer",
+  "App",
+  "Money and crypto",
+  "Account",
+  "Car"
+ ]
+}

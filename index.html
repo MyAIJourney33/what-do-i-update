@@ -1,0 +1,655 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What Do I Update?</title>
+<meta name="theme-color" content="#1D4ED8">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="data:,">
+<style>
+:root{--bg:#F6F5F1;--card:#FFFFFF;--ink:#15171C;--muted:#5B606B;--body:#4A4F59;--line:#E3E1DA;--blue:#1D4ED8;--blue-ink:#1E3A8A;--blue-bg:#E8EEFC;
+--now:#9B1C1C;--now-bg:#FDECEA;--now-line:#F2C4BF;--week:#7A4100;--week-bg:#FFF1D6;--week-line:#F0D9A8;--ok:#12603A;--ok-bg:#E3F3E8;--ok-line:#BFE0CA}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:520px;margin:0 auto;padding:20px 20px 110px}
+h1{font:700 30px/1.12 "Space Grotesk",Inter,system-ui,sans-serif;margin:8px 0 6px}
+h2{font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:22px 0 10px}
+p{margin:0}
+.brand{display:flex;align-items:center;gap:10px;font:700 18px "Space Grotesk",Inter,sans-serif}
+.sub{color:var(--body)}
+.note{display:flex;gap:10px;background:var(--blue-bg);color:var(--blue-ink);border-radius:14px;padding:14px 16px;font-size:14px;margin-top:14px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid #CFCCC3;background:#fff;color:var(--ink);font:600 15px Inter,system-ui,sans-serif;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+.btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:none;border-radius:14px;background:var(--blue);color:#fff;font:700 17px Inter,system-ui,sans-serif;cursor:pointer;margin-top:12px}
+.btn.secondary{background:#fff;color:var(--ink);border:1.5px solid #CFCCC3;min-height:48px;font-size:15px;font-weight:600}
+.counts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:14px}
+.count{border-radius:12px;padding:10px 12px;display:flex;flex-direction:column}
+.count b{font:700 24px "Space Grotesk",Inter,sans-serif}
+.count span{font-size:13px;font-weight:600}
+.now{background:var(--now-bg);color:var(--now)}.week{background:var(--week-bg);color:var(--week)}.ok{background:var(--ok-bg);color:var(--ok)}
+.sec{display:flex;align-items:center;gap:8px;margin:24px 0 10px;font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.card{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:10px;color:var(--ink);font:inherit;cursor:pointer}
+.card.c-now{border-color:var(--now-line)}.card.c-week{border-color:var(--week-line)}.card.c-ok{border-color:var(--ok-line);cursor:default}
+.card .tag{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.card .t{display:block;font:700 18px/1.25 "Space Grotesk",Inter,sans-serif;margin-bottom:6px}
+.card .d{display:block;font-size:14px;color:var(--body)}
+.card .more{display:block;font-size:14px;font-weight:600;color:var(--blue);margin-top:8px}
+.card.done{opacity:.6}
+.pill{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:6px 12px;font-size:13px;font-weight:700}
+.box{background:#fff;border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:14px}
+.box h3{margin:0 0 8px;font-size:15px}
+ol.steps{margin:0;padding-left:22px}ol.steps li{margin:6px 0}
+.small{font-size:13px;color:var(--body)}
+.empty{background:#fff;border:1px dashed #CFCCC3;border-radius:16px;padding:16px;color:var(--body);font-size:14px}
+nav.tabs{position:fixed;left:0;right:0;bottom:0;background:#fff;border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(4,minmax(0,1fr));padding:6px 4px calc(14px + env(safe-area-inset-bottom))}
+nav.tabs button{background:none;border:none;min-height:48px;font:600 12px Inter,system-ui,sans-serif;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer}
+nav.tabs button[aria-current="page"]{color:var(--blue);font-weight:700}
+textarea{width:100%;min-height:84px;border:1.5px solid #CFCCC3;border-radius:12px;padding:10px;font:14px ui-monospace,monospace}
+label{font-weight:600;font-size:14px;display:block;margin:12px 0 6px}
+.back{background:none;border:none;color:var(--blue);font:600 15px Inter,system-ui,sans-serif;min-height:44px;padding:0;cursor:pointer}
+svg{flex-shrink:0}
+nav.tabs{grid-template-columns:repeat(5,minmax(0,1fr))}
+nav.tabs[hidden]{display:none}
+.card.c-gray{border-color:#D6D3CB;background:#FBFAF7}
+.badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:1px}
+.b-confirmed{background:var(--now-bg);color:var(--now)}.b-reported{background:var(--week-bg);color:var(--week)}.b-heads{background:#EEF0F4;color:var(--muted)}
+input[type=search],input[type=text],select{width:100%;min-height:48px;border:1.5px solid #CFCCC3;border-radius:12px;padding:0 14px;font:16px Inter,system-ui,sans-serif;background:#fff;color:var(--ink)}
+details.cat{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
+details.cat summary{min-height:48px;padding:0 16px;display:flex;align-items:center;justify-content:space-between;font-weight:700;cursor:pointer;list-style:none}
+details.cat summary::-webkit-details-marker{display:none}
+details.cat .chips{padding:0 12px 14px}
+.dev{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:56px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:8px;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
+.dev .n{font-weight:700;font-size:15px}.dev .s{font-size:13px;color:var(--body)}
+.dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.check{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.check:first-of-type{border-top:none}
+.check input{width:24px;height:24px;margin:2px 0 0;flex-shrink:0;accent-color:var(--blue)}
+.check label{margin:0;font-weight:500;font-size:15px}
+.check .why{display:block;font-size:13px;color:var(--body);font-weight:400;margin-top:2px}
+.big{display:flex;align-items:center;gap:12px;width:100%;min-height:64px;border:none;border-radius:16px;background:var(--now);color:#fff;font:700 18px "Space Grotesk",Inter,sans-serif;padding:0 18px;cursor:pointer;text-align:left}
+.row{display:flex;gap:8px;align-items:center}
+.row > *{flex:1}
+.linkbtn{background:none;border:none;color:var(--blue);font:600 14px Inter,system-ui,sans-serif;min-height:44px;padding:0;cursor:pointer;text-align:left}
+</style>
+</head>
+<body>
+<main id="app" aria-live="polite"><p class="sub">Loading…</p></main>
+<nav class="tabs" aria-label="Main" id="tabs" hidden>
+<button type="button" data-view="alerts">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>Alerts</button>
+<button type="button" data-view="headlines">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 9h10M7 13h10M7 17h6"/></svg>News</button>
+<button type="button" data-view="setup">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>My stuff</button>
+<button type="button" data-view="protect">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/></svg>Protect</button>
+<button type="button" data-view="settings">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></svg>Settings</button>
+</nav>
+<script>
+"use strict";
+// Privacy design: everything about the person (their devices, models, checklists, family
+// lists) lives only in this browser. All data files are public and identical for everyone;
+// matching happens here, on the phone. Nothing is ever sent anywhere.
+const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
+const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
+      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1";
+const memory = {};
+const store = {
+  get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
+  set(k, v) { memory[k] = v; try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage blocked: keep in memory */ } }
+};
+
+// Family mode: several named lists on one phone ("Me", "Mom"...). Migrates the old single list.
+function loadProfiles() {
+  let p = store.get(KEY_PROFILES, null);
+  if (!p) p = { active: "Me", lists: { Me: { devices: store.get(KEY_OLD_DEVICES, []), custom: [], models: {} } } };
+  for (const l of Object.values(p.lists)) { l.devices = l.devices || []; l.custom = l.custom || []; l.models = l.models || {}; }
+  if (!p.lists[p.active]) p.active = Object.keys(p.lists)[0];
+  return p;
+}
+let P = loadProfiles();
+const list = () => P.lists[P.active];
+let D = { products: [], order: [], kev: { entries: [] }, news: { items: [], plain: {} }, support: { products: {} }, breaches: { breaches: [] } };
+let S = { view: "alerts", fixed: new Set(store.get(KEY_FIXED, [])), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
+          detail: null, device: null, playbook: null, query: "" };
+const selected = () => new Set(list().devices);
+function saveProfiles() { store.set(KEY_PROFILES, P); store.set(KEY_OLD_DEVICES, list().devices); }
+
+const ICON = {
+  now: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 3h8l5 5v8l-5 5H8l-5-5V8z"/><path d="M12 8v5"/><path d="M12 16.5v.01"/></svg>',
+  week: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+  ok: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.7 2.7L16 9.5"/></svg>',
+  gray: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.7"/><path d="M12 17v.01"/></svg>',
+  shield: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#1D4ED8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M8.5 12l2.5 2.5 4.5-5"/></svg>',
+  alarm: '<svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6l8-3z"/><path d="M12 8v4"/><path d="M12 15.5v.01"/></svg>',
+  lock: '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L19 7"/></svg>',
+  plus: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>'
+};
+
+// Tiny DOM helper: text always goes in as textContent, never as HTML.
+function el(tag, attrs, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (k === "class") n.className = v;
+    else if (k === "html") n.innerHTML = v; // only used with the constant ICON strings above
+    else if (k.startsWith("on")) n.addEventListener(k.slice(2), v);
+    else if (k === "value") n.value = v;
+    else if (v !== false && v != null) n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const k of kids.flat()) if (k != null && k !== false) n.append(k.nodeType ? k : document.createTextNode(String(k)));
+  return n;
+}
+const icon = name => el("span", { html: ICON[name], style: "display:inline-flex" });
+const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
+const ageDays = iso => Math.floor((today() - new Date(iso.slice(0, 10) + "T00:00:00")) / 86400000);
+const fmtDate = iso => iso ? new Date(iso.slice(0, 10) + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "";
+const productById = id => D.products.find(p => p.id === id);
+const norm = s => s.toLowerCase().replace(/[^a-z0-9+]+/g, " ").trim();
+// A device also covers the software it runs (a Surface runs Windows and Edge).
+function covered() {
+  const out = selected();
+  for (const id of list().devices) { const p = productById(id); if (p && p.runs) p.runs.forEach(r => out.add(r)); }
+  return out;
+}
+const mine = ids => { const c = covered(); return ids.filter(id => c.has(id)); };
+
+function computeAlerts() {
+  const now = [], week = [], replace = [], notYou = [], oldModels = {};
+  for (const e of D.kev.entries) {
+    const hit = mine(e.products);
+    if (!hit.length) continue;
+    const age = ageDays(e.added);
+    const plain = D.news.plain[e.cve];
+    const names = hit.map(id => productById(id).name);
+    // Per-product wording ("Update Edge") only when none of this person's matches use the default wording.
+    const own = plain && plain.for && hit.every(h => plain.for[h]) ? plain.for[hit[0]] : null;
+    const words = own || plain;
+    const a = { id: e.cve, kind: "kev", entry: e, hit, names, plain, confidence: "confirmed",
+      title: words ? words.title : "Update " + names.join(", "),
+      why: words ? words.why : "Hackers are using a flaw in " + names.join(" and ") + ". Install the latest update." };
+    if (e.replace) { if (age <= REPLACE_DAYS) for (const id of hit) (oldModels[id] = oldModels[id] || []).push(e); }
+    else if (age <= DO_NOW_DAYS) now.push(a);
+    else if (age <= THIS_WEEK_DAYS) week.push(a);
+  }
+  // One card per product for end-of-life models, not one per CISA entry.
+  for (const [id, entries] of Object.entries(oldModels)) {
+    const name = productById(id).name;
+    replace.push({ id: "eol-" + id + "-" + entries[0].cve, kind: "eol", entries, hit: [id], names: [name], confidence: "confirmed",
+      title: "Check your " + name + " model",
+      why: `Hackers are attacking ${entries.length} older ${name} model${entries.length > 1 ? "s" : ""} that will never get a fix. If yours is on the list, replace it.` });
+  }
+  for (const n of D.news.items) {
+    if (ageDays(n.date) > NEWS_DAYS) continue;
+    const hit = mine(n.affects);
+    const a = { id: n.id, kind: "news", news: n, hit, names: hit.map(id => productById(id).name), title: n.title,
+      confidence: n.verdict === "do_now" ? "reported" : "heads", why: hit.length ? n.if_affected : n.if_not };
+    if (!hit.length) notYou.push(a);
+    else if (n.verdict === "do_now") now.push(a);
+    else week.push(a);
+  }
+  return { now, week, replace, notYou };
+}
+
+const modelName = (sp, label) => /^[0-9]/.test(label) || label.length < 4 ? `${sp.source} ${label}` : label;
+// Is this model still getting security updates? (from endoflife.date, chosen by the person)
+function supportFor(id) {
+  const sp = D.support.products[id]; let model = list().models[id];
+  if (!sp || !model) return null;
+  const row = sp.rows.find(r => r.label === model);
+  if (!row) return null;
+  model = modelName(sp, model);
+  if (row.ended) return { ended: true, row, text: `${model} no longer gets security updates${row.until ? " (since " + fmtDate(row.until) + ")" : ""}.` };
+  const left = row.until ? Math.floor((new Date(row.until) - today()) / 86400000) : null;
+  return { ended: false, soon: left !== null && left < 180, row,
+    text: row.until ? `${model} gets security updates until about ${fmtDate(row.until)}.` : `${model} still gets security updates.` };
+}
+
+// One status line per device, so a quiet device is answered out loud.
+function deviceStatus(id, A) {
+  const inList = (arr) => arr.some(a => a.hit.includes(id) || (productById(id) && (productById(id).runs || []).some(r => a.hit.includes(r))));
+  const sup = supportFor(id);
+  if (inList([...A.now, ...A.replace])) return { tone: "now", text: "Act now: see the alert above" };
+  if (sup && sup.ended) return { tone: "now", text: "No longer gets security updates" };
+  if (inList(A.week)) return { tone: "week", text: "Update this week" };
+  if (sup && sup.soon) return { tone: "week", text: "Updates end soon" };
+  const p = productById(id);
+  return { tone: "ok", text: p && p.news_only && !(p.runs || []).length ? "Watched through maker notices and news · nothing reported" : `No attacks reported in ${NEWS_DAYS} days` };
+}
+
+const CONF = { confirmed: ["b-confirmed", "Confirmed attacks"], reported: ["b-reported", "Reported"], heads: ["b-heads", "Heads up"] };
+function header() {
+  const names = Object.keys(P.lists);
+  return el("div", { class: "brand", style: "justify-content:space-between" },
+    el("span", { class: "row", style: "gap:10px" }, icon("shield"), "What Do I Update?"),
+    names.length > 1 ? el("select", { "aria-label": "Whose devices", style: "width:auto;min-height:40px;font-size:14px",
+      onchange: e => { P.active = e.target.value; saveProfiles(); render(); } },
+      ...names.map(n => el("option", { value: n, selected: n === P.active }, n))) : null);
+}
+
+function card(a, tone) {
+  const done = S.fixed.has(a.id);
+  const tag = a.names && a.names.length ? a.names.join(" · ") : (a.kind === "news" ? "In the news" : "");
+  const conf = a.confidence && tone !== "ok" ? CONF[a.confidence] : null;
+  const kids = [el("span", { class: "tag", style: `color:var(--${tone})` }, tag, conf ? el("span", { class: "badge " + conf[0] }, conf[1]) : null),
+    el("span", { class: "t" }, (done ? "Done: " : "") + a.title),
+    el("span", { class: "d" }, a.why)];
+  if (tone === "ok") return el("div", { class: "card c-ok" }, ...kids);
+  kids.push(el("span", { class: "more" }, "How to fix ›"));
+  return el("button", { type: "button", class: `card c-${tone}${done ? " done" : ""}`, onclick: () => go("detail", a) }, ...kids);
+}
+
+function section(tone, label, items) {
+  const wrap = el("section", {});
+  wrap.append(el("div", { class: "sec", style: `color:var(--${tone})` }, icon(tone), el("span", {}, label)));
+  if (!items.length) wrap.append(el("p", { class: "empty" }, "Nothing here right now."));
+  items.forEach(a => wrap.append(card(a, tone)));
+  return wrap;
+}
+
+function viewAlerts() {
+  if (!list().devices.length && !list().custom.length) return viewSetup(true);
+  const A = computeAlerts();
+  const nowList = [...A.now, ...A.replace];
+  const old = list().devices.filter(id => (supportFor(id) || {}).ended);
+  const out = [header(),
+    el("h1", {}, P.active === "Me" ? "Your alerts" : P.active + "'s alerts"),
+    el("p", { class: "sub small" }, `Checked against ${list().devices.length + list().custom.length} items on this phone · data updated ${fmtDate(D.kev.builtAt)}`),
+    el("div", { class: "counts" },
+      el("div", { class: "count now" }, el("b", {}, nowList.length + old.length), el("span", {}, "Do now")),
+      el("div", { class: "count week" }, el("b", {}, A.week.length), el("span", {}, "This week")),
+      el("div", { class: "count ok" }, el("b", {}, A.notYou.length), el("span", {}, "Not you")))];
+  const oldCards = old.map(id => ({ id: "old-" + id, kind: "old", hit: [id], names: [productById(id).name], confidence: "confirmed",
+    title: "Your " + productById(id).name + " is too old for security updates",
+    why: supportFor(id).text + " New flaws will never be fixed on it. Plan to replace it, and don't use it for banking." }));
+  out.push(section("now", "Do this now", [...nowList, ...oldCards]), section("week", "This week", A.week));
+  if (list().custom.length) {
+    const w = el("section", {}, el("div", { class: "sec", style: "color:var(--muted)" }, icon("gray"), el("span", {}, "Not tracked yet")));
+    list().custom.forEach(name => w.append(el("button", { type: "button", class: "card c-gray", onclick: () => go("device", "custom:" + name) },
+      el("span", { class: "tag", style: "color:var(--muted)" }, name), el("span", { class: "t" }, "We can't watch this one yet"),
+      el("span", { class: "d" }, "No news here doesn't mean it's safe. Turn on automatic updates and check the maker's support page now and then."),
+      el("span", { class: "more" }, "What to do ›"))));
+    out.push(w);
+  }
+  out.push(el("div", { class: "sec", style: "color:var(--ink)" }, el("span", {}, "Your devices")));
+  for (const id of list().devices) {
+    const p = productById(id); if (!p) continue;
+    const st = deviceStatus(id, A);
+    out.push(el("button", { type: "button", class: "dev", onclick: () => go("device", id) },
+      el("span", {}, el("span", { class: "n" }, p.name), el("br"), el("span", { class: "s" }, st.text)),
+      el("span", { class: "dot", style: `background:var(--${st.tone})` })));
+  }
+  if (A.notYou.length) {
+    const d = el("details", { class: "cat" }, el("summary", {}, `In the news, not you (${A.notYou.length})`, el("span", { class: "small" }, "Show")));
+    const inner = el("div", { style: "padding:0 12px 4px" }); A.notYou.forEach(a => inner.append(card(a, "ok"))); d.append(inner);
+    out.push(el("div", { style: "margin-top:18px" }, d));
+  }
+  out.push(el("p", { class: "note" }, icon("shield"), el("span", {}, "We never send download links. Always update from your device's own Settings or app store.")));
+  return out;
+}
+
+function stepsBox(products) {
+  return el("div", { class: "box" }, el("h3", {}, "How to fix it"),
+    el("ol", { class: "steps" }, ...products.map(p => el("li", {}, el("b", {}, p.name + ": "), p.how_to_update))));
+}
+
+function viewDetail() {
+  const a = S.detail;
+  const steps = a.hit.map(id => productById(id)).filter(Boolean);
+  const out = [el("button", { type: "button", class: "back", onclick: () => go("alerts") }, "‹ Alerts"),
+    el("h1", {}, a.title), el("p", { class: "sub" }, a.why)];
+  if (a.confidence) out.push(el("p", { class: "small", style: "margin-top:8px" }, el("span", { class: "badge " + CONF[a.confidence][0], style: "margin-left:0" }, CONF[a.confidence][1]), " ",
+    { confirmed: "The U.S. government lists this as being used in real attacks.", reported: "Reported by the maker or major news; not yet on the government list.", heads: "Worth knowing; not an emergency." }[a.confidence]));
+  if (a.kind === "eol") {
+    out.push(el("div", { class: "box" }, el("h3", {}, "Models being attacked"),
+      el("ul", { class: "steps" }, ...a.entries.map(e => el("li", {}, e.name.replace(/ (Vulnerability|Vulnerabilities)$/, ""), el("span", { class: "small" }, ` (${e.cve}, added ${fmtDate(e.added)})`))))));
+    out.push(el("p", { class: "small", style: "margin-top:10px" }, "Find the model on the sticker under your router. Router from your internet company? Call them and ask for a newer one."));
+  } else if (steps.length) {
+    out.push(stepsBox(steps));
+    steps.filter(p => p.caveat).forEach(p => out.push(el("p", { class: "small", style: "margin-top:10px" }, p.caveat)));
+  }
+  out.push(el("p", { class: "note" }, icon("shield"), el("span", {}, "We never send download links. If a message tells you to download an update, it's a scam.")));
+  const done = S.fixed.has(a.id);
+  out.push(el("button", { type: "button", class: "btn", onclick: () => { toggleFixed(a.id); go("alerts"); } }, done ? "Mark as not done" : "I did it, mark as fixed"));
+  if (a.kind === "eol" || a.kind === "old") return out;
+  const src = a.kind === "kev"
+    ? `${a.entry.cve} · added to CISA's exploited list ${fmtDate(a.entry.added)}${a.plain && a.plain.source ? " · " + a.plain.source : ""}`
+    : a.news.source;
+  out.push(el("div", { class: "box" }, el("h3", {}, "Source"), el("p", { class: "small" }, src),
+    a.kind === "kev" ? el("p", { class: "small", style: "margin-top:6px" }, "Technical name: " + a.entry.name) : null));
+  return out;
+}
+
+// One device: how to update it, and whether this model still gets security updates.
+function viewDevice() {
+  const id = S.device;
+  const back = el("button", { type: "button", class: "back", onclick: () => go("alerts") }, "‹ Alerts");
+  if (id.startsWith("custom:")) {
+    const name = id.slice(7);
+    return [back, el("h1", {}, name), el("p", { class: "sub" }, "This isn't on our watch list yet, so we can't warn you about it. Here's how to keep it safe on your own:"),
+      el("div", { class: "box" }, el("ol", { class: "steps" },
+        el("li", {}, "Turn on automatic updates in its settings or its app."),
+        el("li", {}, "Once a month, open its settings and look for Software update or Firmware update."),
+        el("li", {}, "Search the maker's own support site for \"security update\" and the model name."),
+        el("li", {}, "If it hasn't had an update in over a year, it may be too old. Don't use it for anything private."))),
+      el("button", { type: "button", class: "btn secondary", onclick: () => { list().custom = list().custom.filter(c => c !== name); saveProfiles(); go("alerts"); } }, "Remove from my list")];
+  }
+  const p = productById(id); const A = computeAlerts(); const st = deviceStatus(id, A);
+  const out = [back, el("h1", {}, p.name), el("p", { class: "sub" }, el("span", { class: "dot", style: `display:inline-block;margin-right:8px;background:var(--${st.tone})` }), st.text),
+    stepsBox([p])];
+  if (p.caveat) out.push(el("p", { class: "small", style: "margin-top:10px" }, p.caveat));
+  if (p.runs) out.push(el("p", { class: "small", style: "margin-top:10px" }, "Also covers what it runs: " + p.runs.map(r => productById(r).name).join(", ") + "."));
+  const sp = D.support.products[id];
+  if (sp) {
+    const rows = [...sp.rows].sort((x, y) => (y.released || "").localeCompare(x.released || ""));
+    const sel = el("select", { id: "model", onchange: e => { list().models[id] = e.target.value; saveProfiles(); render(); } },
+      el("option", { value: "" }, "Pick your model or version"), ...rows.map(r => el("option", { value: r.label, selected: list().models[id] === r.label }, modelName(sp, r.label))));
+    const sup = supportFor(id);
+    out.push(el("div", { class: "box" }, el("h3", {}, "Still getting security updates?"),
+      el("label", { for: "model" }, "Your model or version"), sel,
+      sup ? el("p", { class: sup.ended ? "pill now" : sup.soon ? "pill week" : "pill ok", style: "margin-top:10px;display:flex" }, sup.text) : null,
+      el("p", { class: "small", style: "margin-top:8px" }, "Saved only on this phone. Dates from endoflife.date.")));
+  }
+  out.push(el("button", { type: "button", class: "btn secondary", onclick: () => { list().devices = list().devices.filter(d => d !== id); delete list().models[id]; saveProfiles(); go("alerts"); } }, "Remove from my list"));
+  return out;
+}
+
+function viewHeadlines() {
+  const items = [...D.news.items].sort((x, y) => y.date.localeCompare(x.date));
+  const out = [header(), el("h1", {}, "In the news"), el("p", { class: "sub" }, "Big hacks, outages and breaches, with one answer: does it affect you?"),
+    el("h2", {}, "Recent"),
+    ...items.map(n => {
+      const hit = mine(n.affects);
+      const tone = hit.length ? (n.verdict === "do_now" ? "now" : "week") : "ok";
+      const label = hit.length ? (n.verdict === "do_now" ? "Do now" : "Heads up") : "Not you";
+      return el("div", { class: "box" },
+        el("p", { class: "small" }, n.date_label || fmtDate(n.date)),
+        el("h3", { style: "margin:4px 0 8px" }, n.title),
+        el("span", { class: `pill ${tone}` }, icon(tone), label),
+        el("p", { class: "small", style: "margin-top:8px" }, hit.length ? n.if_affected : n.if_not),
+        el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source));
+    })];
+  // Breach watch: no email needed. The person marks the services they use, on this phone.
+  const br = D.breaches.breaches || [];
+  if (br.length) {
+    out.push(el("h2", {}, "Recent data breaches"),
+      el("p", { class: "small" }, "Companies whose customer data leaked recently. Tap \"I use this\" for what to do. We never ask for your email."));
+    for (const b of br.slice(0, 25)) {
+      const used = S.used.has(b.name);
+      out.push(el("div", { class: "box" },
+        el("p", { class: "small" }, `Added ${fmtDate(b.added)} · ${b.count.toLocaleString()} accounts${b.domain ? " · " + b.domain : ""}`),
+        el("h3", { style: "margin:4px 0 6px" }, b.name),
+        el("p", { class: "small" }, "Leaked: " + (b.data.join(", ") || "not stated")),
+        used ? el("p", { class: "pill week", style: "margin-top:10px;display:flex" },
+          /password/i.test(b.data.join(" ")) ? "Change this password now, and anywhere you reused it. Turn on two-step sign-in."
+            : "Watch for scam emails and texts that use your details. Change the password if you reused it.") : null,
+        el("button", { type: "button", class: "linkbtn", "aria-pressed": used ? "true" : "false",
+          onclick: () => { used ? S.used.delete(b.name) : S.used.add(b.name); store.set(KEY_BREACHES, [...S.used]); render(); } }, used ? "I don't use this" : "I use this")));
+    }
+    out.push(el("p", { class: "small", style: "margin-top:10px" }, "Breach list from Have I Been Pwned, used under CC BY 4.0."));
+  }
+  return out;
+}
+
+// ---------- My stuff: search, categories, add anything, family lists ----------
+function matchesQuery(p, q) {
+  if (!q) return true;
+  const hay = norm([p.name, p.category, ...(p.aliases || [])].join(" "));
+  return norm(q).split(" ").every(w => hay.includes(w));
+}
+function toggleDevice(id) {
+  const l = list();
+  l.devices = l.devices.includes(id) ? l.devices.filter(d => d !== id) : [...l.devices, id];
+  saveProfiles(); refreshSetup();
+}
+function chip(p) {
+  const on = list().devices.includes(p.id);
+  return el("button", { type: "button", class: "chip", "aria-pressed": on ? "true" : "false", onclick: () => toggleDevice(p.id) }, on ? icon("check") : null, p.name);
+}
+function pickerBody() {
+  const q = S.query.trim();
+  const wrap = el("div", {});
+  if (q) {
+    const nq = norm(q), score = p => norm(p.name).startsWith(nq) ? 0 : norm(p.name).includes(nq) ? 1 : 2;
+    const hits = D.products.filter(p => matchesQuery(p, q)).sort((a, b) => score(a) - score(b) || a.name.length - b.name.length);
+    if (hits.length) wrap.append(el("div", { class: "chips", style: "margin-top:12px" }, ...hits.map(chip)));
+    else wrap.append(el("p", { class: "empty", style: "margin-top:12px" }, `Nothing called "${q}" on our list yet.`));
+    const already = list().custom.some(c => norm(c) === norm(q));
+    if (!already) wrap.append(el("button", { type: "button", class: "btn secondary", onclick: () => {
+      list().custom.push(q.slice(0, 60)); saveProfiles(); S.query = ""; render(); } }, icon("plus"), ` Add "${q.slice(0, 40)}" as not tracked yet`));
+    return wrap;
+  }
+  const order = D.order.length ? D.order : [...new Set(D.products.map(p => p.category))];
+  for (const c of order) {
+    const ps = D.products.filter(p => p.category === c); if (!ps.length) continue;
+    const n = ps.filter(p => list().devices.includes(p.id)).length;
+    const d = el("details", { class: "cat", open: n > 0 }, el("summary", {}, c, el("span", { class: "small" }, n ? `${n} picked` : `${ps.length}`)),
+      el("div", { class: "chips" }, ...ps.map(chip)));
+    wrap.append(d);
+  }
+  return wrap;
+}
+function summaryBox() {
+  const l = list();
+  if (!l.devices.length && !l.custom.length) return el("div", {});
+  return el("div", { class: "box" }, el("h3", {}, `On ${P.active === "Me" ? "your" : P.active + "'s"} list (${l.devices.length + l.custom.length})`),
+    el("div", { class: "chips" },
+      ...l.devices.map(id => productById(id)).filter(Boolean).map(chip),
+      ...l.custom.map(c => el("button", { type: "button", class: "chip", "aria-pressed": "true", onclick: () => { l.custom = l.custom.filter(x => x !== c); saveProfiles(); refreshSetup(); } }, icon("check"), c + " (not tracked)"))));
+}
+function refreshSetup() {
+  const s = document.getElementById("summary"), b = document.getElementById("picker"), btn = document.getElementById("done");
+  if (!s) return render();
+  s.replaceChildren(summaryBox()); b.replaceChildren(pickerBody());
+  btn.disabled = !(list().devices.length || list().custom.length);
+}
+function viewSetup(first) {
+  const search = el("input", { type: "search", id: "q", placeholder: "Search: Roku, Galaxy Tab, Ring, PS5…", value: S.query, autocomplete: "off",
+    oninput: e => { S.query = e.target.value; document.getElementById("picker").replaceChildren(pickerBody()); } });
+  const names = Object.keys(P.lists);
+  const people = el("div", { class: "box" }, el("h3", {}, "Whose devices?"),
+    el("div", { class: "row" },
+      el("select", { "aria-label": "Whose list", onchange: e => { P.active = e.target.value; saveProfiles(); render(); } },
+        ...names.map(n => el("option", { value: n, selected: n === P.active }, n))),
+      el("button", { type: "button", class: "btn secondary", style: "margin-top:0;flex:0 0 auto;width:auto;padding:0 14px", onclick: () => {
+        const box = document.getElementById("newperson"); box.hidden = !box.hidden; if (!box.hidden) box.querySelector("input").focus(); } }, "+ Person")),
+    el("div", { id: "newperson", hidden: true, style: "margin-top:10px" },
+      el("label", { for: "pname" }, "Name (only saved on this phone)"),
+      el("div", { class: "row" }, el("input", { type: "text", id: "pname", maxlength: "30", placeholder: "Mom" }),
+        el("button", { type: "button", class: "btn", style: "margin-top:0;flex:0 0 auto;width:auto;padding:0 18px", onclick: () => {
+          const v = document.getElementById("pname").value.trim().slice(0, 30);
+          if (v && !P.lists[v]) { P.lists[v] = { devices: [], custom: [], models: {} }; P.active = v; saveProfiles(); render(); } } }, "Add"))),
+    el("p", { class: "small", style: "margin-top:8px" }, "Set up a parent's or kid's devices on your phone. Each list gets its own alerts."));
+  return [header(), el("h1", {}, first ? "Tap what you own" : "My stuff"),
+    el("p", { class: "sub" }, "Search or browse. If it's not here, add it anyway, so we never tell you you're fine by mistake."),
+    el("p", { class: "note" }, icon("lock"), el("span", {}, el("b", {}, "Your list stays on this phone. "), "We never see it, store it or sell it.")),
+    el("label", { for: "q" }, "Find a device, app or account"), search,
+    el("div", { id: "picker" }, pickerBody()),
+    el("div", { id: "summary", style: "margin-top:10px" }, summaryBox()),
+    first ? null : people,
+    el("button", { type: "button", class: "btn", id: "done", disabled: !(list().devices.length || list().custom.length), onclick: () => { S.query = ""; go("alerts"); } }, first ? "Show my alerts" : "Done")];
+}
+
+// ---------- Protect: hacked playbooks and checklists ----------
+const PLAYBOOKS = [
+  { id: "phone", title: "My phone is acting hacked", steps: [
+    "Update the phone now: iPhone: Settings › General › Software Update. Android: Settings › System › Software update. Then restart it.",
+    "Delete any app you don't remember installing. On iPhone also check Settings › General › VPN & Device Management and remove profiles you didn't add.",
+    "From a different device you trust, change your Apple Account or Google account password and turn on two-step sign-in. Remove devices you don't recognize from the account.",
+    "Call your phone carrier from another phone. Ask if your SIM or number was moved, and set a port-out PIN or number lock.",
+    "Still strange? Back up your photos, then erase the phone (iPhone: Settings › General › Transfer or Reset iPhone. Android: Settings › System › Reset options). Set it up as new and reinstall apps from the store."] },
+  { id: "computer", title: "My computer is acting hacked", steps: [
+    "If you see the mouse moving by itself or a ransom message, turn off Wi-Fi or unplug the internet cable now.",
+    "Don't pay anyone and don't call phone numbers shown in pop-ups. Real companies never put support numbers in warning pop-ups.",
+    "Uninstall remote access apps you didn't install yourself (TeamViewer, AnyDesk, ScreenConnect and similar).",
+    "Windows: Windows Security › Virus & threat protection › Scan options › Microsoft Defender Offline scan. Mac: install the latest macOS update.",
+    "From a different, clean device, change your email password first, then bank, then everything else.",
+    "Files locked with a ransom note? Report it to the FBI at ic3.gov and get help from a local repair shop. Restore from a backup if you have one."] },
+  { id: "email", title: "Someone got into my email", steps: [
+    "Change the password right away to a new one you've never used. If you're locked out, use the official recovery from the email provider's own sign-in page; don't search for a support number.",
+    "Turn on two-step sign-in, ideally with a passkey or an authenticator app instead of text codes.",
+    "Check the recovery phone and recovery email are yours. Attackers change them to come back later.",
+    "Check forwarding and filters. Gmail: Settings › See all settings › Forwarding and Filters. Outlook: Settings › Mail › Forwarding and Rules. Delete anything you didn't set up.",
+    "Sign out of all other devices from the account's security page.",
+    "Then change passwords on accounts that send resets to this email, starting with your bank. Warn contacts to ignore messages asking for money or gift cards."] },
+  { id: "money", title: "Money left my bank or payment app", steps: [
+    "Call the number on the back of your card or inside the official app. Never use a number from a text, email or caller.",
+    "Ask them to freeze the card or account and dispute every charge you didn't make. Act fast: speed matters most for Zelle, Cash App and other instant transfers.",
+    "Change the password and turn on two-step sign-in. Check the phone number and email on the account are yours.",
+    "Freeze your credit at Equifax, Experian and TransUnion. It's free and stops new accounts in your name.",
+    "If someone used your identity, IdentityTheft.gov gives you a recovery plan and a report to share with your bank."] },
+  { id: "crypto", title: "Crypto was stolen or I shared my recovery phrase", steps: [
+    "If you typed or shared your recovery phrase anywhere: assume the wallet is gone. Make a brand-new wallet on a clean device and move what's left right away.",
+    "In your wallet app, open connected sites or token approvals and disconnect or revoke anything you don't recognize.",
+    "Exchange account: contact support only from inside the official app. Change the password, switch two-step sign-in to an authenticator app and check withdrawal addresses and API keys.",
+    "Ignore anyone offering to recover stolen crypto for a fee. The FBI warns these recovery offers are scams.",
+    "Report the theft to the FBI at ic3.gov with wallet addresses and transaction IDs."] },
+  { id: "social", title: "My social media account was taken", steps: [
+    "Use the official recovery inside the app: tap Forgot password or the hacked-account option on the sign-in screen.",
+    "Once back in: change the password, turn on two-step sign-in and remove logins and connected apps you don't recognize.",
+    "Check the email and phone on the account are yours.",
+    "Post or message friends to ignore DMs from you asking for money, codes or crypto."] },
+  { id: "remote", title: "I let a caller or pop-up into my computer", steps: [
+    "Turn off Wi-Fi or unplug the internet now, and hang up.",
+    "Uninstall the app they had you install (often TeamViewer, AnyDesk, ScreenConnect or similar).",
+    "Call your bank on the number on your card. Tell them a scammer had access to your computer and ask them to watch for transfers.",
+    "From another device, change your email and bank passwords.",
+    "Have the computer checked or reset before you use it for banking again.",
+    "Microsoft, Apple, Amazon and banks never call you to fix your computer and never ask for gift cards. Report it at ReportFraud.ftc.gov."] },
+  { id: "router", title: "Someone is on my Wi-Fi", steps: [
+    "Reset the router: hold the reset button (usually a pinhole) for about 10 seconds until the lights change.",
+    "Set a new admin password and a new long Wi-Fi password.",
+    "Update the router's firmware and turn on automatic updates.",
+    "Turn off remote management and WPS in the router settings.",
+    "Check your router model isn't on our replace list. Router from your internet company? Call them for a newer one."] },
+  { id: "identity", title: "My SSN or ID leaked", steps: [
+    "Freeze your credit at Equifax, Experian and TransUnion. It's free and you can unfreeze any time.",
+    "Get an Identity Protection PIN from the IRS so no one else can file taxes in your name.",
+    "Check your credit reports for free at AnnualCreditReport.com and look for accounts you didn't open.",
+    "Watch your bank and card statements, and turn on alerts for every transaction.",
+    "If someone used your identity, IdentityTheft.gov builds a step-by-step recovery plan."] }
+];
+const CHECKLISTS = [
+  { id: "lockdown", title: "Lock down your phone number and money", items: [
+    ["carrier-pin", "Turn on a port-out PIN or number lock with your phone carrier", "Stops SIM swaps, the most common way crypto and bank accounts get emptied."],
+    ["email-2fa", "Two-step sign-in on your email, with a passkey or authenticator app", "Your email resets every other password."],
+    ["bank-2fa", "Two-step sign-in and transaction alerts on bank and money apps", "You hear about a theft in seconds, not at the end of the month."],
+    ["credit-freeze", "Freeze your credit at Equifax, Experian and TransUnion", "Free. Nobody can open new credit in your name."],
+    ["pw-manager", "Use a password manager and stop reusing passwords", "One leaked password can't open your other accounts."],
+    ["crypto-2fa", "Crypto: authenticator app, not text codes; recovery phrase written on paper, never photographed", "Text codes can be stolen with a SIM swap."],
+    ["recovery", "Recovery phone and email on your accounts are current", "So you can get back in if something happens."],
+    ["auto-updates", "Automatic updates on for your phone and computer", "Most fixes arrive before most attacks."]] },
+  { id: "router", title: "Router checkup", items: [
+    ["admin-pw", "Change the router's admin password from the one on the sticker", "Default passwords are public."],
+    ["firmware", "Router firmware is up to date, with automatic updates on", "Old router firmware is a top target."],
+    ["wpa", "Wi-Fi uses WPA2 or WPA3 with a long password", "Older settings can be cracked in minutes."],
+    ["remote-off", "Remote management is off", "Nobody should reach your router's settings from the internet."],
+    ["wps-off", "WPS is off", "The push-button pairing feature is easy to abuse."],
+    ["upnp-off", "UPnP is off unless a game console needs it", "It lets gadgets open holes in your network on their own."],
+    ["guest-net", "Cameras, plugs and TVs are on the guest network", "If one gets hacked, it can't reach your laptop or phone."],
+    ["model-ok", "Your router model isn't on our replace list", "Old models that never get fixes are being attacked right now."]] }
+];
+function viewProtect() {
+  const out = [header(), el("h1", {}, "Protect"),
+    el("button", { type: "button", class: "big", onclick: () => go("hacked") }, icon("alarm"), "I think I got hacked"),
+    el("p", { class: "small", style: "margin-top:8px" }, "Calm, step-by-step help for phones, computers, email, money, crypto and more.")];
+  for (const c of CHECKLISTS) {
+    const done = c.items.filter(([k]) => S.checks[c.id + ":" + k]).length;
+    const box = el("div", { class: "box" }, el("h3", {}, `${c.title} (${done}/${c.items.length})`));
+    for (const [k, label, why] of c.items) {
+      const key = c.id + ":" + k, idd = "chk-" + key.replace(/[^a-z0-9]/gi, "-");
+      box.append(el("div", { class: "check" },
+        el("input", { type: "checkbox", id: idd, checked: !!S.checks[key], onchange: e => { S.checks[key] = e.target.checked; store.set(KEY_CHECKS, S.checks); render(); } }),
+        el("label", { for: idd }, label, el("span", { class: "why" }, why))));
+    }
+    out.push(box);
+  }
+  out.push(el("p", { class: "small", style: "margin-top:12px" }, "Your checkmarks are saved only on this phone."));
+  return out;
+}
+function viewHacked() {
+  if (S.playbook) {
+    const pb = PLAYBOOKS.find(p => p.id === S.playbook);
+    return [el("button", { type: "button", class: "back", onclick: () => { S.playbook = null; render(); } }, "‹ I think I got hacked"),
+      el("h1", {}, pb.title), el("p", { class: "sub" }, "Take a breath. Do these in order. Most of it takes minutes."),
+      el("div", { class: "box" }, el("ol", { class: "steps" }, ...pb.steps.map(s => el("li", {}, s)))),
+      el("p", { class: "note" }, icon("shield"), el("span", {}, "Real companies won't call you about a hack, ask for gift cards or ask for your passwords or recovery phrase. Anyone who does is the scam."))];
+  }
+  return [el("button", { type: "button", class: "back", onclick: () => go("protect") }, "‹ Protect"),
+    el("h1", {}, "I think I got hacked"), el("p", { class: "sub" }, "What's happening?"),
+    ...PLAYBOOKS.map(pb => el("button", { type: "button", class: "card", onclick: () => { S.playbook = pb.id; render(); window.scrollTo(0, 0); } },
+      el("span", { class: "t", style: "margin:0" }, pb.title), el("span", { class: "more" }, "Show me what to do ›")))];
+}
+
+// ---------- Settings ----------
+function viewSettings() {
+  const code = btoa(unescape(encodeURIComponent(JSON.stringify({ v: 2, lists: P.lists }))));
+  const input = el("textarea", { id: "restore", "aria-describedby": "restore-help" });
+  const copyBtn = el("button", { type: "button", class: "btn secondary", onclick: () => {
+    navigator.clipboard.writeText(code).then(() => { copyBtn.textContent = "Copied"; }, () => { copyBtn.textContent = "Select the code above and copy it"; }); } }, "Copy backup code");
+  const names = Object.keys(P.lists);
+  return [header(), el("h1", {}, "Settings"),
+    el("div", { class: "box" }, el("h3", {}, "Backup code"),
+      el("p", { class: "small" }, "Your lists aren't saved anywhere but this phone. Copy this code somewhere safe to restore them later or move them to a new phone."),
+      el("textarea", { readonly: true, "aria-label": "Your backup code" }, code), copyBtn),
+    el("div", { class: "box" }, el("h3", {}, "Restore from a backup code"),
+      el("label", { for: "restore" }, "Paste your code"), input,
+      el("p", { class: "small", id: "restore-help" }, "This replaces the lists on this phone."),
+      el("button", { type: "button", class: "btn secondary", onclick: () => {
+        try {
+          const raw = JSON.parse(decodeURIComponent(escape(atob(input.value.trim()))));
+          const known = new Set(D.products.map(p => p.id));
+          if (Array.isArray(raw)) P = { active: "Me", lists: { Me: { devices: raw.filter(i => known.has(i)), custom: [], models: {} } } };
+          else { P = { active: Object.keys(raw.lists)[0], lists: raw.lists }; P = (store.set(KEY_PROFILES, P), loadProfiles()); }
+          saveProfiles(); go("alerts");
+        } catch (e) { input.setCustomValidity("That code doesn't look right."); input.reportValidity(); } } }, "Restore")),
+    names.length > 1 ? el("div", { class: "box" }, el("h3", {}, "People on this phone"),
+      ...names.map(n => el("div", { class: "row", style: "justify-content:space-between;min-height:44px" }, el("span", {}, n),
+        n === "Me" ? el("span", { class: "small" }, "You") : el("button", { type: "button", class: "linkbtn", style: "flex:0 0 auto", onclick: () => {
+          delete P.lists[n]; if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")))) : null,
+    el("div", { class: "box" }, el("h3", {}, "Privacy"),
+      el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking, nothing about you ever leaves this phone, and we never send download links.")),
+    el("button", { type: "button", class: "btn secondary", onclick: () => {
+      P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); go("setup"); } }, "Erase everything on this phone"),
+    el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
+      (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
+}
+
+function toggleFixed(id) { S.fixed.has(id) ? S.fixed.delete(id) : S.fixed.add(id); store.set(KEY_FIXED, [...S.fixed]); }
+function go(view, arg) { S.view = view; if (view === "detail") S.detail = arg; if (view === "device") S.device = arg; if (view === "hacked" && !arg) S.playbook = null; render(); window.scrollTo(0, 0); }
+
+function render() {
+  const app = document.getElementById("app");
+  const empty = !list().devices.length && !list().custom.length;
+  const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty),
+                  protect: viewProtect, hacked: viewHacked, settings: viewSettings };
+  app.replaceChildren(...[].concat((views[S.view] || viewAlerts)()).filter(x => x != null && x !== false));
+  const tabs = document.getElementById("tabs");
+  tabs.hidden = empty && Object.keys(P.lists).length === 1;
+  const tab = { detail: "alerts", device: "alerts", hacked: "protect" }[S.view] || S.view;
+  tabs.querySelectorAll("button").forEach(b => { b.removeAttribute("aria-current"); if (b.dataset.view === tab) b.setAttribute("aria-current", "page"); });
+}
+
+document.getElementById("tabs").addEventListener("click", e => { const b = e.target.closest("button"); if (b) go(b.dataset.view); });
+
+const getJSON = (f, optional) => fetch(f, { cache: "no-cache" }).then(r => { if (!r.ok) throw new Error(f); return r.json(); })
+  .catch(e => { if (optional) return null; throw e; });
+Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.json"), getJSON("support.json", true), getJSON("breaches.json", true)])
+  .then(([products, kev, news, support, breaches]) => {
+    D = { products: products.products, order: products.category_order || [], kev, news,
+          support: support || { products: {} }, breaches: breaches || { breaches: [] } };
+    const known = new Set(D.products.map(p => p.id));
+    for (const l of Object.values(P.lists)) l.devices = l.devices.filter(i => known.has(i));
+    if (!list().devices.length && !list().custom.length) S.view = "setup";
+    render();
+  })
+  .catch(() => { document.getElementById("app").replaceChildren(el("p", { class: "empty" }, "Couldn't load the alert list. Check your connection and reload.")); });
+
+if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+</script>
+</body>
+</html>
