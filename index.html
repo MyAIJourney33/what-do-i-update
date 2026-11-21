@@ -712,7 +712,8 @@ function viewSettings() {
         n === "Me" ? el("span", { class: "small" }, "You") : el("button", { type: "button", class: "linkbtn", style: "flex:0 0 auto", onclick: () => {
           delete P.lists[n]; if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")))) : null,
     el("div", { class: "box" }, el("h3", {}, "Privacy"),
-      el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking, nothing about you ever leaves this phone, and we never send download links.")),
+      el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking, nothing about you ever leaves this phone, and we never send download links."),
+      el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
       saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); go("setup"); } }, "Erase everything on this phone"),
