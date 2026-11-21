@@ -72,6 +72,19 @@ details.cat .chips{padding:0 12px 14px}
 .row{display:flex;gap:8px;align-items:center}
 .row > *{flex:1}
 .linkbtn{background:none;border:none;color:var(--blue);font:600 14px Inter,system-ui,sans-serif;min-height:44px;padding:0;cursor:pointer;text-align:left}
+details.how{margin-top:4px}
+details.how summary{display:inline-flex;align-items:center;min-height:40px;color:var(--blue);font-weight:600;font-size:14px;cursor:pointer;list-style:none}
+details.how summary::-webkit-details-marker{display:none}
+details.how summary::after{content:"›";margin-left:6px;transition:transform .15s}
+details.how[open] summary::after{transform:rotate(90deg)}
+details.how ol{margin:2px 0 6px;padding-left:20px;font-size:14px;color:var(--body);background:#F8F7F3;border-radius:10px;padding:10px 12px 10px 30px}
+details.how ol li{margin:4px 0}
+.check .body{flex:1}
+ol.intro{margin:14px 0 0;padding:0;list-style:none;counter-reset:s}
+ol.intro li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:8px}
+ol.intro li::before{content:counter(s);flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--blue);color:#fff;font:700 15px/28px Inter,sans-serif;text-align:center}
+ol.intro b{display:block;font-size:16px}
+ol.intro span{font-size:14px;color:var(--body)}
 </style>
 </head>
 <body>
@@ -95,7 +108,7 @@ details.cat .chips{padding:0 12px 14px}
 // matching happens here, on the phone. Nothing is ever sent anywhere.
 const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
-      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1";
+      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1";
 const memory = {};
 const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
@@ -446,6 +459,17 @@ function refreshSetup() {
   s.replaceChildren(summaryBox()); b.replaceChildren(pickerBody());
   btn.disabled = !(list().devices.length || list().custom.length);
 }
+function viewWelcome() {
+  const fresh = !list().devices.length && !list().custom.length;
+  return [header(), el("h1", {}, "What needs updating, in plain English"),
+    el("p", { class: "sub" }, "Hackers go after old software. This app watches the U.S. government's list of flaws hackers are using right now, and tells you which ones hit the things you own."),
+    el("ol", { class: "intro" },
+      el("li", {}, el("div", {}, el("b", {}, "Tap what you own"), el("span", {}, "Your phone, computer, TV, router and apps. It takes about 2 minutes."))),
+      el("li", {}, el("div", {}, el("b", {}, "See what to fix"), el("span", {}, "Red means do it now. Yellow means this week. Green means you're fine."))),
+      el("li", {}, el("div", {}, el("b", {}, "Follow the steps"), el("span", {}, "Each alert tells you exactly where to tap in Settings. Think you got hacked? The Protect tab walks you through it.")))),
+    el("p", { class: "note" }, icon("lock"), el("span", {}, el("b", {}, "No account. No tracking. "), "Your list stays on this phone, and we never send download links. If a message with a link claims to be us, it's a scam.")),
+    el("button", { type: "button", class: "btn", onclick: () => { store.set(KEY_INTRO, true); go(fresh ? "setup" : "alerts"); } }, fresh ? "Get started" : "Back to my alerts")];
+}
 function viewSetup(first) {
   const search = el("input", { type: "search", id: "q", placeholder: "Search: Roku, Galaxy Tab, Ring, PS5…", value: S.query, autocomplete: "off",
     oninput: e => { S.query = e.target.value; document.getElementById("picker").replaceChildren(pickerBody()); } });
@@ -474,32 +498,100 @@ function viewSetup(first) {
 }
 
 // ---------- Protect: hacked playbooks and checklists ----------
+// "Show me how" steps. Settings paths only, never download links.
+const HOW = {
+  carrierLock: [
+    "AT&T: open the myAT&T app › Services › Mobile Security › Wireless Account Lock, and turn it on.",
+    "Verizon: in the My Verizon app, open your security settings and turn on both Number Lock and SIM Protection for each line.",
+    "T-Mobile: in the T-Life app, open your line and turn on both SIM Protection and Port Out Protection.",
+    "Other carriers: call the number on your bill and ask for a port-out PIN or a number lock.",
+    "Getting a new phone later? Turn the lock off first, then turn it back on after."],
+  appleGoogle: [
+    "iPhone: Settings › tap your name › Sign-In & Security › Change Password. Make sure Two-Factor Authentication says On.",
+    "iPhone devices: Settings › tap your name, scroll to your device list, tap one you don't recognize › Remove from Account.",
+    "Android: Settings › Google › Manage your Google Account › Security. Tap Password to change it and 2-Step Verification to turn it on.",
+    "Android devices: on that same Security page, open Your devices › Manage all devices and sign out of any you don't recognize."],
+  deleteApps: [
+    "iPhone: touch and hold the app › Remove App › Delete App.",
+    "Android: Settings › Apps › tap the app › Uninstall.",
+    "Not sure what an app is? Delete it. You can always reinstall real apps from the App Store or Google Play."],
+  uninstallRemote: [
+    "Windows: Settings › Apps › Installed apps. Find the app, tap the three dots next to it › Uninstall.",
+    "Mac: open Finder › Applications, drag the app to the Trash, then empty the Trash.",
+    "Then check what starts up on its own. Windows: Settings › Apps › Startup. Mac: System Settings › General › Login Items. Turn off anything you don't know."],
+  passwords: [
+    "Use a password manager so every password is different. iPhone and Mac have the Passwords app built in; Android has Google Password Manager.",
+    "Go in this order: email first, then bank and money apps, then everything else.",
+    "Let the password manager make each new password. You don't need to remember them."],
+  email2fa: [
+    "Gmail: Google Account › Security › 2-Step Verification › Turn on. Add a passkey or Google Authenticator as your second step.",
+    "Outlook or Hotmail: Microsoft account › Security › turn on two-step verification and add the Microsoft Authenticator app.",
+    "Yahoo: Account info › Account security › Two-step verification.",
+    "Save the backup codes it gives you somewhere safe, like on paper."],
+  recoveryInfo: [
+    "Gmail: Google Account › Security › check Recovery phone and Recovery email.",
+    "Outlook or Hotmail: Microsoft account › Security › check your sign-in methods and remove any phone or email that isn't yours.",
+    "Yahoo: Account info › Account security › check the phone numbers and email addresses listed."],
+  signOutAll: [
+    "Gmail: Google Account › Security › Your devices › Manage all devices. Sign out of every device you don't recognize.",
+    "Outlook or Hotmail: Microsoft account › Security › look for Sign out everywhere.",
+    "Then change the password again so anyone signed out can't sign back in."],
+  creditFreeze: [
+    "Freeze at all three: Equifax, Experian and TransUnion. Each one is a separate freeze.",
+    "Type each company's name into your browser or app store yourself. Never use a freeze link from a text or email.",
+    "Choose Security freeze. You'll need your Social Security number, birth date and address.",
+    "Save the PIN or sign-in each one gives you. You'll need it to unfreeze before applying for a loan or card.",
+    "It's free and doesn't hurt your credit score."],
+  irsPin: [
+    "Type IRS.gov into your browser yourself and search for Get an IP PIN.",
+    "You'll verify who you are with a photo ID. Then you get a 6-digit PIN.",
+    "Give the PIN to whoever files your taxes. It goes on your return.",
+    "You get a new PIN every year."],
+  creditReports: [
+    "Type AnnualCreditReport.com into your browser yourself. It's the only official free site.",
+    "Request all three reports. They're free every week.",
+    "Look for accounts, addresses or credit checks you don't recognize, and dispute them with that company."],
+  bankAlerts: [
+    "In your bank's or card's app, look for Alerts or Notifications in Settings or your profile.",
+    "Turn on alerts for every purchase, every transfer and every password or phone number change.",
+    "In the same app, find Security and turn on two-step sign-in, if it isn't on already."],
+  routerAdmin: [
+    "On a phone or computer connected to your Wi-Fi, open a browser and type the address printed on the router's sticker. It's often 192.168.1.1 or 192.168.0.1.",
+    "Sign in with the admin password on the sticker. Many newer routers use an app instead, such as Eero, Google Home, Netgear or TP-Link Deco.",
+    "Change the admin password under Administration or System. Change the Wi-Fi password under Wireless or Wi-Fi.",
+    "Firmware updates, remote management and WPS are usually in the same Administration, System or Advanced menus."],
+  autoUpdates: [
+    "iPhone: Settings › General › Software Update › Automatic Updates. Turn everything on.",
+    "Android: Settings › System › Software update. In the Play Store, tap your picture › Settings › Network preferences › Auto-update apps.",
+    "Windows: Settings › Windows Update. Keep updates on and restart when it asks.",
+    "Mac: System Settings › General › Software Update › Automatic updates. Turn everything on."]
+};
 const PLAYBOOKS = [
   { id: "phone", title: "My phone is acting hacked", steps: [
     "Update the phone now: iPhone: Settings › General › Software Update. Android: Settings › System › Software update. Then restart it.",
-    "Delete any app you don't remember installing. On iPhone also check Settings › General › VPN & Device Management and remove profiles you didn't add.",
-    "From a different device you trust, change your Apple Account or Google account password and turn on two-step sign-in. Remove devices you don't recognize from the account.",
-    "Call your phone carrier from another phone. Ask if your SIM or number was moved, and set a port-out PIN or number lock.",
+    { t: "Delete any app you don't remember installing. On iPhone also check Settings › General › VPN & Device Management and remove profiles you didn't add.", how: HOW.deleteApps },
+    { t: "From a different device you trust, change your Apple Account or Google account password and turn on two-step sign-in. Remove devices you don't recognize from the account.", how: HOW.appleGoogle },
+    { t: "Call your phone carrier from another phone. Ask if your SIM or number was moved, and set a port-out PIN or number lock.", how: HOW.carrierLock },
     "Still strange? Back up your photos, then erase the phone (iPhone: Settings › General › Transfer or Reset iPhone. Android: Settings › System › Reset options). Set it up as new and reinstall apps from the store."] },
   { id: "computer", title: "My computer is acting hacked", steps: [
     "If you see the mouse moving by itself or a ransom message, turn off Wi-Fi or unplug the internet cable now.",
     "Don't pay anyone and don't call phone numbers shown in pop-ups. Real companies never put support numbers in warning pop-ups.",
-    "Uninstall remote access apps you didn't install yourself (TeamViewer, AnyDesk, ScreenConnect and similar).",
+    { t: "Uninstall remote access apps you didn't install yourself (TeamViewer, AnyDesk, ScreenConnect and similar).", how: HOW.uninstallRemote },
     "Windows: Windows Security › Virus & threat protection › Scan options › Microsoft Defender Offline scan. Mac: install the latest macOS update.",
-    "From a different, clean device, change your email password first, then bank, then everything else.",
+    { t: "From a different, clean device, change your email password first, then bank, then everything else.", how: HOW.passwords },
     "Files locked with a ransom note? Report it to the FBI at ic3.gov and get help from a local repair shop. Restore from a backup if you have one."] },
   { id: "email", title: "Someone got into my email", steps: [
     "Change the password right away to a new one you've never used. If you're locked out, use the official recovery from the email provider's own sign-in page; don't search for a support number.",
-    "Turn on two-step sign-in, ideally with a passkey or an authenticator app instead of text codes.",
-    "Check the recovery phone and recovery email are yours. Attackers change them to come back later.",
+    { t: "Turn on two-step sign-in, ideally with a passkey or an authenticator app instead of text codes.", how: HOW.email2fa },
+    { t: "Check the recovery phone and recovery email are yours. Attackers change them to come back later.", how: HOW.recoveryInfo },
     "Check forwarding and filters. Gmail: Settings › See all settings › Forwarding and Filters. Outlook: Settings › Mail › Forwarding and Rules. Delete anything you didn't set up.",
-    "Sign out of all other devices from the account's security page.",
+    { t: "Sign out of all other devices from the account's security page.", how: HOW.signOutAll },
     "Then change passwords on accounts that send resets to this email, starting with your bank. Warn contacts to ignore messages asking for money or gift cards."] },
   { id: "money", title: "Money left my bank or payment app", steps: [
     "Call the number on the back of your card or inside the official app. Never use a number from a text, email or caller.",
     "Ask them to freeze the card or account and dispute every charge you didn't make. Act fast: speed matters most for Zelle, Cash App and other instant transfers.",
     "Change the password and turn on two-step sign-in. Check the phone number and email on the account are yours.",
-    "Freeze your credit at Equifax, Experian and TransUnion. It's free and stops new accounts in your name.",
+    { t: "Freeze your credit at Equifax, Experian and TransUnion. It's free and stops new accounts in your name.", how: HOW.creditFreeze },
     "If someone used your identity, IdentityTheft.gov gives you a recovery plan and a report to share with your bank."] },
   { id: "crypto", title: "Crypto was stolen or I shared my recovery phrase", steps: [
     "If you typed or shared your recovery phrase anywhere: assume the wallet is gone. Make a brand-new wallet on a clean device and move what's left right away.",
@@ -514,22 +606,22 @@ const PLAYBOOKS = [
     "Post or message friends to ignore DMs from you asking for money, codes or crypto."] },
   { id: "remote", title: "I let a caller or pop-up into my computer", steps: [
     "Turn off Wi-Fi or unplug the internet now, and hang up.",
-    "Uninstall the app they had you install (often TeamViewer, AnyDesk, ScreenConnect or similar).",
+    { t: "Uninstall the app they had you install (often TeamViewer, AnyDesk, ScreenConnect or similar).", how: HOW.uninstallRemote },
     "Call your bank on the number on your card. Tell them a scammer had access to your computer and ask them to watch for transfers.",
-    "From another device, change your email and bank passwords.",
+    { t: "From another device, change your email and bank passwords.", how: HOW.passwords },
     "Have the computer checked or reset before you use it for banking again.",
     "Microsoft, Apple, Amazon and banks never call you to fix your computer and never ask for gift cards. Report it at ReportFraud.ftc.gov."] },
   { id: "router", title: "Someone is on my Wi-Fi", steps: [
     "Reset the router: hold the reset button (usually a pinhole) for about 10 seconds until the lights change.",
-    "Set a new admin password and a new long Wi-Fi password.",
+    { t: "Set a new admin password and a new long Wi-Fi password.", how: HOW.routerAdmin },
     "Update the router's firmware and turn on automatic updates.",
     "Turn off remote management and WPS in the router settings.",
     "Check your router model isn't on our replace list. Router from your internet company? Call them for a newer one."] },
   { id: "identity", title: "My SSN or ID leaked", steps: [
-    "Freeze your credit at Equifax, Experian and TransUnion. It's free and you can unfreeze any time.",
-    "Get an Identity Protection PIN from the IRS so no one else can file taxes in your name.",
-    "Check your credit reports for free at AnnualCreditReport.com and look for accounts you didn't open.",
-    "Watch your bank and card statements, and turn on alerts for every transaction.",
+    { t: "Freeze your credit at Equifax, Experian and TransUnion. It's free and you can unfreeze any time.", how: HOW.creditFreeze },
+    { t: "Get an Identity Protection PIN from the IRS so no one else can file taxes in your name.", how: HOW.irsPin },
+    { t: "Check your credit reports for free at AnnualCreditReport.com and look for accounts you didn't open.", how: HOW.creditReports },
+    { t: "Watch your bank and card statements, and turn on alerts for every transaction.", how: HOW.bankAlerts },
     "If someone used your identity, IdentityTheft.gov builds a step-by-step recovery plan."] }
 ];
 const CHECKLISTS = [
@@ -552,6 +644,13 @@ const CHECKLISTS = [
     ["guest-net", "Cameras, plugs and TVs are on the guest network", "If one gets hacked, it can't reach your laptop or phone."],
     ["model-ok", "Your router model isn't on our replace list", "Old models that never get fixes are being attacked right now."]] }
 ];
+const CHECK_HOW = { "lockdown:carrier-pin": "carrierLock", "lockdown:email-2fa": "email2fa", "lockdown:bank-2fa": "bankAlerts",
+  "lockdown:credit-freeze": "creditFreeze", "lockdown:pw-manager": "passwords", "lockdown:recovery": "recoveryInfo",
+  "lockdown:auto-updates": "autoUpdates", "router:admin-pw": "routerAdmin", "router:firmware": "routerAdmin" };
+function howTo(steps) {
+  if (!steps || !steps.length) return null;
+  return el("details", { class: "how" }, el("summary", {}, "Show me how"), el("ol", {}, ...steps.map(x => el("li", {}, x))));
+}
 function viewProtect() {
   const out = [header(), el("h1", {}, "Protect"),
     el("button", { type: "button", class: "big", onclick: () => go("hacked") }, icon("alarm"), "I think I got hacked"),
@@ -563,7 +662,7 @@ function viewProtect() {
       const key = c.id + ":" + k, idd = "chk-" + key.replace(/[^a-z0-9]/gi, "-");
       box.append(el("div", { class: "check" },
         el("input", { type: "checkbox", id: idd, checked: !!S.checks[key], onchange: e => { S.checks[key] = e.target.checked; store.set(KEY_CHECKS, S.checks); render(); } }),
-        el("label", { for: idd }, label, el("span", { class: "why" }, why))));
+        el("div", { class: "body" }, el("label", { for: idd }, label, el("span", { class: "why" }, why)), howTo(HOW[CHECK_HOW[key]]))));
     }
     out.push(box);
   }
@@ -575,7 +674,8 @@ function viewHacked() {
     const pb = PLAYBOOKS.find(p => p.id === S.playbook);
     return [el("button", { type: "button", class: "back", onclick: () => { S.playbook = null; render(); } }, "‹ I think I got hacked"),
       el("h1", {}, pb.title), el("p", { class: "sub" }, "Take a breath. Do these in order. Most of it takes minutes."),
-      el("div", { class: "box" }, el("ol", { class: "steps" }, ...pb.steps.map(s => el("li", {}, s)))),
+      el("div", { class: "box" }, el("ol", { class: "steps" }, ...pb.steps.map(s => typeof s === "string" ? el("li", {}, s)
+        : el("li", {}, s.t, howTo(s.how))))),
       el("p", { class: "note" }, icon("shield"), el("span", {}, "Real companies won't call you about a hack, ask for gift cards or ask for your passwords or recovery phrase. Anyone who does is the scam."))];
   }
   return [el("button", { type: "button", class: "back", onclick: () => go("protect") }, "‹ Protect"),
@@ -592,6 +692,7 @@ function viewSettings() {
     navigator.clipboard.writeText(code).then(() => { copyBtn.textContent = "Copied"; }, () => { copyBtn.textContent = "Select the code above and copy it"; }); } }, "Copy backup code");
   const names = Object.keys(P.lists);
   return [header(), el("h1", {}, "Settings"),
+    el("button", { type: "button", class: "btn secondary", onclick: () => go("welcome") }, "How this app works"),
     el("div", { class: "box" }, el("h3", {}, "Backup code"),
       el("p", { class: "small" }, "Your lists aren't saved anywhere but this phone. Copy this code somewhere safe to restore them later or move them to a new phone."),
       el("textarea", { readonly: true, "aria-label": "Your backup code" }, code), copyBtn),
@@ -625,12 +726,12 @@ function go(view, arg) { S.view = view; if (view === "detail") S.detail = arg; i
 function render() {
   const app = document.getElementById("app");
   const empty = !list().devices.length && !list().custom.length;
-  const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty),
+  const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty), welcome: viewWelcome,
                   protect: viewProtect, hacked: viewHacked, settings: viewSettings };
   app.replaceChildren(...[].concat((views[S.view] || viewAlerts)()).filter(x => x != null && x !== false));
   const tabs = document.getElementById("tabs");
   tabs.hidden = empty && Object.keys(P.lists).length === 1;
-  const tab = { detail: "alerts", device: "alerts", hacked: "protect" }[S.view] || S.view;
+  const tab = { detail: "alerts", device: "alerts", hacked: "protect", welcome: "settings" }[S.view] || S.view;
   tabs.querySelectorAll("button").forEach(b => { b.removeAttribute("aria-current"); if (b.dataset.view === tab) b.setAttribute("aria-current", "page"); });
 }
 
@@ -644,7 +745,7 @@ Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.j
           support: support || { products: {} }, breaches: breaches || { breaches: [] } };
     const known = new Set(D.products.map(p => p.id));
     for (const l of Object.values(P.lists)) l.devices = l.devices.filter(i => known.has(i));
-    if (!list().devices.length && !list().custom.length) S.view = "setup";
+    if (!list().devices.length && !list().custom.length) S.view = store.get(KEY_INTRO, false) ? "setup" : "welcome";
     render();
   })
   .catch(() => { document.getElementById("app").replaceChildren(el("p", { class: "empty" }, "Couldn't load the alert list. Check your connection and reload.")); });
