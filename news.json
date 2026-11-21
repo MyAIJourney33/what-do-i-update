@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-19",
+ "updated": "2026-11-21",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -42,6 +42,38 @@
   }
  },
  "items": [
+  {
+   "id": "fbi-ncic-2026-11",
+   "date": "2026-11-20",
+   "title": "FBI police database reported hacked",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A law enforcement database, not your devices. Nothing to update. Real FBI agents never call demanding money; hang up on anyone who does.",
+   "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026"
+  },
+  {
+   "id": "chase-vendor-2026-11",
+   "date": "2026-11-19",
+   "title": "Chase says a vendor leak exposed emails",
+   "affects": [
+    "bank"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "If you bank with Chase: hackers got some names and emails held by marketing vendors. Chase says its services weren't disrupted. Nothing to update. Expect fake Chase emails; open the Chase app yourself instead of tapping links.",
+   "if_not": "Nothing for you to do.",
+   "source": "Gray News, Nov 19, 2026"
+  },
+  {
+   "id": "usda-2026-11",
+   "date": "2026-11-19",
+   "title": "Hackers got into a USDA farm payment system",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A government payment system for farmers, not home devices. Nothing to update. If you get USDA payments, check any message about your account with your local office.",
+   "source": "NBC News, Nov 20, 2026"
+  },
   {
    "id": "apple-outage-2026-11",
    "date": "2026-11-17",
