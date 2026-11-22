@@ -135,6 +135,10 @@ const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KE
 const TERMS_VERSION = "2026-11-21";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
 const PUSH_WORKER = "https://api.whatdoiupdate.com";
+// If another website shows this app inside a frame (to borrow our name for a scam), show nothing but a pointer here.
+if (window.top !== window.self) document.addEventListener("DOMContentLoaded", () => {
+  document.body.textContent = "What Do I Update? only works at whatdoiupdate.com. Type that address into your browser yourself.";
+});
 const memory = {};
 const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
@@ -155,6 +159,30 @@ let D = { products: [], order: [], kev: { entries: [] }, news: { items: [], plai
 let S = { view: "alerts", fixed: new Set(store.get(KEY_FIXED, [])), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
           detail: null, device: null, playbook: null, query: "" };
 const selected = () => new Set(list().devices);
+// Checks a pasted restore code before it touches this phone. A code from someone else could otherwise put
+// any text inside the app (like "call this number"), or break it. Only our own product ids, short names and
+// no links, emails or phone numbers get through. Throws on anything else.
+function cleanRestore(raw, known) {
+  const bad = t => /https?:|www\.|\.(com|net|org|io|app|ly|co)\b|@|\d[\d\s().-]{6,}\d/i.test(t) || /[\u0000-\u001f<>]/.test(t);
+  const name = (t, max) => { if (typeof t !== "string") throw 0; t = t.trim(); if (!t || t.length > max || bad(t)) throw 0; return t; };
+  const ids = a => [...new Set((Array.isArray(a) ? a : []).filter(i => typeof i === "string" && known.has(i)))];
+  if (Array.isArray(raw)) return { active: "Me", lists: { Me: { devices: ids(raw), custom: [], models: {} } } };
+  if (!raw || typeof raw !== "object" || !raw.lists || typeof raw.lists !== "object" || Array.isArray(raw.lists)) throw 0;
+  const entries = Object.entries(raw.lists);
+  if (!entries.length || entries.length > 10) throw 0;
+  const lists = {};
+  for (const [n, l] of entries) {
+    if (!l || typeof l !== "object") throw 0;
+    const devices = ids(l.devices);
+    const custom = [...new Set((Array.isArray(l.custom) ? l.custom : [])
+      .filter(c => typeof c === "string" && c.trim() && c.trim().length <= 60 && !bad(c)).map(c => c.trim()))].slice(0, 50);
+    const models = {};
+    for (const [id, m] of Object.entries(l.models && typeof l.models === "object" ? l.models : {}))
+      if (devices.includes(id) && typeof m === "string" && m.length <= 60 && !bad(m)) models[id] = m;
+    lists[n === "Me" ? "Me" : name(n, 30)] = { devices, custom, models };
+  }
+  return { active: Object.keys(lists)[0], lists };
+}
 function saveProfiles() { store.set(KEY_PROFILES, P); store.set(KEY_OLD_DEVICES, list().devices); }
 
 const ICON = {
@@ -990,9 +1018,7 @@ function viewSettings() {
       el("button", { type: "button", class: "btn secondary", onclick: () => {
         try {
           const raw = JSON.parse(decodeURIComponent(escape(atob(input.value.trim()))));
-          const known = new Set(D.products.map(p => p.id));
-          if (Array.isArray(raw)) P = { active: "Me", lists: { Me: { devices: raw.filter(i => known.has(i)), custom: [], models: {} } } };
-          else { P = { active: Object.keys(raw.lists)[0], lists: raw.lists }; P = (store.set(KEY_PROFILES, P), loadProfiles()); }
+          P = cleanRestore(raw, new Set(D.products.map(p => p.id)));
           saveProfiles(); go("alerts");
         } catch (e) { input.setCustomValidity("That code doesn't look right."); input.reportValidity(); } } }, "Restore")),
     names.length > 1 ? el("div", { class: "box" }, el("h3", {}, "People on this phone"),
