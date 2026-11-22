@@ -68,6 +68,9 @@ nav.tabs[hidden]{display:none}
 .card.c-gray{border-color:#D6D3CB;background:#FBFAF7}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:1px}
 .b-new{background:var(--blue);color:#fff;margin-left:0;margin-right:6px}.card .when{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+.agree{display:flex;gap:12px;align-items:flex-start;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px;margin-top:16px;font-size:15px}
+.agree input{width:24px;height:24px;flex:0 0 24px;margin:0;accent-color:var(--blue)}.agree label{margin:0;font-weight:500}.agree a{color:var(--blue);font-weight:600}
+.btn:disabled{opacity:.45;cursor:not-allowed}
 .src-links{margin-top:6px;color:var(--muted)}.src-links a{color:var(--blue);font-weight:600;text-decoration:none;display:inline-block;padding:4px 0}
 .b-confirmed{background:var(--now-bg);color:var(--now)}.b-reported{background:var(--week-bg);color:var(--week)}.b-heads{background:#EEF0F4;color:var(--muted)}
 input[type=search],input[type=text],select{width:100%;min-height:48px;border:1.5px solid #CFCCC3;border-radius:12px;padding:0 14px;font:16px Inter,system-ui,sans-serif;background:#fff;color:var(--ink)}
@@ -125,7 +128,11 @@ ol.intro span{font-size:14px;color:var(--body)}
 const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
-      KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1";
+      KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1",
+      KEY_TERMS = "wdiu.terms.v1";
+// The terms people agree to (privacy.html#terms). Bump the date when the terms change in a way that matters:
+// everyone is asked to agree again. What they agreed to and when is saved only on this phone.
+const TERMS_VERSION = "2026-11-21";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
 const PUSH_WORKER = "https://wdiu-push.myaijourney33.workers.dev";
 const memory = {};
@@ -606,6 +613,23 @@ function refreshSetup() {
   s.replaceChildren(summaryBox()); b.replaceChildren(pickerBody());
   btn.disabled = !(list().devices.length || list().custom.length);
 }
+const agreed = () => (store.get(KEY_TERMS, null) || {}).v === TERMS_VERSION;
+function agree() { store.set(KEY_TERMS, { v: TERMS_VERSION, on: new Date().toISOString().slice(0, 10) }); }
+// A real checkbox with its label; the button it controls stays off until it's ticked.
+function agreeBox(btn) {
+  btn.disabled = true;
+  return el("div", { class: "agree" },
+    el("input", { type: "checkbox", id: "agree", onchange: e => { btn.disabled = !e.target.checked; } }),
+    el("label", { for: "agree" }, "I agree to the ", el("a", { href: "privacy.html#terms" }, "Terms of use"), " and the ", el("a", { href: "privacy.html" }, "Privacy policy"), "."));
+}
+// Shown once to anyone who hasn't agreed to the current terms (people who started before there were terms, or after a change).
+function viewAgree() {
+  const btn = el("button", { type: "button", class: "btn", onclick: () => { agree(); dailyCount(); render(); } }, "Continue");
+  return [header(), el("h1", {}, "Before you continue"),
+    el("p", { class: "sub" }, "We added short terms of use. In plain words: this app gives you information, not a guarantee. It's free, it comes as is, and your lists stay on this phone."),
+    agreeBox(btn), btn];
+}
+
 function viewWelcome() {
   const fresh = !list().devices.length && !list().custom.length;
   return [header(), el("h1", {}, "What needs updating, in plain English"),
@@ -615,7 +639,13 @@ function viewWelcome() {
       el("li", {}, el("div", {}, el("b", {}, "See what to fix"), el("span", {}, "Red means do it now. Yellow means this week. Green means you're fine."))),
       el("li", {}, el("div", {}, el("b", {}, "Follow the steps"), el("span", {}, "Each alert tells you exactly where to tap in Settings. Think you got hacked? The Protect tab walks you through it.")))),
     el("p", { class: "note" }, icon("lock"), el("span", {}, el("b", {}, "No account. No tracking. "), "Your list stays on this phone, and we never send download links. If a message with a link claims to be us, it's a scam.")),
-    el("button", { type: "button", class: "btn", onclick: () => { store.set(KEY_INTRO, true); go(fresh ? "setup" : "alerts"); } }, fresh ? "Get started" : "Back to my alerts")];
+    ...(() => {
+      const btn = el("button", { type: "button", class: "btn", onclick: () => { if (!agreed()) { agree(); dailyCount(); } store.set(KEY_INTRO, true); go(fresh ? "setup" : "alerts"); } },
+        fresh ? "Get started" : "Back to my alerts");
+      if (agreed()) return [el("p", { class: "small" }, `You agreed to the terms of use on ${fmtDate((store.get(KEY_TERMS, {}) || {}).on || TERMS_VERSION)}. `,
+        el("a", { href: "privacy.html#terms" }, "Read them")), btn];
+      return [agreeBox(btn), btn];
+    })()];
 }
 function viewSetup(first) {
   const search = el("input", { type: "search", id: "q", placeholder: "Search: Roku, Galaxy Tab, Ring, PS5…", value: S.query, autocomplete: "off",
@@ -861,7 +891,7 @@ async function alertsOff() {
 // Off if the person turns it off in Settings, or their browser sends Global Privacy Control / Do Not Track.
 const browserSaysDontTrack = () => navigator.globalPrivacyControl === true || navigator.doNotTrack === "1" || window.doNotTrack === "1";
 function dailyCount() {
-  if (!PUSH_WORKER || store.get(KEY_COUNT_OFF, false) || browserSaysDontTrack()) return;
+  if (!PUSH_WORKER || !agreed() || store.get(KEY_COUNT_OFF, false) || browserSaysDontTrack()) return;
   const d = new Date(), day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
   if (store.get(KEY_COUNTED, "") === day) return;
   store.set(KEY_COUNTED, day);
@@ -981,7 +1011,7 @@ function viewSettings() {
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
-      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); S.seenOpen = null; S.ping = null; go("setup"); } }, "Erase everything on this phone"),
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),
     el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
       (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
 }
@@ -994,9 +1024,10 @@ function render() {
   const empty = !list().devices.length && !list().custom.length;
   const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty), welcome: viewWelcome, notify: viewNotify,
                   protect: viewProtect, hacked: viewHacked, settings: viewSettings };
-  app.replaceChildren(...[].concat((views[S.view] || viewAlerts)()).filter(x => x != null && x !== false));
+  const gated = !agreed() && S.view !== "welcome";
+  app.replaceChildren(...[].concat((gated ? viewAgree : views[S.view] || viewAlerts)()).filter(x => x != null && x !== false));
   const tabs = document.getElementById("tabs");
-  tabs.hidden = empty && Object.keys(P.lists).length === 1;
+  tabs.hidden = gated || (empty && Object.keys(P.lists).length === 1);
   const tab = { detail: "alerts", device: "alerts", hacked: "protect", welcome: "settings", notify: "settings" }[S.view] || S.view;
   tabs.querySelectorAll("button").forEach(b => { b.removeAttribute("aria-current"); if (b.dataset.view === tab) b.setAttribute("aria-current", "page"); });
 }
