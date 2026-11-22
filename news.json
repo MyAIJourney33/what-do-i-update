@@ -4,7 +4,7 @@
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
    "why": "Google fixed a flaw hackers are already using. A booby-trapped web page could run code inside your browser. Fixed Nov 9, 2026: you need version 157.0.8103.50 or newer.",
-   "source": "Google security advisory, Nov 9, 2026",
+   "source": "Google security advisory, Nov 9, 2026; BleepingComputer, Nov 10, 2026",
    "for": {
     "edge": {
      "title": "Update Edge and restart it",
@@ -18,7 +18,10 @@
      "title": "Update Brave, Opera or Vivaldi",
      "why": "These browsers are built on Chrome, which has a flaw hackers are already using. Install your browser's latest update and restart it."
     }
-   }
+   },
+   "links": [
+    "https://bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year"
+   ]
   },
   "CVE-2026-124194": {
    "title": "Update Outlook",
@@ -50,7 +53,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "A law enforcement database, not your devices. Nothing to update. Real FBI agents never call demanding money; hang up on anyone who does.",
-   "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026"
+   "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026",
+   "links": [
+    "https://www.ic3.gov/PSA/2026/PSA260917"
+   ]
   },
   {
    "id": "chase-vendor-2026-11",
@@ -62,7 +68,10 @@
    "verdict": "heads_up",
    "if_affected": "If you bank with Chase: hackers got some names and emails held by marketing vendors. Chase says its services weren't disrupted. Nothing to update. Expect fake Chase emails; open the Chase app yourself instead of tapping links.",
    "if_not": "Nothing for you to do.",
-   "source": "Gray News, Nov 19, 2026"
+   "source": "Gray News (KOLD), Nov 19, 2026",
+   "links": [
+    "https://www.kold.com/2026/11/19/chase-bank-announces-cyberattack-says-hackers-may-have-obtained-customers-personal-information/"
+   ]
   },
   {
    "id": "usda-2026-11",
@@ -72,7 +81,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "A government payment system for farmers, not home devices. Nothing to update. If you get USDA payments, check any message about your account with your local office.",
-   "source": "NBC News, Nov 20, 2026"
+   "source": "NBC News, Nov 20, 2026; Nextgov/FCW, Nov 2026",
+   "links": [
+    "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/"
+   ]
   },
   {
    "id": "apple-outage-2026-11",
@@ -88,7 +100,10 @@
    "verdict": "heads_up",
    "if_affected": "An outage after a bad update at Apple, not a hack. Nothing to update on your devices. Ignore texts or calls saying your Apple ID is locked and asking for a code.",
    "if_not": "Nothing for you to do.",
-   "source": "ABC News live updates, Nov 17, 2026"
+   "source": "ABC News live updates, Nov 17, 2026; AP via ABC7, Nov 17, 2026",
+   "links": [
+    "https://abc7.com/story/apple-joins-parade-technology-hiccups-recent-days/20048749/"
+   ]
   },
   {
    "id": "outage-wave-2026-11",
@@ -100,7 +115,10 @@
    "verdict": "heads_up",
    "if_affected": "Banks, Schwab, United and the FAA all had outages. Every company that gave a cause blamed a technical fault, not an attack. An outage doesn't move your money. If you get a call or text 'fixing' your account, hang up and call the number on your card.",
    "if_not": "Nothing for you to do.",
-   "source": "FOX Television Stations, Nov 17, 2026; FourWeekMBA outage tally, Nov 2026"
+   "source": "FOX Television Stations (FOX 4), Nov 17, 2026; FourWeekMBA outage tally, Nov 2026",
+   "links": [
+    "https://www.fox4news.com/news/airline-bank-outage-reason-tech-glitch-cyber-attack"
+   ]
   },
   {
    "id": "m365-outage-2026-11",
@@ -113,7 +131,10 @@
    "verdict": "heads_up",
    "if_affected": "An outage, not a hack. Nothing to update. Ignore emails asking you to \"restore\" your mailbox.",
    "if_not": "Nothing for you to do.",
-   "source": "Microsoft incident MO1550821"
+   "source": "Microsoft incident MO1550821, via BleepingComputer, Nov 12, 2026",
+   "links": [
+    "https://bleepingcomputer.com/news/microsoft/massive-microsoft-365-outage-disrupts-outlook-teams-copilot-worldwide"
+   ]
   },
   {
    "id": "freezers-2026-11",
@@ -123,7 +144,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "Commercial refrigeration in grocery stores and cold storage, not home fridges.",
-   "source": "Reuters, Nov 5, 2026"
+   "source": "Reuters, Nov 5, 2026; FBI and CISA warning via BleepingComputer, Nov 5, 2026",
+   "links": [
+    "https://bleepingcomputer.com/news/security/fbi-cisa-warn-of-cyberattacks-targeting-refrigeration-systems"
+   ]
   },
   {
    "id": "android-nov-2026",
@@ -137,7 +161,10 @@
    "verdict": "heads_up",
    "if_affected": "Google fixed a serious flaw that needs no tap from you. Hackers aren't using it yet. Install the update when your phone offers it and check the security patch level says November 5, 2026 or later.",
    "if_not": "Nothing for you to do.",
-   "source": "Android Security Bulletin, November 2026 (published Nov 2, 2026)"
+   "source": "Android Security Bulletin, November 2026 (published Nov 2, 2026)",
+   "links": [
+    "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
+   ]
   },
   {
    "id": "binance-2026-10",
@@ -149,7 +176,10 @@
    "verdict": "heads_up",
    "if_affected": "If you use Binance: the exchange says it refilled affected wallets. Ignore messages offering refunds or asking you to \"verify\" your account.",
    "if_not": "Nothing for you to do.",
-   "source": "TRM Labs; Binance"
+   "source": "TRM Labs, Oct 30, 2026; Binance",
+   "links": [
+    "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history"
+   ]
   },
   {
    "id": "gcloud-london-2026-10",
@@ -159,7 +189,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "Hit UK banks and services. Backup power failed; nothing for you to update.",
-   "source": "Technology Magazine"
+   "source": "Technology Magazine, Oct 2026",
+   "links": [
+    "https://technologymagazine.com/news/the-google-cloud-outage-what-industry-experts-have-to-say"
+   ]
   },
   {
    "id": "android-sms-2026-10",
@@ -173,8 +206,12 @@
    "verdict": "do_now",
    "if_affected": "One hidden text can crash calling, including 911. Install the October update (Android 14–17). Android 12 and 13 won't get a fix: plan to replace the phone.",
    "if_not": "You don't have an Android phone.",
-   "source": "PBX Science",
-   "date_label": "October 2026"
+   "source": "PBX Science; BleepingComputer, Oct 31, 2026",
+   "date_label": "October 2026",
+   "links": [
+    "https://bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones",
+    "https://pbxscience.com/?p=24824"
+   ]
   }
  ]
 }
