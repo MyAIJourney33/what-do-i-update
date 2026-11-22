@@ -52,10 +52,11 @@
    "affects": [],
    "verdict": "heads_up",
    "if_affected": "",
-   "if_not": "Only cheap, uncertified no-name Android boxes. Roku, Fire TV, Apple TV, Chromecast and name-brand TVs aren't part of it. Nothing to update. Google says to check a box is Play Protect certified; if yours isn't, the safest move is to unplug it.",
-   "source": "HUMAN Security via MarTech Cube, Nov 19, 2026",
+   "if_not": "Only cheap, uncertified no-name Android boxes. Roku, Fire TV, Apple TV, Chromecast and name-brand TVs aren't part of it. Nothing to update. Google says to check a box is Play Protect certified, and the FBI says to consider disconnecting suspicious devices.",
+   "source": "HUMAN Security via MarTech Cube, Nov 19, 2026; FBI IC3 PSA on BADBOX 2.0, Jun 5, 2025",
    "links": [
-    "https://www.martechcube.com/?p=327632"
+    "https://www.martechcube.com/?p=327632",
+    "https://www.ic3.gov/PSA/2025/PSA250605"
    ]
   },
   {
