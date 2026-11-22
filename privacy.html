@@ -33,6 +33,7 @@ a{color:#1D4ED8;font-weight:600}
 <b>The short version</b>
 <ul>
 <li>No account, no tracking, no ads and no cookies.</li>
+<li>We count how many phones open the app each day: just numbers, never who. You can turn it off.</li>
 <li>The list of things you own stays on your phone. We never see it, store it or sell it.</li>
 <li>We never send download links. Any message with a link that claims to be from us is a scam.</li>
 <li>Instant alerts are optional. If you turn them on, we keep only an anonymous push address.</li>
@@ -45,6 +46,16 @@ a{color:#1D4ED8;font-weight:600}
 
 <h2>What we send you</h2>
 <p>Everyone gets the same public files: the list of flaws being attacked, our news notes, support dates and a list of known data breaches. Your phone compares them with your list. That's why we never need to know what you own.</p>
+
+<h2>What we count</h2>
+<p>To know whether the app is helping anyone, we keep a few daily totals. Counting isn't tracking: we never know who opened the app, only how many phones did.</p>
+<ul>
+<li><b>Phones that opened the app.</b> At most once a day, your phone sends our alert server a blank "opened today" signal. The server adds 1 to that day's total.</li>
+<li><b>Phones watching someone else's devices.</b> The same signal says yes or no to one question: does this phone have more than one list (family watch)? That adds 1 to a second total.</li>
+<li><b>Instant alert sign-ups.</b> The number of push addresses we hold (see above). Just the number.</li>
+</ul>
+<p>The signal has no ID, no cookie and nothing about what's on your lists. Like any web request it arrives with your IP address; we don't keep it. The totals are kept by Cloudflare, which runs our alert server, as one row of numbers per day. They aren't secret, and we may share them.</p>
+<p>To stop counting this phone, go to Settings › Daily count › Don't count this phone. If your browser sends Global Privacy Control or Do Not Track, we never count it.</p>
 
 <h2>Links to our sources</h2>
 <p>News stories and alerts link to where the information came from (news sites, device makers and government agencies) so you can read more or check our work. These links only appear under "Read more" and show the site's name. They open the other site in a new tab, and that site's own privacy rules apply. We don't track which links you tap. Alerts and notifications never contain links, and we never link to downloads: updates always come from your device's own Settings.</p>
