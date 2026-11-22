@@ -56,6 +56,7 @@ nav.tabs[hidden]{display:none}
 .card.c-gray{border-color:#D6D3CB;background:#FBFAF7}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:1px}
 .b-new{background:var(--blue);color:#fff;margin-left:0;margin-right:6px}.card .when{display:block;font-size:13px;color:var(--muted);margin-top:6px}
+.src-links{margin-top:6px;color:var(--muted)}.src-links a{color:var(--blue);font-weight:600;text-decoration:none;display:inline-block;padding:4px 0}
 .b-confirmed{background:var(--now-bg);color:var(--now)}.b-reported{background:var(--week-bg);color:var(--week)}.b-heads{background:#EEF0F4;color:var(--muted)}
 input[type=search],input[type=text],select{width:100%;min-height:48px;border:1.5px solid #CFCCC3;border-radius:12px;padding:0 14px;font:16px Inter,system-ui,sans-serif;background:#fff;color:var(--ink)}
 details.cat{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
@@ -167,6 +168,20 @@ const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
 const ageDays = iso => Math.floor((today() - new Date(iso.slice(0, 10) + "T00:00:00")) / 86400000);
 const fmtShort = iso => { const d = new Date(iso.slice(0, 10) + "T00:00:00");
   return d.toLocaleDateString(undefined, d.getFullYear() === today().getFullYear() ? { month: "short", day: "numeric" } : { month: "short", day: "numeric", year: "numeric" }); };
+// "Read more" links to the original sources, so people can check us. Each link shows the site's name,
+// opens in a new tab and sends no referrer. Only https links are shown; instructions never carry links.
+function sourceLinks(urls) {
+  const ok = (urls || []).filter(u => typeof u === "string" && u.startsWith("https://")).slice(0, 3);
+  if (!ok.length) return null;
+  const site = u => { try { return new URL(u).hostname.replace(/^www\./, ""); } catch (e) { return null; } };
+  const parts = [];
+  ok.forEach(u => { const h = site(u); if (!h) return;
+    if (parts.length) parts.push(" · ");
+    parts.push(el("a", { href: u, target: "_blank", rel: "noopener noreferrer", "aria-label": `Read the source on ${h} (opens a new tab)` }, h + " ↗")); });
+  return parts.length ? el("p", { class: "small src-links" }, "Read more: ", ...parts) : null;
+}
+const nvdLink = cve => "https://nvd.nist.gov/vuln/detail/" + encodeURIComponent(cve);
+
 // The date line on a card: when CISA added the flaw, or when the news happened.
 function cardDate(a) {
   if (a.kind === "kev") return "Added " + fmtShort(a.entry.added);
@@ -427,8 +442,10 @@ function viewDetail() {
   const src = a.kind === "kev"
     ? `${a.entry.cve} · added to CISA's exploited list ${fmtDate(a.entry.added)}${a.plain && a.plain.source ? " · " + a.plain.source : ""}`
     : a.news.source;
+  const links = a.kind === "kev" ? [...((a.plain && a.plain.links) || []), nvdLink(a.entry.cve)] : a.news.links;
   out.push(el("div", { class: "box" }, el("h3", {}, "Source"), el("p", { class: "small" }, src),
-    a.kind === "kev" ? el("p", { class: "small", style: "margin-top:6px" }, "Technical name: " + a.entry.name) : null));
+    a.kind === "kev" ? el("p", { class: "small", style: "margin-top:6px" }, "Technical name: " + a.entry.name) : null,
+    sourceLinks(links)));
   return out;
 }
 
@@ -500,7 +517,8 @@ function viewHeadlines() {
         el("h3", { style: "margin:4px 0 8px" }, n.title),
         el("span", { class: `pill ${tone}` }, icon(tone), label),
         el("p", { class: "small", style: "margin-top:8px" }, hit.length ? n.if_affected : n.if_not),
-        el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source));
+        el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source),
+        sourceLinks(n.links));
     })];
   // Breach watch: no email needed. The person marks the services they use, on this phone.
   const br = D.breaches.breaches || [];
