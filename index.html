@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What Do I Update?</title>
-<meta name="description" content="Free and private: see which of your phones, computers and accounts need updating after the latest hacks. No account, no tracking.">
+<meta name="description" content="When something you own gets hacked, like your iPhone or Chrome, we tell you what Apple or Google says to do, in plain English. Free, no account, no tracking.">
 <!-- Link previews (texts, iMessage, Facebook, X): what shows when someone shares the link -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="What Do I Update?">
 <meta property="og:title" content="What Do I Update?">
-<meta property="og:description" content="See which of your phones, computers and accounts need updating after the latest hacks. Free, no account, private.">
+<meta property="og:description" content="When something you own gets hacked, like your iPhone or Chrome, we tell you what Apple or Google says to do. Free, no account, private.">
 <meta property="og:url" content="https://whatdoiupdate.com/">
 <meta property="og:image" content="https://whatdoiupdate.com/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="What Do I Update? See which of your phones, computers and accounts need updating after the latest hacks.">
+<meta property="og:image:alt" content="What Do I Update? When something you own gets hacked, we tell you what the maker says to do.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#1D4ED8">
 <link rel="manifest" href="manifest.webmanifest">
@@ -660,8 +660,8 @@ function viewAgree() {
 
 function viewWelcome() {
   const fresh = !list().devices.length && !list().custom.length;
-  return [header(), el("h1", {}, "What needs updating, in plain English"),
-    el("p", { class: "sub" }, "Hackers go after old software. This app watches the U.S. government's list of flaws hackers are using right now, and tells you which ones hit the things you own."),
+  return [header(), el("h1", {}, "Know when something you own gets hacked"),
+    el("p", { class: "sub" }, "Like when Apple fixes an iPhone flaw hackers are already using: we tell you in plain English and show what Apple says to do."),
     el("ol", { class: "intro" },
       el("li", {}, el("div", {}, el("b", {}, "Tap what you own"), el("span", {}, "Your phone, computer, TV, router and apps. It takes about 2 minutes."))),
       el("li", {}, el("div", {}, el("b", {}, "See what to fix"), el("span", {}, "Red means do it now. Yellow means this week. Green means you're fine."))),
