@@ -626,6 +626,23 @@
    ]
   },
   {
+   "id": "starlink",
+   "name": "Starlink",
+   "category": "Wi-Fi router",
+   "how_to_update": "Updates itself overnight (around 3 AM). To check: Starlink app › Settings › Starlink › Software Updates",
+   "caveat": "A kit left unplugged for months misses updates. Plug it in with a view of the sky now and then so it can catch up.",
+   "news_only": true,
+   "aliases": [
+    "starlink",
+    "spacex",
+    "starlink dish",
+    "dishy",
+    "starlink router",
+    "satellite internet",
+    "starlink mini"
+   ]
+  },
+  {
    "id": "google-wifi",
    "name": "Google Nest Wifi or Google Wifi",
    "category": "Wi-Fi router",
