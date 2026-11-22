@@ -134,7 +134,7 @@ const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KE
 // everyone is asked to agree again. What they agreed to and when is saved only on this phone.
 const TERMS_VERSION = "2026-11-21";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
-const PUSH_WORKER = "https://wdiu-push.myaijourney33.workers.dev";
+const PUSH_WORKER = "https://api.whatdoiupdate.com";
 const memory = {};
 const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
