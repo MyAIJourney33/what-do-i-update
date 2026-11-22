@@ -112,7 +112,7 @@ const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
-const PUSH_WORKER = "";
+const PUSH_WORKER = "https://wdiu-push.myaijourney33.workers.dev";
 const memory = {};
 const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
@@ -761,6 +761,18 @@ async function alertsOff() {
   }
   store.set(KEY_PUSH, false);
 }
+// A test ping goes only to this phone, so people can see alerts work before a real one arrives.
+async function sendTestAlert() {
+  const sub = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
+  if (!sub) { store.set(KEY_PUSH, false); render(); return "Alerts got switched off on this phone. Tap Turn on instant alerts again."; }
+  const r = await fetch(PUSH_WORKER + "/test", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) });
+  if (r.status === 429) return "A test was just sent. Wait 2 minutes before sending another.";
+  if (r.status === 404) return "This phone isn't signed up anymore. Turn instant alerts off, then on again.";
+  const res = r.ok ? await r.json() : {};
+  return res.sent ? "Sent. It should show up within a minute. Nothing? Check that notifications for What Do I Update? are allowed in your phone's settings."
+    : `The test didn't go through${res.status ? ` (code ${res.status})` : ""}. Turn instant alerts off, then on again, and try once more.`;
+}
+
 function viewNotify() {
   const live = !!PUSH_WORKER;
   return [header(), el("h1", {}, "Get notified"),
@@ -798,7 +810,15 @@ function alertsBox() {
     try { on ? await alertsOff() : await alertsOn(); render(); }
     catch (e) { btn.disabled = false; btn.textContent = on ? "Turn off instant alerts" : "Turn on instant alerts"; msg.textContent = e.message || "Something went wrong. Try again."; } } },
     on ? "Turn off instant alerts" : "Turn on instant alerts");
-  box.append(btn, msg);
+  box.append(btn);
+  if (on) {
+    const test = el("button", { type: "button", class: "btn secondary", style: "margin-top:8px", onclick: async () => {
+      test.disabled = true; msg.textContent = "Sending…";
+      try { msg.textContent = await sendTestAlert(); } catch (e) { msg.textContent = e.message || "Couldn't reach the alerts server. Try again."; }
+      test.disabled = false; } }, "Send me a test alert");
+    box.append(test);
+  }
+  box.append(msg);
   return box;
 }
 
