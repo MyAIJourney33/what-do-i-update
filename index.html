@@ -125,7 +125,7 @@ ol.intro span{font-size:14px;color:var(--body)}
 const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
-      KEY_SEEN = "wdiu.seen.v1";
+      KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
 const PUSH_WORKER = "https://wdiu-push.myaijourney33.workers.dev";
 const memory = {};
@@ -855,6 +855,30 @@ async function alertsOff() {
   }
   store.set(KEY_PUSH, false);
 }
+// ---------- Daily count ----------
+// At most once a day this phone adds 1 to our daily total, saying only whether it watches more than one
+// person's devices: {"family": true|false}. No ID, no cookie, nothing about what's on the lists.
+// Off if the person turns it off in Settings, or their browser sends Global Privacy Control / Do Not Track.
+const browserSaysDontTrack = () => navigator.globalPrivacyControl === true || navigator.doNotTrack === "1" || window.doNotTrack === "1";
+function dailyCount() {
+  if (!PUSH_WORKER || store.get(KEY_COUNT_OFF, false) || browserSaysDontTrack()) return;
+  const d = new Date(), day = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`;
+  if (store.get(KEY_COUNTED, "") === day) return;
+  store.set(KEY_COUNTED, day);
+  fetch(PUSH_WORKER + "/count", { method: "POST", keepalive: true, headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ family: Object.keys(P.lists).length > 1 }) }).catch(() => {});
+}
+function countBox() {
+  if (!PUSH_WORKER) return null;
+  const off = store.get(KEY_COUNT_OFF, false), dnt = browserSaysDontTrack();
+  const text = dnt ? "Your browser asks websites not to track you, so this phone is never counted."
+    : off ? "This phone isn't counted."
+    : "Once a day, this phone adds 1 to our count of people using the app, and says whether it watches more than one person's devices. No ID, no cookie, nothing about what you own.";
+  return [el("h3", { style: "margin-top:14px" }, "Daily count"), el("p", { class: "small" }, text),
+    dnt ? null : el("button", { type: "button", class: "btn secondary", style: "margin-top:8px",
+      onclick: () => { store.set(KEY_COUNT_OFF, !off); render(); } }, off ? "Count this phone again" : "Don't count this phone")];
+}
+
 // A test ping goes only to this phone, so people can see alerts work before a real one arrives.
 async function sendTestAlert() {
   const sub = await (await navigator.serviceWorker.ready).pushManager.getSubscription();
@@ -952,11 +976,12 @@ function viewSettings() {
           "Copy code for " + n + "'s phone"))),
       el("p", { class: "small", style: "margin-top:10px" }, "Want them to get alerts on their own phone too? Copy their code, send it to them, and on their phone open this app › Settings › Restore from a backup code.")) : null,
     el("div", { class: "box" }, el("h3", {}, "Privacy"),
-      el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking, nothing about you ever leaves this phone, and we never send download links."),
+      el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking: nothing that identifies you or lists what you own ever leaves this phone, and we never send download links."),
+      ...[].concat(countBox() || []),
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
-      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); S.seenOpen = null; S.ping = null; go("setup"); } }, "Erase everything on this phone"),
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); S.seenOpen = null; S.ping = null; go("setup"); } }, "Erase everything on this phone"),
     el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
       (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
 }
@@ -990,6 +1015,7 @@ Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.j
     S.seenOpen = JSON.parse(JSON.stringify(store.get(KEY_SEEN, null)));
     pingCheck();
     render();
+    dailyCount();
   })
   .catch(() => { document.getElementById("app").replaceChildren(el("p", { class: "empty" }, "Couldn't load the alert list. Check your connection and reload.")); });
 
