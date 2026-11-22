@@ -55,6 +55,7 @@ nav.tabs{grid-template-columns:repeat(5,minmax(0,1fr))}
 nav.tabs[hidden]{display:none}
 .card.c-gray{border-color:#D6D3CB;background:#FBFAF7}
 .badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border-radius:6px;padding:2px 7px;margin-left:6px;vertical-align:1px}
+.b-new{background:var(--blue);color:#fff;margin-left:0;margin-right:6px}.card .when{display:block;font-size:13px;color:var(--muted);margin-top:6px}
 .b-confirmed{background:var(--now-bg);color:var(--now)}.b-reported{background:var(--week-bg);color:var(--week)}.b-heads{background:#EEF0F4;color:var(--muted)}
 input[type=search],input[type=text],select{width:100%;min-height:48px;border:1.5px solid #CFCCC3;border-radius:12px;padding:0 14px;font:16px Inter,system-ui,sans-serif;background:#fff;color:var(--ink)}
 details.cat{background:#fff;border:1px solid var(--line);border-radius:14px;margin-bottom:8px}
@@ -110,7 +111,8 @@ ol.intro span{font-size:14px;color:var(--body)}
 // matching happens here, on the phone. Nothing is ever sent anywhere.
 const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
-      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1";
+      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
+      KEY_SEEN = "wdiu.seen.v1";
 // Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
 const PUSH_WORKER = "https://wdiu-push.myaijourney33.workers.dev";
 const memory = {};
@@ -163,6 +165,15 @@ function el(tag, attrs, ...kids) {
 const icon = name => el("span", { html: ICON[name], style: "display:inline-flex" });
 const today = () => { const d = new Date(); d.setHours(0, 0, 0, 0); return d; };
 const ageDays = iso => Math.floor((today() - new Date(iso.slice(0, 10) + "T00:00:00")) / 86400000);
+const fmtShort = iso => { const d = new Date(iso.slice(0, 10) + "T00:00:00");
+  return d.toLocaleDateString(undefined, d.getFullYear() === today().getFullYear() ? { month: "short", day: "numeric" } : { month: "short", day: "numeric", year: "numeric" }); };
+// The date line on a card: when CISA added the flaw, or when the news happened.
+function cardDate(a) {
+  if (a.kind === "kev") return "Added " + fmtShort(a.entry.added);
+  if (a.kind === "news") return "Reported " + (a.news.date_label || fmtShort(a.news.date));
+  if (a.kind === "eol") return "Last added " + fmtShort(a.entries.map(e => e.added).sort().pop());
+  return null;
+}
 const fmtDate = iso => iso ? new Date(iso.slice(0, 10) + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "";
 const productById = id => D.products.find(p => p.id === id);
 const norm = s => s.toLowerCase().replace(/[^a-z0-9+]+/g, " ").trim();
@@ -247,24 +258,74 @@ function header() {
       ...names.map(n => el("option", { value: n, selected: n === P.active }, n))) : null);
 }
 
-function card(a, tone) {
+function card(a, tone, isNew) {
   const done = S.fixed.has(a.id);
   const tag = a.names && a.names.length ? a.names.join(" · ") : (a.kind === "news" ? "In the news" : "");
   const conf = a.confidence && tone !== "ok" ? CONF[a.confidence] : null;
-  const kids = [el("span", { class: "tag", style: `color:var(--${tone})` }, tag, conf ? el("span", { class: "badge " + conf[0] }, conf[1]) : null),
+  const kids = [el("span", { class: "tag", style: `color:var(--${tone})` }, isNew ? el("span", { class: "badge b-new" }, "New") : null,
+      tag, conf ? el("span", { class: "badge " + conf[0] }, conf[1]) : null),
     el("span", { class: "t" }, (done ? "Done: " : "") + a.title),
     el("span", { class: "d" }, a.why)];
+  const when = cardDate(a);
+  if (when) kids.push(el("span", { class: "when" }, when));
   if (tone === "ok") return el("div", { class: "card c-ok" }, ...kids);
   kids.push(el("span", { class: "more" }, "How to fix ›"));
   return el("button", { type: "button", class: `card c-${tone}${done ? " done" : ""}`, onclick: () => go("detail", a) }, ...kids);
 }
 
-function section(tone, label, items) {
+function section(tone, label, items, isNew = () => false) {
   const wrap = el("section", {});
   wrap.append(el("div", { class: "sec", style: `color:var(--${tone})` }, icon(tone), el("span", {}, label)));
   if (!items.length) wrap.append(el("p", { class: "empty" }, "Nothing here right now."));
-  items.forEach(a => wrap.append(card(a, tone)));
+  [...items.filter(isNew), ...items.filter(a => !isNew(a))].forEach(a => wrap.append(card(a, tone, isNew(a))));
   return wrap;
+}
+
+// ---------- What's new since this phone last opened the app (remembered only on this phone) ----------
+// S.seenOpen is a snapshot taken when the app opened, so New badges stay put until the next visit.
+function newCheck(name) {
+  const prev = S.seenOpen && S.seenOpen.lists && S.seenOpen.lists[name];
+  if (!prev) return () => false;            // first look at this list: nothing is "new"
+  const seen = new Set(prev);
+  return a => !seen.has(a.id);
+}
+function markSeen(name, ids) {
+  const s = store.get(KEY_SEEN, {}), alive = new Set([...D.kev.entries.map(e => e.cve), ...D.news.items.map(n => n.id)]);
+  s.lists = s.lists || {};
+  s.lists[name] = [...new Set([...ids, ...(s.lists[name] || []).filter(id => alive.has(id))])];
+  store.set(KEY_SEEN, s);
+}
+// Every Do now item in the public data, the same way the alerts server decides when to ping.
+function globalDoNow() {
+  return [...D.kev.entries.filter(e => (e.products || []).length && !e.replace && ageDays(e.added) <= DO_NOW_DAYS).map(e => e.cve),
+          ...D.news.items.filter(n => n.verdict === "do_now" && (n.affects || []).length && ageDays(n.date) <= NEWS_DAYS).map(n => n.id)];
+}
+// On open: did a new Do now alert come out since last time, and whose list (if anyone's) is it on?
+function pingCheck() {
+  const prev = S.seenOpen && S.seenOpen.all, all = globalDoNow();
+  S.ping = null;
+  if (prev) {
+    const old = new Set(prev), fresh = new Set(all.filter(id => !old.has(id)));
+    if (fresh.size) {
+      const hits = {}, keep = P.active;
+      for (const n of Object.keys(P.lists)) {
+        P.active = n;
+        try { hits[n] = computeAlerts().now.some(a => fresh.has(a.id)); } finally { P.active = keep; }
+      }
+      S.ping = { hits };
+    }
+  }
+  const s = store.get(KEY_SEEN, {}); s.all = all; store.set(KEY_SEEN, s);
+}
+function pingNote() {
+  if (!S.ping || S.ping.hits[P.active]) return null;   // it's on this list: the New badge shows it
+  const whose = n => n === "Me" ? "your" : n + "'s";
+  const others = Object.keys(S.ping.hits).filter(n => S.ping.hits[n]);
+  if (others.length) return el("div", { class: "note ping", style: "margin:0 0 14px" }, icon("shield"), el("span", {},
+    `A new alert came out since you last looked. It's about ${others.map(whose).join(" and ")} devices, not this list. `,
+    el("button", { type: "button", class: "linkbtn", style: "min-height:auto", onclick: () => { P.active = others[0]; saveProfiles(); render(); } }, `See ${whose(others[0])} alerts ›`)));
+  return el("p", { class: "note ping", style: "margin:0 0 14px" }, icon("shield"), el("span", {},
+    `A new alert came out since you last looked. It isn't about anything on ${Object.keys(P.lists).length > 1 ? "your lists" : "your list"}, so there's nothing new for you to do.`));
 }
 
 function viewAlerts() {
@@ -276,6 +337,7 @@ function viewAlerts() {
     el("h1", {}, P.active === "Me" ? "Your alerts" : P.active + "'s alerts"),
     el("p", { class: "sub small" }, `Checked against ${list().devices.length + list().custom.length} ${list().devices.length + list().custom.length === 1 ? "item" : "items"} on this phone · alerts updated ${fmtDate(D.kev.builtAt)} · news ${fmtDate(D.news.updated)}`),
     staleBanner("alerts"),
+    pingNote(),
     el("div", { class: "counts" },
       el("div", { class: "count now" }, el("b", {}, nowList.length + old.length), el("span", {}, "Do now")),
       el("div", { class: "count week" }, el("b", {}, A.week.length), el("span", {}, "This week")),
@@ -284,7 +346,9 @@ function viewAlerts() {
     title: "Your " + productById(id).name + " is too old for security updates",
     why: supportFor(id).text + " New flaws will never be fixed on it. Plan to replace it, and don't use it for banking." }));
   if (Object.keys(P.lists).length > 1) out.push(familyBox());
-  out.push(section("now", "Do this now", [...nowList, ...oldCards]), section("week", "This week", A.week));
+  const isNew = newCheck(P.active), doNow = [...nowList, ...oldCards];
+  out.push(section("now", "Do this now", doNow, isNew), section("week", "This week", A.week, isNew));
+  markSeen(P.active, [...doNow, ...A.week].map(a => a.id));
   if (list().custom.length) {
     const w = el("section", {}, el("div", { class: "sec", style: "color:var(--muted)" }, icon("gray"), el("span", {}, "Not tracked yet")));
     list().custom.forEach(name => w.append(el("button", { type: "button", class: "card c-gray", onclick: () => go("device", "custom:" + name) },
@@ -862,7 +926,7 @@ function viewSettings() {
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
-      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); go("setup"); } }, "Erase everything on this phone"),
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); S.seenOpen = null; S.ping = null; go("setup"); } }, "Erase everything on this phone"),
     el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
       (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
 }
@@ -893,6 +957,8 @@ Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.j
     const known = new Set(D.products.map(p => p.id));
     for (const l of Object.values(P.lists)) l.devices = l.devices.filter(i => known.has(i));
     if (!list().devices.length && !list().custom.length) S.view = store.get(KEY_INTRO, false) ? "setup" : "welcome";
+    S.seenOpen = JSON.parse(JSON.stringify(store.get(KEY_SEEN, null)));
+    pingCheck();
     render();
   })
   .catch(() => { document.getElementById("app").replaceChildren(el("p", { class: "empty" }, "Couldn't load the alert list. Check your connection and reload.")); });
