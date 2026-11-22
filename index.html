@@ -274,7 +274,8 @@ function viewAlerts() {
   const old = list().devices.filter(id => (supportFor(id) || {}).ended);
   const out = [header(),
     el("h1", {}, P.active === "Me" ? "Your alerts" : P.active + "'s alerts"),
-    el("p", { class: "sub small" }, `Checked against ${list().devices.length + list().custom.length} items on this phone · data updated ${fmtDate(D.kev.builtAt)}`),
+    el("p", { class: "sub small" }, `Checked against ${list().devices.length + list().custom.length} ${list().devices.length + list().custom.length === 1 ? "item" : "items"} on this phone · alerts updated ${fmtDate(D.kev.builtAt)} · news ${fmtDate(D.news.updated)}`),
+    staleBanner("alerts"),
     el("div", { class: "counts" },
       el("div", { class: "count now" }, el("b", {}, nowList.length + old.length), el("span", {}, "Do now")),
       el("div", { class: "count week" }, el("b", {}, A.week.length), el("span", {}, "This week")),
@@ -401,9 +402,30 @@ function viewDevice() {
   return out;
 }
 
+// ---------- Freshness: say so when our data is old (an outage, or the phone is offline) ----------
+const STALE_ALERT_HOURS = 48, STALE_NEWS_DAYS = 14;
+function freshness() {
+  const built = Date.parse(D.kev.builtAt || ""), news = Date.parse((D.news.updated || "") + "T12:00:00");
+  return { alertsHours: isNaN(built) ? Infinity : (Date.now() - built) / 3600000,
+           newsDays: isNaN(news) ? Infinity : (Date.now() - news) / 86400000 };
+}
+function staleBanner(which) {
+  const f = freshness();
+  if (f.alertsHours > STALE_ALERT_HOURS)
+    return el("div", { class: "box", role: "status", style: "background:var(--week-bg);border-color:var(--week-line)" },
+      el("h3", { style: "margin:0 0 4px" }, "Our alert data may be out of date"),
+      el("p", { class: "small", style: "margin:0" }, `It was last updated ${fmtDate(D.kev.builtAt)}. We may be having trouble updating, or this phone is offline. Updates from your devices' own Settings are always safe to install.`));
+  if (which === "news" && f.newsDays > STALE_NEWS_DAYS)
+    return el("div", { class: "box", role: "status", style: "background:var(--week-bg);border-color:var(--week-line)" },
+      el("p", { class: "small", style: "margin:0" }, `Our news was last updated ${fmtDate(D.news.updated)}, so newer stories may be missing. Device alerts above still update on their own.`));
+  return null;
+}
+
 function viewHeadlines() {
   const items = [...D.news.items].sort((x, y) => y.date.localeCompare(x.date));
   const out = [header(), el("h1", {}, "In the news"), el("p", { class: "sub" }, "Big hacks, outages and breaches, with one answer: does it affect you?"),
+    el("p", { class: "small" }, `News last updated ${fmtDate(D.news.updated)} · device alerts checked ${fmtDate(D.kev.builtAt)}`),
+    staleBanner("news"),
     el("h2", {}, "Recent"),
     ...items.map(n => {
       const hit = mine(n.affects);
@@ -739,14 +761,31 @@ async function alertsOff() {
   }
   store.set(KEY_PUSH, false);
 }
+function viewNotify() {
+  const live = !!PUSH_WORKER;
+  return [header(), el("h1", {}, "Get notified"),
+    el("p", { class: "sub" }, live ? "Get a ping when a new Do now alert appears. First add this app to your Home Screen. On iPhone and iPad, that's required for notifications."
+      : "Instant alerts are coming soon. Add this app to your Home Screen now: it opens like an app, works offline, and you'll be ready when alerts turn on."),
+    el("div", { class: "box" }, el("h3", {}, "iPhone or iPad"),
+      el("ol", { class: "steps" }, el("li", {}, "Open this page in Safari."), el("li", {}, "Tap the Share button (the square with an arrow)."),
+        el("li", {}, "Scroll down and tap Add to Home Screen, then Add."), el("li", {}, "Close Safari and open What Do I Update? from your Home Screen."),
+        live ? el("li", {}, "Go to Settings in the app and tap Turn on instant alerts, then Allow.") : null)),
+    el("div", { class: "box" }, el("h3", {}, "Android"),
+      el("ol", { class: "steps" }, el("li", {}, "Open this page in Chrome."), el("li", {}, "Tap the menu (three dots) and choose Add to Home screen or Install app."),
+        el("li", {}, "Open What Do I Update? from your Home Screen."),
+        live ? el("li", {}, "Go to Settings in the app and tap Turn on instant alerts, then Allow.") : null)),
+    el("div", { class: "box" }, el("h3", {}, "Computer"),
+      el("p", { class: "small" }, live ? "In Chrome, Edge or Firefox, go to Settings in the app and tap Turn on instant alerts. Installing it isn't required on a computer."
+        : "Chrome and Edge can install it from the install icon in the address bar. On a computer, that's optional.")),
+    el("p", { class: "note" }, icon("shield"), el("span", {}, "Every alert says only \"New alert — open the app.\" It never contains a link. If a notification or text with a link claims to be us, it's a scam.")),
+    live ? alertsBox() : null];
+}
 function alertsBox() {
   if (!PUSH_WORKER) return null;
   const on = store.get(KEY_PUSH, false), box = el("div", { class: "box" }, el("h3", {}, "Instant alerts"));
   if (isAppleMobile && !onHomeScreen()) {
-    box.append(el("p", { class: "small" }, "On iPhone and iPad, alerts only work from the Home Screen version of this app:"),
-      el("ol", { class: "steps", style: "font-size:14px;margin-top:6px" },
-        el("li", {}, "In Safari, tap the Share button."), el("li", {}, "Tap Add to Home Screen, then Add."),
-        el("li", {}, "Open What Do I Update? from your Home Screen and come back here.")));
+    box.append(el("p", { class: "small" }, "On iPhone and iPad, alerts only work after you add this app to your Home Screen."),
+      el("button", { type: "button", class: "btn", onclick: () => go("notify") }, "Show me how"));
     return box;
   }
   if (!canPush()) { box.append(el("p", { class: "small" }, "This browser can't show alerts. Chrome, Edge, Firefox and Safari can.")); return box; }
@@ -772,6 +811,7 @@ function viewSettings() {
   const names = Object.keys(P.lists);
   return [header(), el("h1", {}, "Settings"),
     el("button", { type: "button", class: "btn secondary", onclick: () => go("welcome") }, "How this app works"),
+    el("button", { type: "button", class: "btn secondary", style: "margin-top:8px", onclick: () => go("notify") }, onHomeScreen() ? "How to get notified" : "Add to Home Screen / get notified"),
     alertsBox(),
     el("div", { class: "box" }, el("h3", {}, "Backup code"),
       el("p", { class: "small" }, "Your lists aren't saved anywhere but this phone. Copy this code somewhere safe to restore them later or move them to a new phone."),
@@ -813,12 +853,12 @@ function go(view, arg) { S.view = view; if (view === "detail") S.detail = arg; i
 function render() {
   const app = document.getElementById("app");
   const empty = !list().devices.length && !list().custom.length;
-  const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty), welcome: viewWelcome,
+  const views = { alerts: viewAlerts, detail: viewDetail, device: viewDevice, headlines: viewHeadlines, setup: () => viewSetup(empty), welcome: viewWelcome, notify: viewNotify,
                   protect: viewProtect, hacked: viewHacked, settings: viewSettings };
   app.replaceChildren(...[].concat((views[S.view] || viewAlerts)()).filter(x => x != null && x !== false));
   const tabs = document.getElementById("tabs");
   tabs.hidden = empty && Object.keys(P.lists).length === 1;
-  const tab = { detail: "alerts", device: "alerts", hacked: "protect", welcome: "settings" }[S.view] || S.view;
+  const tab = { detail: "alerts", device: "alerts", hacked: "protect", welcome: "settings", notify: "settings" }[S.view] || S.view;
   tabs.querySelectorAll("button").forEach(b => { b.removeAttribute("aria-current"); if (b.dataset.view === tab) b.setAttribute("aria-current", "page"); });
 }
 
