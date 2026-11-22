@@ -6,6 +6,7 @@
 <title>What Do I Update?</title>
 <meta name="theme-color" content="#1D4ED8">
 <link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" href="data:,">
 <style>
 :root{--bg:#F6F5F1;--card:#FFFFFF;--ink:#15171C;--muted:#5B606B;--body:#4A4F59;--line:#E3E1DA;--blue:#1D4ED8;--blue-ink:#1E3A8A;--blue-bg:#E8EEFC;
@@ -63,6 +64,7 @@ details.cat .chips{padding:0 12px 14px}
 .dev{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;min-height:56px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 14px;margin-bottom:8px;font:inherit;color:var(--ink);text-align:left;cursor:pointer}
 .dev .n{font-weight:700;font-size:15px}.dev .s{font-size:13px;color:var(--body)}
 .dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+:root{--muted-dot:#CFCCC3}
 .check{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
 .check:first-of-type{border-top:none}
 .check input{width:24px;height:24px;margin:2px 0 0;flex-shrink:0;accent-color:var(--blue)}
@@ -108,7 +110,9 @@ ol.intro span{font-size:14px;color:var(--body)}
 // matching happens here, on the phone. Nothing is ever sent anywhere.
 const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
-      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1";
+      KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1";
+// Instant alerts server (Cloudflare Worker). Empty = alerts switch hidden.
+const PUSH_WORKER = "";
 const memory = {};
 const store = {
   get(k, fallback) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : fallback; } catch (e) { return k in memory ? memory[k] : fallback; } },
@@ -278,6 +282,7 @@ function viewAlerts() {
   const oldCards = old.map(id => ({ id: "old-" + id, kind: "old", hit: [id], names: [productById(id).name], confidence: "confirmed",
     title: "Your " + productById(id).name + " is too old for security updates",
     why: supportFor(id).text + " New flaws will never be fixed on it. Plan to replace it, and don't use it for banking." }));
+  if (Object.keys(P.lists).length > 1) out.push(familyBox());
   out.push(section("now", "Do this now", [...nowList, ...oldCards]), section("week", "This week", A.week));
   if (list().custom.length) {
     const w = el("section", {}, el("div", { class: "sec", style: "color:var(--muted)" }, icon("gray"), el("span", {}, "Not tracked yet")));
@@ -300,8 +305,34 @@ function viewAlerts() {
     const inner = el("div", { style: "padding:0 12px 4px" }); A.notYou.forEach(a => inner.append(card(a, "ok"))); d.append(inner);
     out.push(el("div", { style: "margin-top:18px" }, d));
   }
+  if (Object.keys(P.lists).length === 1) out.push(el("button", { type: "button", class: "card", style: "margin-top:18px",
+    onclick: () => { S.addPerson = true; go("setup"); } },
+    el("span", { class: "t" }, "Watch over a parent's devices too"),
+    el("span", { class: "d" }, "Scammers go after parents and grandparents. Add their phone, TV and router here, and see their alerts next to yours."),
+    el("span", { class: "more" }, "Add a person ›")));
   out.push(el("p", { class: "note" }, icon("shield"), el("span", {}, "We never send download links. Always update from your device's own Settings or app store.")));
   return out;
+}
+// Counts for one person's list, without switching the screen to them.
+function alertCounts(name) {
+  const keep = P.active; P.active = name;
+  try {
+    const A = computeAlerts(), old = list().devices.filter(id => (supportFor(id) || {}).ended).length;
+    return { now: A.now.length + A.replace.length + old, week: A.week.length, empty: !list().devices.length && !list().custom.length };
+  } finally { P.active = keep; }
+}
+function familyBox() {
+  const box = el("div", { class: "box" }, el("h3", {}, "Everyone you watch"));
+  for (const n of Object.keys(P.lists)) {
+    const c = alertCounts(n), who = n === "Me" ? "You" : n;
+    const text = c.empty ? "No devices added yet" : c.now ? `${c.now} to do now` + (c.week ? ` · ${c.week} this week` : "") : c.week ? `${c.week} this week` : "All clear";
+    const tone = c.empty ? "muted" : c.now ? "now" : c.week ? "week" : "ok";
+    box.append(el("button", { type: "button", class: "dev", style: n === P.active ? "border-color:var(--blue)" : "",
+      onclick: () => { P.active = n; saveProfiles(); c.empty ? go("setup") : go("alerts"); } },
+      el("span", {}, el("span", { class: "n" }, who + (n === P.active ? " (showing)" : "")), el("br"), el("span", { class: "s" }, text)),
+      el("span", { class: "dot", style: `background:var(--${tone === "muted" ? "muted-dot" : tone})` })));
+  }
+  return box;
 }
 
 function stepsBox(products) {
@@ -480,13 +511,14 @@ function viewSetup(first) {
         ...names.map(n => el("option", { value: n, selected: n === P.active }, n))),
       el("button", { type: "button", class: "btn secondary", style: "margin-top:0;flex:0 0 auto;width:auto;padding:0 14px", onclick: () => {
         const box = document.getElementById("newperson"); box.hidden = !box.hidden; if (!box.hidden) box.querySelector("input").focus(); } }, "+ Person")),
-    el("div", { id: "newperson", hidden: true, style: "margin-top:10px" },
+    el("div", { id: "newperson", hidden: !S.addPerson, style: "margin-top:10px" },
       el("label", { for: "pname" }, "Name (only saved on this phone)"),
       el("div", { class: "row" }, el("input", { type: "text", id: "pname", maxlength: "30", placeholder: "Mom" }),
         el("button", { type: "button", class: "btn", style: "margin-top:0;flex:0 0 auto;width:auto;padding:0 18px", onclick: () => {
           const v = document.getElementById("pname").value.trim().slice(0, 30);
           if (v && !P.lists[v]) { P.lists[v] = { devices: [], custom: [], models: {} }; P.active = v; saveProfiles(); render(); } } }, "Add"))),
     el("p", { class: "small", style: "margin-top:8px" }, "Set up a parent's or kid's devices on your phone. Each list gets its own alerts."));
+  S.addPerson = false;
   return [header(), el("h1", {}, first ? "Tap what you own" : "My stuff"),
     el("p", { class: "sub" }, "Search or browse. If it's not here, add it anyway, so we never tell you you're fine by mistake."),
     el("p", { class: "note" }, icon("lock"), el("span", {}, el("b", {}, "Your list stays on this phone. "), "We never see it, store it or sell it.")),
@@ -684,6 +716,53 @@ function viewHacked() {
       el("span", { class: "t", style: "margin:0" }, pb.title), el("span", { class: "more" }, "Show me what to do ›")))];
 }
 
+// ---------- Instant alerts ----------
+// The server only ever gets an anonymous push address. Every ping says the same thing.
+const isAppleMobile = /iPhone|iPad|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+const onHomeScreen = () => window.matchMedia("(display-mode: standalone)").matches || navigator.standalone === true;
+const canPush = () => "serviceWorker" in navigator && "PushManager" in window && "Notification" in window;
+const b64uBytes = s => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+async function alertsOn() {
+  if (await Notification.requestPermission() !== "granted") throw new Error("Notifications weren't allowed.");
+  const reg = await navigator.serviceWorker.ready;
+  const { key } = await fetch(PUSH_WORKER + "/key").then(r => r.json());
+  const sub = await reg.pushManager.subscribe({ userVisibleOnly: true, applicationServerKey: b64uBytes(key) });
+  const r = await fetch(PUSH_WORKER + "/subscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) });
+  if (!r.ok) throw new Error("Couldn't reach the alerts server.");
+  store.set(KEY_PUSH, true);
+}
+async function alertsOff() {
+  const reg = await navigator.serviceWorker.ready, sub = await reg.pushManager.getSubscription();
+  if (sub) {
+    await fetch(PUSH_WORKER + "/unsubscribe", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ endpoint: sub.endpoint }) }).catch(() => {});
+    await sub.unsubscribe();
+  }
+  store.set(KEY_PUSH, false);
+}
+function alertsBox() {
+  if (!PUSH_WORKER) return null;
+  const on = store.get(KEY_PUSH, false), box = el("div", { class: "box" }, el("h3", {}, "Instant alerts"));
+  if (isAppleMobile && !onHomeScreen()) {
+    box.append(el("p", { class: "small" }, "On iPhone and iPad, alerts only work from the Home Screen version of this app:"),
+      el("ol", { class: "steps", style: "font-size:14px;margin-top:6px" },
+        el("li", {}, "In Safari, tap the Share button."), el("li", {}, "Tap Add to Home Screen, then Add."),
+        el("li", {}, "Open What Do I Update? from your Home Screen and come back here.")));
+    return box;
+  }
+  if (!canPush()) { box.append(el("p", { class: "small" }, "This browser can't show alerts. Chrome, Edge, Firefox and Safari can.")); return box; }
+  if (Notification.permission === "denied") { box.append(el("p", { class: "small" }, "Alerts are blocked. Allow notifications for this app in your phone's or browser's settings, then come back.")); return box; }
+  box.append(el("p", { class: "small" }, on ? "On. You'll get a ping when a new Do now alert appears."
+    : "Get a ping when a new Do now alert appears. Every ping just says \"New alert — open the app.\" Your phone then checks if it's yours, so nothing about your devices leaves this phone."));
+  const msg = el("p", { class: "small", style: "margin-top:6px", role: "status" });
+  const btn = el("button", { type: "button", class: on ? "btn secondary" : "btn", onclick: async () => {
+    btn.disabled = true; btn.textContent = "One moment…";
+    try { on ? await alertsOff() : await alertsOn(); render(); }
+    catch (e) { btn.disabled = false; btn.textContent = on ? "Turn off instant alerts" : "Turn on instant alerts"; msg.textContent = e.message || "Something went wrong. Try again."; } } },
+    on ? "Turn off instant alerts" : "Turn on instant alerts");
+  box.append(btn, msg);
+  return box;
+}
+
 // ---------- Settings ----------
 function viewSettings() {
   const code = btoa(unescape(encodeURIComponent(JSON.stringify({ v: 2, lists: P.lists }))));
@@ -693,6 +772,7 @@ function viewSettings() {
   const names = Object.keys(P.lists);
   return [header(), el("h1", {}, "Settings"),
     el("button", { type: "button", class: "btn secondary", onclick: () => go("welcome") }, "How this app works"),
+    alertsBox(),
     el("div", { class: "box" }, el("h3", {}, "Backup code"),
       el("p", { class: "small" }, "Your lists aren't saved anywhere but this phone. Copy this code somewhere safe to restore them later or move them to a new phone."),
       el("textarea", { readonly: true, "aria-label": "Your backup code" }, code), copyBtn),
@@ -708,9 +788,15 @@ function viewSettings() {
           saveProfiles(); go("alerts");
         } catch (e) { input.setCustomValidity("That code doesn't look right."); input.reportValidity(); } } }, "Restore")),
     names.length > 1 ? el("div", { class: "box" }, el("h3", {}, "People on this phone"),
-      ...names.map(n => el("div", { class: "row", style: "justify-content:space-between;min-height:44px" }, el("span", {}, n),
-        n === "Me" ? el("span", { class: "small" }, "You") : el("button", { type: "button", class: "linkbtn", style: "flex:0 0 auto", onclick: () => {
-          delete P.lists[n]; if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")))) : null,
+      ...names.map(n => el("div", { style: "padding:8px 0;border-top:1px solid var(--line)" },
+        el("div", { class: "row", style: "justify-content:space-between;min-height:36px" }, el("b", {}, n === "Me" ? "You" : n),
+          n === "Me" ? null : el("button", { type: "button", class: "linkbtn", style: "flex:0 0 auto", onclick: () => {
+            delete P.lists[n]; if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")),
+        n === "Me" ? null : el("button", { type: "button", class: "btn secondary", style: "margin-top:4px", onclick: e => {
+          const c = btoa(unescape(encodeURIComponent(JSON.stringify({ v: 2, lists: { Me: P.lists[n] } }))));
+          navigator.clipboard.writeText(c).then(() => { e.target.textContent = "Copied. Send it to " + n; }, () => { e.target.textContent = "Couldn't copy. Try again"; }); } },
+          "Copy code for " + n + "'s phone"))),
+      el("p", { class: "small", style: "margin-top:10px" }, "Want them to get alerts on their own phone too? Copy their code, send it to them, and on their phone open this app › Settings › Restore from a backup code.")) : null,
     el("div", { class: "box" }, el("h3", {}, "Privacy"),
       el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking, nothing about you ever leaves this phone, and we never send download links."),
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
