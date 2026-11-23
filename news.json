@@ -128,6 +128,7 @@
    "if_affected": "",
    "if_not": "A government payment system for farmers, not home devices. Nothing to update. If you get USDA payments, check any message about your account with your local office.",
    "source": "NBC News, Nov 20, 2026; Nextgov/FCW, Nov 2026",
+   "reported_by": "a government tech news site",
    "links": [
     "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/"
    ]
@@ -147,6 +148,7 @@
    "if_affected": "An outage after a bad update at Apple, not a hack. Nothing to update on your devices. Ignore texts or calls saying your Apple ID is locked and asking for a code.",
    "if_not": "Nothing for you to do.",
    "source": "ABC News live updates, Nov 17, 2026; AP via ABC7, Nov 17, 2026",
+   "reported_by": "local news",
    "links": [
     "https://abc7.com/story/apple-joins-parade-technology-hiccups-recent-days/20048749/"
    ]
@@ -161,7 +163,8 @@
    "verdict": "heads_up",
    "if_affected": "Banks, Schwab, United and the FAA all had outages. Every company that gave a cause blamed a technical fault, not an attack. An outage doesn't move your money. If you get a call or text 'fixing' your account, hang up and call the number on your card.",
    "if_not": "Nothing for you to do.",
-   "source": "FOX Television Stations (FOX 4), Nov 17, 2026; FourWeekMBA outage tally, Nov 2026",
+   "source": "FOX 4 News (FOX Television Stations), Nov 17, 2026; FourWeekMBA outage tally, Nov 2026",
+   "reported_by": "local news",
    "links": [
     "https://www.fox4news.com/news/airline-bank-outage-reason-tech-glitch-cyber-attack"
    ]
@@ -223,6 +226,7 @@
    "if_affected": "If you use Binance: the exchange says it refilled affected wallets. Ignore messages offering refunds or asking you to \"verify\" your account.",
    "if_not": "Nothing for you to do.",
    "source": "TRM Labs, Oct 30, 2026; Binance",
+   "reported_by": "a blockchain research firm",
    "links": [
     "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history"
    ]
