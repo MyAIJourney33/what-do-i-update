@@ -1,0 +1,38 @@
+# What Do I Update?
+
+> A free app that tells ordinary people, in plain English, when something they own (phone, computer, browser, router, app) has a security flaw hackers are actively using, and exactly where to tap to update it. No account, no tracking; device lists stay on the phone.
+
+Alerts come from CISA's Known Exploited Vulnerabilities catalog (flaws used in real attacks), refreshed hourly. News items lead with the maker's or a government's own notice; items not yet confirmed by the company or an agency are labeled Unconfirmed. We never send download links.
+
+Data updated Nov 23, 2026.
+
+## Current alerts
+
+- [Update your Synology drive](https://whatdoiupdate.com/alerts/update-your-synology-drive-cve-2024-10441.html): Do now: hackers are using this flaw. Affects Home storage drive (Synology, QNAP). Added Nov 18, 2026.
+- [Update Chrome and restart it](https://whatdoiupdate.com/alerts/update-chrome-and-restart-it-cve-2026-125350.html): Do now: hackers are using this flaw. Affects Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi. Added Nov 10, 2026.
+- [Update Outlook](https://whatdoiupdate.com/alerts/update-outlook-cve-2026-124194.html): Do now: hackers are using this flaw. Affects Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app). Added Nov 10, 2026.
+- [Make sure your Apple devices are up to date](https://whatdoiupdate.com/alerts/make-sure-your-apple-devices-are-up-to-date-cve-2024-27834.html): Update this week: hackers are using this flaw. Affects iPhone, iPad, Apple Watch, Apple TV, Mac, Safari. Added Nov 4, 2026.
+- [Run Windows Update and restart](https://whatdoiupdate.com/alerts/run-windows-update-and-restart-cve-2026-96951.html): Update this week: hackers are using this flaw. Affects Windows PC. Added Oct 13, 2026.
+
+## News
+
+- [FBI police database reported hacked](https://whatdoiupdate.com/news/fbi-ncic-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
+- [Software checkout firm says card numbers were stolen](https://whatdoiupdate.com/news/cleverbridge-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
+- [Hackers got into a USDA farm payment system](https://whatdoiupdate.com/news/usda-2026-11.html): Heads up (unconfirmed). Not home devices. Nov 19, 2026.
+- [Chase says a vendor leak exposed emails](https://whatdoiupdate.com/news/chase-vendor-2026-11.html): Heads up. Affects: Bank or credit union. Nov 19, 2026.
+- [Cheap no-name TV boxes used in record ad fraud](https://whatdoiupdate.com/news/badbox-2026-11.html): Heads up. Not home devices. Nov 19, 2026.
+- [Bank and airline outages, Nov 12–17](https://whatdoiupdate.com/news/outage-wave-2026-11.html): Heads up (unconfirmed). Affects: Bank or credit union. Nov 17, 2026.
+- [Apple Pay, iCloud and the App Store went down](https://whatdoiupdate.com/news/apple-outage-2026-11.html): Heads up (unconfirmed). Affects: iPhone, iPad, Mac, Apple Watch, Apple TV. Nov 17, 2026.
+- [Microsoft 365 down for almost 24 hours](https://whatdoiupdate.com/news/m365-outage-2026-11.html): Heads up. Affects: Outlook.com / Microsoft 365 account, Outlook (desktop app). Nov 12, 2026.
+- [Black Friday scam texts and fake stores](https://whatdoiupdate.com/news/holiday-scams-2026-11.html): Heads up. Affects: Amazon account, Bank or credit union. Nov 10, 2026.
+- [U.S. warns of hacks on store freezers](https://whatdoiupdate.com/news/freezers-2026-11.html): Heads up. Not home devices. Nov 5, 2026.
+- [Android's November update fixes a no-tap flaw](https://whatdoiupdate.com/news/android-nov-2026.html): Heads up. Affects: Android phone (any brand), Samsung Galaxy, Google Pixel. Nov 3, 2026.
+- [$6.3 billion stolen from Binance](https://whatdoiupdate.com/news/binance-2026-10.html): Heads up (unconfirmed). Affects: Crypto exchange (Coinbase, Binance, Kraken…). Oct 29, 2026.
+- [Google Cloud outage in London](https://whatdoiupdate.com/news/gcloud-london-2026-10.html): Heads up. Not home devices. Oct 20, 2026.
+
+## More
+
+- [All alerts](https://whatdoiupdate.com/alerts/)
+- [All news](https://whatdoiupdate.com/news/)
+- [The app](https://whatdoiupdate.com/)
+- [Privacy and terms](https://whatdoiupdate.com/privacy.html)
