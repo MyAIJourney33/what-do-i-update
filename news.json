@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -46,6 +46,20 @@
  },
  "items": [
   {
+   "id": "cleverbridge-2026-11",
+   "date": "2026-11-20",
+   "title": "Software checkout firm says card numbers were stolen",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Only if you got a letter from Cleverbridge, which runs checkout for some software sellers: hackers copied card numbers, expiry dates and security codes. Cleverbridge says to check your statements and ask your card issuer about a new card. It never asks for card details by email, phone or text.",
+   "source": "Cleverbridge incident update, Nov 2026; BleepingComputer, Nov 2026",
+   "links": [
+    "https://grow.cleverbridge.com/incident-update",
+    "https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/"
+   ]
+  },
+  {
    "id": "badbox-2026-11",
    "date": "2026-11-19",
    "title": "Cheap no-name TV boxes used in record ad fraud",
@@ -53,10 +67,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "Only cheap, uncertified no-name Android boxes. Roku, Fire TV, Apple TV, Chromecast and name-brand TVs aren't part of it. Nothing to update. Google says to check a box is Play Protect certified, and the FBI says to consider disconnecting suspicious devices.",
-   "source": "HUMAN Security via MarTech Cube, Nov 19, 2026; FBI IC3 PSA on BADBOX 2.0, Jun 5, 2025",
+   "source": "FBI IC3 PSA on BADBOX 2.0, Jun 5, 2025; HUMAN Security via MarTech Cube, Nov 19, 2026",
    "links": [
-    "https://www.martechcube.com/?p=327632",
-    "https://www.ic3.gov/PSA/2025/PSA250605"
+    "https://www.ic3.gov/PSA/2025/PSA250605",
+    "https://www.martechcube.com/?p=327632"
    ]
   },
   {
@@ -98,8 +112,10 @@
    "verdict": "heads_up",
    "if_affected": "If you bank with Chase: hackers got some names and emails held by marketing vendors. Chase says its services weren't disrupted. Nothing to update. Expect fake Chase emails; open the Chase app yourself instead of tapping links.",
    "if_not": "Nothing for you to do.",
-   "source": "Gray News (KOLD), Nov 19, 2026",
+   "source": "BleepingComputer, Nov 2026; ABC News, Nov 19, 2026; Gray News (KOLD), Nov 19, 2026",
    "links": [
+    "https://www.bleepingcomputer.com/news/security/vendor-data-breach-exposes-chase-visa-mastercard-customer-info/",
+    "https://abcnews.com/US/jpmorgan-chase-reports-cyberattack-party-service-providers/story?id=138287705",
     "https://www.kold.com/2026/11/19/chase-bank-announces-cyberattack-says-hackers-may-have-obtained-customers-personal-information/"
    ]
   },
@@ -219,28 +235,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "Hit UK banks and services. Backup power failed; nothing for you to update.",
-   "source": "Technology Magazine, Oct 2026",
+   "source": "Google Cloud Service Health, Oct 20, 2026; Technology Magazine, Oct 2026",
    "links": [
+    "https://status.cloud.google.com/incidents/Xs2XTHzAVC9YnafnPyzj",
     "https://technologymagazine.com/news/the-google-cloud-outage-what-industry-experts-have-to-say"
-   ]
-  },
-  {
-   "id": "android-sms-2026-10",
-   "date": "2026-10-01",
-   "title": "Android \"SMS of Death\" text bug",
-   "affects": [
-    "android",
-    "samsung-galaxy",
-    "pixel"
-   ],
-   "verdict": "do_now",
-   "if_affected": "One hidden text can crash calling, including 911. Install the October update (Android 14–17). Android 12 and 13 won't get a fix: plan to replace the phone.",
-   "if_not": "You don't have an Android phone.",
-   "source": "PBX Science; BleepingComputer, Oct 31, 2026",
-   "date_label": "October 2026",
-   "links": [
-    "https://bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones",
-    "https://pbxscience.com/?p=24824"
    ]
   }
  ]
