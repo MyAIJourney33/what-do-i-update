@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-22",
+ "updated": "2026-11-23",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -46,6 +46,20 @@
  },
  "items": [
   {
+   "id": "cleverbridge-2026-11",
+   "date": "2026-11-20",
+   "title": "Software checkout firm says card numbers were stolen",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Only if you got a letter from Cleverbridge, which runs checkout for some software sellers: hackers copied card numbers, expiry dates and security codes. Cleverbridge says to check your statements and ask your card issuer about a new card. It never asks for card details by email, phone or text.",
+   "source": "BleepingComputer, Nov 2026; Help Net Security, Nov 23, 2026",
+   "links": [
+    "https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/",
+    "https://www.helpnetsecurity.com/2026/11/23/cleverbridge-data-breach-card-numbers-cvv/"
+   ]
+  },
+  {
    "id": "badbox-2026-11",
    "date": "2026-11-19",
    "title": "Cheap no-name TV boxes used in record ad fraud",
@@ -53,10 +67,10 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "Only cheap, uncertified no-name Android boxes. Roku, Fire TV, Apple TV, Chromecast and name-brand TVs aren't part of it. Nothing to update. Google says to check a box is Play Protect certified, and the FBI says to consider disconnecting suspicious devices.",
-   "source": "HUMAN Security via MarTech Cube, Nov 19, 2026; FBI IC3 PSA on BADBOX 2.0, Jun 5, 2025",
+   "source": "FBI IC3 PSA on BADBOX 2.0, Jun 5, 2025; HUMAN Security via MarTech Cube, Nov 19, 2026",
    "links": [
-    "https://www.martechcube.com/?p=327632",
-    "https://www.ic3.gov/PSA/2025/PSA250605"
+    "https://www.ic3.gov/PSA/2025/PSA250605",
+    "https://www.martechcube.com/?p=327632"
    ]
   },
   {
@@ -98,56 +112,10 @@
    "verdict": "heads_up",
    "if_affected": "If you bank with Chase: hackers got some names and emails held by marketing vendors. Chase says its services weren't disrupted. Nothing to update. Expect fake Chase emails; open the Chase app yourself instead of tapping links.",
    "if_not": "Nothing for you to do.",
-   "source": "Gray News (KOLD), Nov 19, 2026",
+   "source": "BleepingComputer, Nov 2026; Gray News (KOLD), Nov 19, 2026",
    "links": [
+    "https://www.bleepingcomputer.com/news/security/vendor-data-breach-exposes-chase-visa-mastercard-customer-info/",
     "https://www.kold.com/2026/11/19/chase-bank-announces-cyberattack-says-hackers-may-have-obtained-customers-personal-information/"
-   ]
-  },
-  {
-   "id": "usda-2026-11",
-   "date": "2026-11-19",
-   "title": "Hackers got into a USDA farm payment system",
-   "affects": [],
-   "verdict": "heads_up",
-   "if_affected": "",
-   "if_not": "A government payment system for farmers, not home devices. Nothing to update. If you get USDA payments, check any message about your account with your local office.",
-   "source": "NBC News, Nov 20, 2026; Nextgov/FCW, Nov 2026",
-   "links": [
-    "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/"
-   ]
-  },
-  {
-   "id": "apple-outage-2026-11",
-   "date": "2026-11-17",
-   "title": "Apple Pay, iCloud and the App Store went down",
-   "affects": [
-    "iphone",
-    "ipad",
-    "mac",
-    "apple-watch",
-    "apple-tv"
-   ],
-   "verdict": "heads_up",
-   "if_affected": "An outage after a bad update at Apple, not a hack. Nothing to update on your devices. Ignore texts or calls saying your Apple ID is locked and asking for a code.",
-   "if_not": "Nothing for you to do.",
-   "source": "ABC News live updates, Nov 17, 2026; AP via ABC7, Nov 17, 2026",
-   "links": [
-    "https://abc7.com/story/apple-joins-parade-technology-hiccups-recent-days/20048749/"
-   ]
-  },
-  {
-   "id": "outage-wave-2026-11",
-   "date": "2026-11-17",
-   "title": "Bank and airline outages, Nov 12–17",
-   "affects": [
-    "bank"
-   ],
-   "verdict": "heads_up",
-   "if_affected": "Banks, Schwab, United and the FAA all had outages. Every company that gave a cause blamed a technical fault, not an attack. An outage doesn't move your money. If you get a call or text 'fixing' your account, hang up and call the number on your card.",
-   "if_not": "Nothing for you to do.",
-   "source": "FOX Television Stations (FOX 4), Nov 17, 2026; FourWeekMBA outage tally, Nov 2026",
-   "links": [
-    "https://www.fox4news.com/news/airline-bank-outage-reason-tech-glitch-cyber-attack"
    ]
   },
   {
@@ -194,53 +162,6 @@
    "source": "Android Security Bulletin, November 2026 (published Nov 2, 2026)",
    "links": [
     "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-   ]
-  },
-  {
-   "id": "binance-2026-10",
-   "date": "2026-10-29",
-   "title": "$6.3 billion stolen from Binance",
-   "affects": [
-    "crypto-exchange"
-   ],
-   "verdict": "heads_up",
-   "if_affected": "If you use Binance: the exchange says it refilled affected wallets. Ignore messages offering refunds or asking you to \"verify\" your account.",
-   "if_not": "Nothing for you to do.",
-   "source": "TRM Labs, Oct 30, 2026; Binance",
-   "links": [
-    "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history"
-   ]
-  },
-  {
-   "id": "gcloud-london-2026-10",
-   "date": "2026-10-20",
-   "title": "Google Cloud outage in London",
-   "affects": [],
-   "verdict": "heads_up",
-   "if_affected": "",
-   "if_not": "Hit UK banks and services. Backup power failed; nothing for you to update.",
-   "source": "Technology Magazine, Oct 2026",
-   "links": [
-    "https://technologymagazine.com/news/the-google-cloud-outage-what-industry-experts-have-to-say"
-   ]
-  },
-  {
-   "id": "android-sms-2026-10",
-   "date": "2026-10-01",
-   "title": "Android \"SMS of Death\" text bug",
-   "affects": [
-    "android",
-    "samsung-galaxy",
-    "pixel"
-   ],
-   "verdict": "do_now",
-   "if_affected": "One hidden text can crash calling, including 911. Install the October update (Android 14–17). Android 12 and 13 won't get a fix: plan to replace the phone.",
-   "if_not": "You don't have an Android phone.",
-   "source": "PBX Science; BleepingComputer, Oct 31, 2026",
-   "date_label": "October 2026",
-   "links": [
-    "https://bleepingcomputer.com/news/security/new-android-sms-of-death-exploit-can-remotely-crash-unpatched-phones",
-    "https://pbxscience.com/?p=24824"
    ]
   }
  ]
