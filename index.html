@@ -193,6 +193,10 @@ async function verifyCode(code, jwk, onDay) {
 const isoDay = () => { const d = today(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
 // Which paid tiers this phone has. While paid tiers are off, everything counts as unlocked.
 const hasTier = t => !PAID_ON || S.unlocked.has(t);
+// Family plan: free covers you plus one more person. More lists need the family code once paid tiers are on.
+// Never takes lists away: people who already have more (or restore a backup code) keep them.
+const FREE_LISTS = 2;
+const canAddList = () => Object.keys(P.lists).length < FREE_LISTS || hasTier("family");
 async function loadUnlocks() {
   S.unlocked = new Set();
   if (!PAID_ON || !CODE_KEY) return;
@@ -711,10 +715,31 @@ function viewAgree() {
     agreeBox(btn), btn];
 }
 
+// A real, recent alert for the welcome screen, straight from the live data: the newest flaw on CISA's list
+// (from the last 45 days) that we've written plain English for. Labeled as an example, never as "yours".
+function sampleAlert() {
+  const recent = e => (today() - new Date(e.added + "T00:00:00")) / 86400000 <= 45;
+  const e = (D.kev.entries || []).filter(e => D.news.plain[e.cve] && (e.products || []).length && recent(e))
+    .sort((a, b) => b.added.localeCompare(a.added))[0];
+  if (!e) return null;
+  const p = D.news.plain[e.cve], days = (today() - new Date(e.added + "T00:00:00")) / 86400000;
+  const tone = days <= 14 ? "now" : "week";
+  const names = e.products.map(productById).filter(Boolean).map(x => x.name).slice(0, 3);
+  const links = sourceLinks(p.links || []);
+  return el("div", { class: "sample" },
+    el("p", { class: "small", style: "margin:18px 0 6px" }, el("b", {}, "A real alert"), ` from ${fmtDate(e.added)}:`),
+    el("div", { class: `card c-${tone}` },
+      el("span", { class: "tag", style: `color:var(--${tone})` }, names.join(" · "), el("span", { class: "badge " + CONF.confirmed[0] }, CONF.confirmed[1])),
+      el("span", { class: "t" }, p.title), el("span", { class: "d" }, p.why),
+      el("span", { class: "when" }, `${tone === "now" ? "Do now" : "This week"} · Source: ${p.source}`)),
+    links);
+}
 function viewWelcome() {
   const fresh = !list().devices.length && !list().custom.length;
   return [header(), el("h1", {}, "Know when something you own gets hacked"),
     el("p", { class: "sub" }, "Like when Apple fixes an iPhone flaw hackers are already using: we tell you in plain English and show what Apple says to do."),
+    sampleAlert(),
+    el("p", { class: "small" }, `Alert data updated ${fmtDate(D.kev.builtAt)} from CISA's list of flaws hackers are using · news updated ${fmtDate(D.news.updated)}`),
     el("ol", { class: "intro" },
       el("li", {}, el("div", {}, el("b", {}, "Tap what you own"), el("span", {}, "Your phone, computer, TV, router and apps. It takes about 2 minutes."))),
       el("li", {}, el("div", {}, el("b", {}, "See what to fix"), el("span", {}, "Red means do it now. Yellow means this week. Green means you're fine."))),
@@ -743,8 +768,10 @@ function viewSetup(first) {
       el("div", { class: "row" }, el("input", { type: "text", id: "pname", maxlength: "30", placeholder: "Mom" }),
         el("button", { type: "button", class: "btn", style: "margin-top:0;flex:0 0 auto;width:auto;padding:0 18px", onclick: () => {
           const v = document.getElementById("pname").value.trim().slice(0, 30);
+          if (v && !P.lists[v] && !canAddList()) { document.getElementById("family-note").hidden = false; return; }
           if (v && !P.lists[v]) { P.lists[v] = { devices: [], custom: [], models: {} }; P.active = v; saveProfiles(); render(); } } }, "Add"))),
-    el("p", { class: "small", style: "margin-top:8px" }, "Set up a parent's or kid's devices on your phone. Each list gets its own alerts."));
+    el("p", { class: "small", style: "margin-top:8px" }, "Set up a parent's or kid's devices on your phone. Each list gets its own alerts."),
+    el("p", { class: "small", id: "family-note", hidden: true, role: "status" }, "Free covers you and one more person. To watch more people, get the Family plan, then paste your code in Settings › Unlock code."));
   S.addPerson = false;
   return [header(), el("h1", {}, first ? "Tap what you own" : "My stuff"),
     el("p", { class: "sub" }, "Search or browse. If it's not here, add it anyway, so we never tell you you're fine by mistake."),
