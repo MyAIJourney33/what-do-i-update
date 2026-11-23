@@ -329,7 +329,7 @@ function computeAlerts() {
     if (ageDays(n.date) > NEWS_DAYS) continue;
     const hit = mine(n.affects);
     const a = { id: n.id, kind: "news", news: n, hit, names: hit.map(id => productById(id).name), title: n.title,
-      confidence: n.verdict === "do_now" ? "reported" : "heads", why: hit.length ? n.if_affected : n.if_not };
+      confidence: n.reported_by ? "unconfirmed" : n.verdict === "do_now" ? "reported" : "heads", why: hit.length ? n.if_affected : n.if_not };
     if (!hit.length) notYou.push(a);
     else if (n.verdict === "do_now") now.push(a);
     else week.push(a);
@@ -365,7 +365,12 @@ function deviceStatus(id, A) {
   return { tone: "ok", text: p && p.news_only && !(p.runs || []).length ? "Watched through maker notices and news · nothing reported" : `No attacks reported in ${NEWS_DAYS} days` };
 }
 
-const CONF = { confirmed: ["b-confirmed", "Confirmed attacks"], reported: ["b-reported", "Reported"], heads: ["b-heads", "Heads up"] };
+const CONF = { confirmed: ["b-confirmed", "Confirmed attacks"], reported: ["b-reported", "Reported"], heads: ["b-heads", "Heads up"],
+  unconfirmed: ["b-reported", "Unconfirmed"] };
+// News we keep before the company or an agency confirms it: say so, and who reported it.
+const unconfirmedNote = n => n && n.reported_by
+  ? el("p", { class: "small", style: "margin-top:6px" }, el("b", {}, "Unconfirmed: "), `reported by ${n.reported_by}, not yet confirmed by the company or an agency.`)
+  : null;
 function header() {
   const names = Object.keys(P.lists);
   return el("div", { class: "brand", style: "justify-content:space-between" },
@@ -547,7 +552,7 @@ function viewDetail() {
     ? `${a.entry.cve} · added to CISA's exploited list ${fmtDate(a.entry.added)}${a.plain && a.plain.source ? " · " + a.plain.source : ""}`
     : a.news.source;
   const links = a.kind === "kev" ? [...((a.plain && a.plain.links) || []), nvdLink(a.entry.cve)] : a.news.links;
-  out.push(el("div", { class: "box" }, el("h3", {}, "Source"), el("p", { class: "small" }, src),
+  out.push(el("div", { class: "box" }, el("h3", {}, "Source"), el("p", { class: "small" }, src), a.kind === "news" ? unconfirmedNote(a.news) : null,
     a.kind === "kev" ? el("p", { class: "small", style: "margin-top:6px" }, "Technical name: " + a.entry.name) : null,
     sourceLinks(links)));
   return out;
@@ -620,7 +625,9 @@ function viewHeadlines() {
         el("p", { class: "small" }, n.date_label || fmtDate(n.date)),
         el("h3", { style: "margin:4px 0 8px" }, n.title),
         el("span", { class: `pill ${tone}` }, icon(tone), label),
+        n.reported_by ? el("span", { class: "badge " + CONF.unconfirmed[0], style: "margin-left:8px" }, CONF.unconfirmed[1]) : null,
         el("p", { class: "small", style: "margin-top:8px" }, hit.length ? n.if_affected : n.if_not),
+        unconfirmedNote(n),
         el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source),
         sourceLinks(n.links));
     })];
