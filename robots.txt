@@ -1,0 +1,5 @@
+# Everyone is welcome to read and link to these pages, search engines and AI assistants included.
+User-agent: *
+Allow: /
+
+Sitemap: https://whatdoiupdate.com/sitemap.xml
