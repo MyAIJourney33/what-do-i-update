@@ -30,8 +30,53 @@ Data updated Nov 23, 2026.
 - [$6.3 billion stolen from Binance](https://whatdoiupdate.com/news/binance-2026-10.html): Heads up (unconfirmed). Affects: Crypto exchange (Coinbase, Binance, Kraken…). Oct 29, 2026.
 - [Google Cloud outage in London](https://whatdoiupdate.com/news/gcloud-london-2026-10.html): Heads up. Not home devices. Oct 20, 2026.
 
+## Do I need to update? (one page per device, checked daily)
+
+- [7-Zip](https://whatdoiupdate.com/devices/7zip.html): no urgent update
+- [ASUS laptop or desktop](https://whatdoiupdate.com/devices/asus-pc.html): no urgent update
+- [ASUS router](https://whatdoiupdate.com/devices/router-asus.html): no urgent update
+- [Adobe Acrobat / Reader](https://whatdoiupdate.com/devices/adobe-reader.html): no urgent update
+- [Android phone (any brand)](https://whatdoiupdate.com/devices/android.html): update this week
+- [Apple TV](https://whatdoiupdate.com/devices/apple-tv.html): update this week
+- [Apple Watch](https://whatdoiupdate.com/devices/apple-watch.html): update this week
+- [Brave, Opera or Vivaldi](https://whatdoiupdate.com/devices/other-chromium.html): update now
+- [Chrome](https://whatdoiupdate.com/devices/chrome.html): update now
+- [Chromebook](https://whatdoiupdate.com/devices/chromebook.html): update now
+- [D-Link camera or recorder](https://whatdoiupdate.com/devices/camera-dlink.html): no urgent update
+- [D-Link router](https://whatdoiupdate.com/devices/router-dlink.html): no urgent update
+- [Dahua camera or recorder](https://whatdoiupdate.com/devices/camera-dahua.html): no urgent update
+- [DrayTek router](https://whatdoiupdate.com/devices/router-draytek.html): no urgent update
+- [Firefox](https://whatdoiupdate.com/devices/firefox.html): no urgent update
+- [Google Pixel](https://whatdoiupdate.com/devices/pixel.html): update this week
+- [Hikvision camera or recorder](https://whatdoiupdate.com/devices/camera-hikvision.html): no urgent update
+- [Home storage drive (Synology, QNAP)](https://whatdoiupdate.com/devices/nas.html): update now
+- [Java](https://whatdoiupdate.com/devices/java.html): no urgent update
+- [Mac](https://whatdoiupdate.com/devices/mac.html): update this week
+- [Microsoft Edge](https://whatdoiupdate.com/devices/edge.html): update now
+- [Microsoft Office (Word, Excel, PowerPoint)](https://whatdoiupdate.com/devices/office.html): update now
+- [Microsoft Surface](https://whatdoiupdate.com/devices/surface.html): update now
+- [Motorola phone](https://whatdoiupdate.com/devices/motorola.html): update this week
+- [Netgear router](https://whatdoiupdate.com/devices/router-netgear.html): no urgent update
+- [Notepad++](https://whatdoiupdate.com/devices/notepad-plus.html): no urgent update
+- [Outlook (desktop app)](https://whatdoiupdate.com/devices/outlook.html): update now
+- [Remote access app (TeamViewer, AnyDesk, ScreenConnect)](https://whatdoiupdate.com/devices/remote-access.html): no urgent update
+- [Safari](https://whatdoiupdate.com/devices/safari.html): update this week
+- [Samsung Galaxy](https://whatdoiupdate.com/devices/samsung-galaxy.html): update this week
+- [Samsung Galaxy Tab](https://whatdoiupdate.com/devices/galaxy-tab.html): update this week
+- [TP-Link router](https://whatdoiupdate.com/devices/router-tplink.html): no urgent update
+- [TRENDnet router or camera](https://whatdoiupdate.com/devices/router-trendnet.html): no urgent update
+- [Tenda router](https://whatdoiupdate.com/devices/router-tenda.html): no urgent update
+- [Ubiquiti (UniFi / AmpliFi)](https://whatdoiupdate.com/devices/router-ubiquiti.html): no urgent update
+- [WhatsApp](https://whatdoiupdate.com/devices/whatsapp.html): no urgent update
+- [WinRAR](https://whatdoiupdate.com/devices/winrar.html): no urgent update
+- [Windows PC](https://whatdoiupdate.com/devices/windows.html): update this week
+- [Zyxel router or modem](https://whatdoiupdate.com/devices/router-zyxel.html): no urgent update
+- [iPad](https://whatdoiupdate.com/devices/ipad.html): update this week
+- [iPhone](https://whatdoiupdate.com/devices/iphone.html): update this week
+
 ## More
 
+- [All devices](https://whatdoiupdate.com/devices/)
 - [All alerts](https://whatdoiupdate.com/alerts/)
 - [All news](https://whatdoiupdate.com/news/)
 - [The app](https://whatdoiupdate.com/)
