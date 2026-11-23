@@ -486,7 +486,7 @@ function stepsBox(products) {
 function viewDetail() {
   const a = S.detail;
   const steps = a.hit.map(id => productById(id)).filter(Boolean);
-  const out = [el("button", { type: "button", class: "back", onclick: () => go("alerts") }, "‹ Alerts"),
+  const out = [el("button", { type: "button", class: "back", onclick: () => goBack("alerts") }, "‹ Alerts"),
     el("h1", {}, a.title), el("p", { class: "sub" }, a.why)];
   if (a.confidence) out.push(el("p", { class: "small", style: "margin-top:8px" }, el("span", { class: "badge " + CONF[a.confidence][0], style: "margin-left:0" }, CONF[a.confidence][1]), " ",
     { confirmed: "The U.S. government lists this as being used in real attacks.", reported: "Reported by the maker or major news; not yet on the government list.", heads: "Worth knowing; not an emergency." }[a.confidence]));
@@ -500,7 +500,7 @@ function viewDetail() {
   }
   out.push(el("p", { class: "note" }, icon("shield"), el("span", {}, "We never send download links. If a message tells you to download an update, it's a scam.")));
   const done = isDone(a.id);
-  out.push(el("button", { type: "button", class: "btn", onclick: () => { toggleFixed(a.id); go("alerts"); } }, done ? "Mark as not done" : "I did it, mark as fixed"));
+  out.push(el("button", { type: "button", class: "btn", onclick: () => { toggleFixed(a.id); goBack("alerts"); } }, done ? "Mark as not done" : "I did it, mark as fixed"));
   if (a.kind === "eol" || a.kind === "old") return out;
   const src = a.kind === "kev"
     ? `${a.entry.cve} · added to CISA's exploited list ${fmtDate(a.entry.added)}${a.plain && a.plain.source ? " · " + a.plain.source : ""}`
@@ -515,7 +515,7 @@ function viewDetail() {
 // One device: how to update it, and whether this model still gets security updates.
 function viewDevice() {
   const id = S.device;
-  const back = el("button", { type: "button", class: "back", onclick: () => go("alerts") }, "‹ Alerts");
+  const back = el("button", { type: "button", class: "back", onclick: () => goBack("alerts") }, "‹ Alerts");
   if (id.startsWith("custom:")) {
     const name = id.slice(7);
     return [back, el("h1", {}, name), el("p", { class: "sub" }, "This isn't on our watch list yet, so we can't warn you about it. Here's how to keep it safe on your own:"),
@@ -524,7 +524,7 @@ function viewDevice() {
         el("li", {}, "Once a month, open its settings and look for Software update or Firmware update."),
         el("li", {}, "Search the maker's own support site for \"security update\" and the model name."),
         el("li", {}, "If it hasn't had an update in over a year, it may be too old. Don't use it for anything private."))),
-      el("button", { type: "button", class: "btn secondary", onclick: () => { list().custom = list().custom.filter(c => c !== name); saveProfiles(); go("alerts"); } }, "Remove from my list")];
+      el("button", { type: "button", class: "btn secondary", onclick: () => { list().custom = list().custom.filter(c => c !== name); saveProfiles(); goBack("alerts"); } }, "Remove from my list")];
   }
   const p = productById(id); const A = computeAlerts(); const st = deviceStatus(id, A);
   const out = [back, el("h1", {}, p.name), el("p", { class: "sub" }, el("span", { class: "dot", style: `display:inline-block;margin-right:8px;background:var(--${st.tone}-dot);color:var(--${st.tone}-dot)` }), st.text),
@@ -542,7 +542,7 @@ function viewDevice() {
       sup ? el("p", { class: sup.ended ? "pill now" : sup.soon ? "pill week" : "pill ok", style: "margin-top:10px;display:flex" }, sup.text) : null,
       el("p", { class: "small", style: "margin-top:8px" }, "Saved only on this phone. Dates from endoflife.date.")));
   }
-  out.push(el("button", { type: "button", class: "btn secondary", onclick: () => { list().devices = list().devices.filter(d => d !== id); delete list().models[id]; saveProfiles(); go("alerts"); } }, "Remove from my list"));
+  out.push(el("button", { type: "button", class: "btn secondary", onclick: () => { list().devices = list().devices.filter(d => d !== id); delete list().models[id]; saveProfiles(); goBack("alerts"); } }, "Remove from my list"));
   return out;
 }
 
@@ -894,15 +894,15 @@ function viewProtect() {
 function viewHacked() {
   if (S.playbook) {
     const pb = PLAYBOOKS.find(p => p.id === S.playbook);
-    return [el("button", { type: "button", class: "back", onclick: () => { S.playbook = null; render(); } }, "‹ I think I got hacked"),
+    return [el("button", { type: "button", class: "back", onclick: () => goBack("hacked") }, "‹ I think I got hacked"),
       el("h1", {}, pb.title), el("p", { class: "sub" }, "Take a breath. Do these in order. Most of it takes minutes."),
       el("div", { class: "box" }, el("ol", { class: "steps" }, ...pb.steps.map(s => typeof s === "string" ? el("li", {}, s)
         : el("li", {}, s.t, howTo(s.how))))),
       el("p", { class: "note" }, icon("shield"), el("span", {}, "Real companies won't call you about a hack, ask for gift cards or ask for your passwords or recovery phrase. Anyone who does is the scam."))];
   }
-  return [el("button", { type: "button", class: "back", onclick: () => go("protect") }, "‹ Protect"),
+  return [el("button", { type: "button", class: "back", onclick: () => goBack("protect") }, "‹ Protect"),
     el("h1", {}, "I think I got hacked"), el("p", { class: "sub" }, "What's happening?"),
-    ...PLAYBOOKS.map(pb => el("button", { type: "button", class: "card", onclick: () => { S.playbook = pb.id; render(); window.scrollTo(0, 0); } },
+    ...PLAYBOOKS.map(pb => el("button", { type: "button", class: "card", onclick: () => go("hacked", pb.id) },
       el("span", { class: "t", style: "margin:0" }, pb.title), el("span", { class: "more" }, "Show me what to do ›")))];
 }
 
@@ -1067,7 +1067,29 @@ function toggleFixed(id) {
   ids.has(id) ? ids.delete(id) : ids.add(id);
   S.done[P.active] = [...ids]; store.set(KEY_DONE, S.done);
 }
-function go(view, arg) { S.view = view; if (view === "detail") S.detail = arg; if (view === "device") S.device = arg; if (view === "hacked" && !arg) S.playbook = null; render(); window.scrollTo(0, 0); }
+// Screen history, so the phone's back swipe and our ‹ buttons return to the screen you came from, at the same spot.
+// Kept in memory only (NAV); the browser's history holds just a step number.
+const NAV = []; let navAt = -1;
+try { if ("scrollRestoration" in history) history.scrollRestoration = "manual"; } catch (e) { /* older browsers */ }
+function show(view, arg) { S.view = view; if (view === "detail") S.detail = arg; if (view === "device") S.device = arg; if (view === "hacked") S.playbook = arg || null; render(); }
+function navStart() {
+  NAV.length = 0; NAV.push({ view: S.view }); navAt = 0;
+  try { history.replaceState({ wdiu: 0 }, ""); } catch (e) { /* history blocked: buttons still work */ }
+}
+function go(view, arg) {
+  if (NAV[navAt]) NAV[navAt].y = window.scrollY;
+  NAV.length = navAt + 1; NAV.push({ view, arg }); navAt = NAV.length - 1;
+  try { history.pushState({ wdiu: navAt }, ""); } catch (e) { /* history blocked: buttons still work */ }
+  show(view, arg); window.scrollTo(0, 0);
+}
+// ‹ buttons: step back if there's an earlier screen in this visit, otherwise open the fallback screen.
+function goBack(fallback) { navAt > 0 ? history.back() : go(fallback); }
+window.addEventListener("popstate", e => {
+  const i = e.state && typeof e.state.wdiu === "number" ? e.state.wdiu : null;
+  if (NAV[navAt]) NAV[navAt].y = window.scrollY;
+  if (i === null || !NAV[i]) { navStart(); show("alerts"); window.scrollTo(0, 0); return; }   // step from an earlier visit
+  navAt = i; show(NAV[i].view, NAV[i].arg); window.scrollTo(0, NAV[i].y || 0);
+});
 
 function render() {
   const app = document.getElementById("app");
@@ -1095,6 +1117,7 @@ Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.j
     if (!list().devices.length && !list().custom.length) S.view = store.get(KEY_INTRO, false) ? "setup" : "welcome";
     S.seenOpen = JSON.parse(JSON.stringify(store.get(KEY_SEEN, null)));
     pingCheck();
+    navStart();
     render();
     dailyCount();
   })
