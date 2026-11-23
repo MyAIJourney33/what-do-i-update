@@ -129,7 +129,7 @@ const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
       KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1",
-      KEY_TERMS = "wdiu.terms.v1";
+      KEY_TERMS = "wdiu.terms.v1", KEY_DONE = "wdiu.fixed.v2";
 // The terms people agree to (privacy.html#terms). Bump the date when the terms change in a way that matters:
 // everyone is asked to agree again. What they agreed to and when is saved only on this phone.
 const TERMS_VERSION = "2026-11-21";
@@ -156,7 +156,19 @@ function loadProfiles() {
 let P = loadProfiles();
 const list = () => P.lists[P.active];
 let D = { products: [], order: [], kev: { entries: [] }, news: { items: [], plain: {} }, support: { products: {} }, breaches: { breaches: [] } };
-let S = { view: "alerts", fixed: new Set(store.get(KEY_FIXED, [])), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
+// "I did it" marks, kept per list: Mom updating Chrome doesn't mean you did. { listName: [alert ids] }
+function loadDone() {
+  const m = store.get(KEY_DONE, null);
+  if (m && typeof m === "object" && !Array.isArray(m)) return m;
+  // Older versions kept one set of marks for everyone. With one list they can only be that list's.
+  // With several we can't tell whose they were, so they start fresh rather than hide someone's alert.
+  const old = store.get(KEY_FIXED, []), names = Object.keys(P.lists);
+  const out = names.length === 1 && Array.isArray(old) && old.length ? { [names[0]]: old.filter(x => typeof x === "string") } : {};
+  store.set(KEY_DONE, out);
+  return out;
+}
+const isDone = (id, name = P.active) => (S.done[name] || []).includes(id);
+let S = { view: "alerts", done: loadDone(), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
           detail: null, device: null, playbook: null, query: "" };
 const selected = () => new Set(list().devices);
 // Checks a pasted restore code before it touches this phone. A code from someone else could otherwise put
@@ -300,12 +312,14 @@ function supportFor(id) {
 
 // One status line per device, so a quiet device is answered out loud.
 function deviceStatus(id, A) {
-  const inList = (arr) => arr.some(a => a.hit.includes(id) || (productById(id) && (productById(id).runs || []).some(r => a.hit.includes(r))));
+  const hits = a => a.hit.includes(id) || (productById(id) && (productById(id).runs || []).some(r => a.hit.includes(r)));
+  const inList = (arr) => arr.some(a => hits(a) && !isDone(a.id));
   const sup = supportFor(id);
   if (inList([...A.now, ...A.replace])) return { tone: "now", text: "Act now: see the alert above" };
   if (sup && sup.ended) return { tone: "now", text: "No longer gets security updates" };
   if (inList(A.week)) return { tone: "week", text: "Update this week" };
   if (sup && sup.soon) return { tone: "week", text: "Updates end soon" };
+  if ([...A.now, ...A.replace, ...A.week].some(hits)) return { tone: "ok", text: "You marked its alert as done" };
   const p = productById(id);
   return { tone: "ok", text: p && p.news_only && !(p.runs || []).length ? "Watched through maker notices and news · nothing reported" : `No attacks reported in ${NEWS_DAYS} days` };
 }
@@ -321,7 +335,7 @@ function header() {
 }
 
 function card(a, tone, isNew) {
-  const done = S.fixed.has(a.id);
+  const done = isDone(a.id);
   const tag = a.names && a.names.length ? a.names.join(" · ") : (a.kind === "news" ? "In the news" : "");
   const conf = a.confidence && tone !== "ok" ? CONF[a.confidence] : null;
   const kids = [el("span", { class: "tag", style: `color:var(--${tone})` }, isNew ? el("span", { class: "badge b-new" }, "New") : null,
@@ -395,20 +409,21 @@ function viewAlerts() {
   const A = computeAlerts();
   const nowList = [...A.now, ...A.replace];
   const old = list().devices.filter(id => (supportFor(id) || {}).ended);
+  const oldCards = old.map(id => ({ id: "old-" + id, kind: "old", hit: [id], names: [productById(id).name], confidence: "confirmed",
+    title: "Your " + productById(id).name + " is too old for security updates",
+    why: supportFor(id).text + " New flaws will never be fixed on it. Plan to replace it, and don't use it for banking." }));
+  const doNow = [...nowList, ...oldCards], toDo = arr => arr.filter(a => !isDone(a.id)).length;
   const out = [header(),
     el("h1", {}, P.active === "Me" ? "Your alerts" : P.active + "'s alerts"),
     el("p", { class: "sub small" }, `Checked against ${list().devices.length + list().custom.length} ${list().devices.length + list().custom.length === 1 ? "item" : "items"} on this phone · alerts updated ${fmtDate(D.kev.builtAt)} · news ${fmtDate(D.news.updated)}`),
     staleBanner("alerts"),
     pingNote(),
     el("div", { class: "counts" },
-      el("div", { class: "count now" }, el("b", {}, nowList.length + old.length), el("span", {}, "Do now")),
-      el("div", { class: "count week" }, el("b", {}, A.week.length), el("span", {}, "This week")),
+      el("div", { class: "count now" }, el("b", {}, toDo(doNow)), el("span", {}, "Do now")),
+      el("div", { class: "count week" }, el("b", {}, toDo(A.week)), el("span", {}, "This week")),
       el("div", { class: "count ok" }, el("b", {}, A.notYou.length), el("span", {}, "Not you")))];
-  const oldCards = old.map(id => ({ id: "old-" + id, kind: "old", hit: [id], names: [productById(id).name], confidence: "confirmed",
-    title: "Your " + productById(id).name + " is too old for security updates",
-    why: supportFor(id).text + " New flaws will never be fixed on it. Plan to replace it, and don't use it for banking." }));
   if (Object.keys(P.lists).length > 1) out.push(familyBox());
-  const isNew = newCheck(P.active), doNow = [...nowList, ...oldCards];
+  const isNew = newCheck(P.active);
   out.push(section("now", "Do this now", doNow, isNew), section("week", "This week", A.week, isNew));
   markSeen(P.active, [...doNow, ...A.week].map(a => a.id));
   if (list().custom.length) {
@@ -444,8 +459,9 @@ function viewAlerts() {
 function alertCounts(name) {
   const keep = P.active; P.active = name;
   try {
-    const A = computeAlerts(), old = list().devices.filter(id => (supportFor(id) || {}).ended).length;
-    return { now: A.now.length + A.replace.length + old, week: A.week.length, empty: !list().devices.length && !list().custom.length };
+    const A = computeAlerts(), open = a => !isDone(a.id);
+    const old = list().devices.filter(id => (supportFor(id) || {}).ended && !isDone("old-" + id)).length;
+    return { now: [...A.now, ...A.replace].filter(open).length + old, week: A.week.filter(open).length, empty: !list().devices.length && !list().custom.length };
   } finally { P.active = keep; }
 }
 function familyBox() {
@@ -483,7 +499,7 @@ function viewDetail() {
     steps.filter(p => p.caveat).forEach(p => out.push(el("p", { class: "small", style: "margin-top:10px" }, p.caveat)));
   }
   out.push(el("p", { class: "note" }, icon("shield"), el("span", {}, "We never send download links. If a message tells you to download an update, it's a scam.")));
-  const done = S.fixed.has(a.id);
+  const done = isDone(a.id);
   out.push(el("button", { type: "button", class: "btn", onclick: () => { toggleFixed(a.id); go("alerts"); } }, done ? "Mark as not done" : "I did it, mark as fixed"));
   if (a.kind === "eol" || a.kind === "old") return out;
   const src = a.kind === "kev"
@@ -1019,13 +1035,14 @@ function viewSettings() {
         try {
           const raw = JSON.parse(decodeURIComponent(escape(atob(input.value.trim()))));
           P = cleanRestore(raw, new Set(D.products.map(p => p.id)));
+          S.done = {}; store.set(KEY_DONE, S.done);
           saveProfiles(); go("alerts");
         } catch (e) { input.setCustomValidity("That code doesn't look right."); input.reportValidity(); } } }, "Restore")),
     names.length > 1 ? el("div", { class: "box" }, el("h3", {}, "People on this phone"),
       ...names.map(n => el("div", { style: "padding:8px 0;border-top:1px solid var(--line)" },
         el("div", { class: "row", style: "justify-content:space-between;min-height:36px" }, el("b", {}, n === "Me" ? "You" : n),
           n === "Me" ? null : el("button", { type: "button", class: "linkbtn", style: "flex:0 0 auto", onclick: () => {
-            delete P.lists[n]; if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")),
+            delete P.lists[n]; delete S.done[n]; store.set(KEY_DONE, S.done); if (P.active === n) P.active = "Me"; saveProfiles(); render(); } }, "Remove")),
         n === "Me" ? null : el("button", { type: "button", class: "btn secondary", style: "margin-top:4px", onclick: e => {
           const c = btoa(unescape(encodeURIComponent(JSON.stringify({ v: 2, lists: { Me: P.lists[n] } }))));
           navigator.clipboard.writeText(c).then(() => { e.target.textContent = "Copied. Send it to " + n; }, () => { e.target.textContent = "Couldn't copy. Try again"; }); } },
@@ -1039,13 +1056,17 @@ function viewSettings() {
       ...[].concat(countBox() || []),
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
-      P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.fixed.clear(); S.checks = {}; S.used.clear();
-      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),
+      P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.done = {}; S.checks = {}; S.used.clear();
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_DONE, {}); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),
     el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
       (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
 }
 
-function toggleFixed(id) { S.fixed.has(id) ? S.fixed.delete(id) : S.fixed.add(id); store.set(KEY_FIXED, [...S.fixed]); }
+function toggleFixed(id) {
+  const ids = new Set(S.done[P.active] || []);
+  ids.has(id) ? ids.delete(id) : ids.add(id);
+  S.done[P.active] = [...ids]; store.set(KEY_DONE, S.done);
+}
 function go(view, arg) { S.view = view; if (view === "detail") S.detail = arg; if (view === "device") S.device = arg; if (view === "hacked" && !arg) S.playbook = null; render(); window.scrollTo(0, 0); }
 
 function render() {
