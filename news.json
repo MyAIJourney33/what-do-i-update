@@ -225,9 +225,9 @@
    "verdict": "heads_up",
    "if_affected": "If you use Binance: the exchange says it refilled affected wallets. Ignore messages offering refunds or asking you to \"verify\" your account.",
    "if_not": "Nothing for you to do.",
-   "source": "TRM Labs, Oct 30, 2026; Binance",
-   "reported_by": "a blockchain research firm",
+   "source": "FBI cyber alert, Nov 2026; TRM Labs, Oct 30, 2026",
    "links": [
+    "https://www.fbi.gov/investigate/cyber/alerts/2026/north-korea-responsible-for-6-billion-binance-attack",
     "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history"
    ]
   },

@@ -27,7 +27,7 @@ Data updated Nov 23, 2026.
 - [Black Friday scam texts and fake stores](https://whatdoiupdate.com/news/holiday-scams-2026-11.html): Heads up. Affects: Amazon account, Bank or credit union. Nov 10, 2026.
 - [U.S. warns of hacks on store freezers](https://whatdoiupdate.com/news/freezers-2026-11.html): Heads up. Not home devices. Nov 5, 2026.
 - [Android's November update fixes a no-tap flaw](https://whatdoiupdate.com/news/android-nov-2026.html): Heads up. Affects: Android phone (any brand), Samsung Galaxy, Google Pixel. Nov 3, 2026.
-- [$6.3 billion stolen from Binance](https://whatdoiupdate.com/news/binance-2026-10.html): Heads up (unconfirmed). Affects: Crypto exchange (Coinbase, Binance, Kraken…). Oct 29, 2026.
+- [$6.3 billion stolen from Binance](https://whatdoiupdate.com/news/binance-2026-10.html): Heads up. Affects: Crypto exchange (Coinbase, Binance, Kraken…). Oct 29, 2026.
 - [Google Cloud outage in London](https://whatdoiupdate.com/news/gcloud-london-2026-10.html): Heads up. Not home devices. Oct 20, 2026.
 
 ## Do I need to update? (one page per device, checked daily)
