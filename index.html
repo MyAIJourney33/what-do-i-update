@@ -129,7 +129,10 @@ const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
       KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1",
-      KEY_TERMS = "wdiu.terms.v1", KEY_DONE = "wdiu.fixed.v2";
+      KEY_TERMS = "wdiu.terms.v1", KEY_DONE = "wdiu.fixed.v2", KEY_UNLOCK = "wdiu.unlock.v1";
+// Paid tiers (built, switched off). With PAID_ON false everything stays free and no unlock box shows.
+// CODE_KEY is the public half of the alerts server's code key (GET /code-key); fill it in when switching on.
+const PAID_ON = false, CODE_KEY = null;
 // The terms people agree to (privacy.html#terms). Bump the date when the terms change in a way that matters:
 // everyone is asked to agree again. What they agreed to and when is saved only on this phone.
 const TERMS_VERSION = "2026-11-21";
@@ -168,9 +171,43 @@ function loadDone() {
   return out;
 }
 const isDone = (id, name = P.active) => (S.done[name] || []).includes(id);
-let S = { view: "alerts", done: loadDone(), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
+let S = { view: "alerts", done: loadDone(), unlocked: new Set(), checks: store.get(KEY_CHECKS, {}), used: new Set(store.get(KEY_BREACHES, [])),
           detail: null, device: null, playbook: null, query: "" };
 const selected = () => new Set(list().devices);
+// ---------- Unlock codes: checked on this phone, never sent anywhere ----------
+// A code is WDIU-<payload>.<signature>. Only our server can sign one; anyone can check it with the public key.
+// The payload says only what it unlocks and until when: {v:1, t:"family", i:<random>, x:"YYYY-MM-DD" or null}.
+const fromB64u = s => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), c => c.charCodeAt(0));
+async function verifyCode(code, jwk, onDay) {
+  try {
+    const m = /^WDIU-([A-Za-z0-9_-]{10,400})\.([A-Za-z0-9_-]{40,120})$/.exec(String(code || "").trim());
+    if (!m || !jwk || !crypto.subtle) return null;
+    const key = await crypto.subtle.importKey("jwk", { kty: "EC", crv: "P-256", x: jwk.x, y: jwk.y }, { name: "ECDSA", namedCurve: "P-256" }, false, ["verify"]);
+    if (!(await crypto.subtle.verify({ name: "ECDSA", hash: "SHA-256" }, key, fromB64u(m[2]), new TextEncoder().encode(m[1])))) return null;
+    const b = JSON.parse(new TextDecoder().decode(fromB64u(m[1])));
+    if (!b || b.v !== 1 || typeof b.t !== "string" || !/^[a-z]{2,12}$/.test(b.t)) return null;
+    if (b.x !== null && !(typeof b.x === "string" && /^\d{4}-\d{2}-\d{2}$/.test(b.x) && b.x >= onDay)) return null;
+    return { t: b.t, x: b.x };
+  } catch (e) { return null; }
+}
+const isoDay = () => { const d = today(); return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, "0")}-${String(d.getDate()).padStart(2, "0")}`; };
+// Which paid tiers this phone has. While paid tiers are off, everything counts as unlocked.
+const hasTier = t => !PAID_ON || S.unlocked.has(t);
+async function loadUnlocks() {
+  S.unlocked = new Set();
+  if (!PAID_ON || !CODE_KEY) return;
+  for (const c of store.get(KEY_UNLOCK, [])) { const ok = await verifyCode(c, CODE_KEY, isoDay()); if (ok) S.unlocked.add(ok.t); }
+}
+function unlockBox() {
+  if (!PAID_ON || !CODE_KEY) return null;
+  const input = el("textarea", { id: "unlock", "aria-describedby": "unlock-help", autocomplete: "off" });
+  const msg = el("p", { class: "small", id: "unlock-help", role: "status" }, S.unlocked.size ? "Unlocked on this phone: " + [...S.unlocked].join(", ") + "." : "Paste the code you got after paying. It's checked on this phone; nothing is sent.");
+  return el("div", { class: "box" }, el("h3", {}, "Unlock code"), el("label", { for: "unlock" }, "Paste your code"), input, msg,
+    el("button", { type: "button", class: "btn secondary", onclick: async () => {
+      const ok = await verifyCode(input.value, CODE_KEY, isoDay());
+      if (!ok) { msg.textContent = "That code didn't work. Check you copied all of it, or that it hasn't ended."; return; }
+      store.set(KEY_UNLOCK, [...new Set([...store.get(KEY_UNLOCK, []), input.value.trim()])]); S.unlocked.add(ok.t); render(); } }, "Unlock"));
+}
 // Checks a pasted restore code before it touches this phone. A code from someone else could otherwise put
 // any text inside the app (like "call this number"), or break it. Only our own product ids, short names and
 // no links, emails or phone numbers get through. Throws on anything else.
@@ -1048,6 +1085,7 @@ function viewSettings() {
           navigator.clipboard.writeText(c).then(() => { e.target.textContent = "Copied. Send it to " + n; }, () => { e.target.textContent = "Couldn't copy. Try again"; }); } },
           "Copy code for " + n + "'s phone"))),
       el("p", { class: "small", style: "margin-top:10px" }, "Want them to get alerts on their own phone too? Copy their code, send it to them, and on their phone open this app › Settings › Restore from a backup code.")) : null,
+    unlockBox(),
     el("div", { class: "box" }, el("h3", {}, "Questions or a wrong alert?"),
       el("p", { class: "small" }, "Email ", el("a", { href: "mailto:help@whatdoiupdate.com", class: "linkbtn", style: "display:inline;min-height:auto" }, "help@whatdoiupdate.com"),
         ". We only reply to emails you send us. We'll never email you first, and our replies never contain download links.")),
@@ -1057,7 +1095,7 @@ function viewSettings() {
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.done = {}; S.checks = {}; S.used.clear();
-      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_DONE, {}); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),
+      saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_DONE, {}); store.set(KEY_UNLOCK, []); S.unlocked = new Set(); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),
     el("p", { class: "small", style: "margin-top:14px" }, `Data: ${D.kev.source || "CISA"} ${D.kev.catalogVersion || ""} · built ${D.kev.builtAt || ""} · news ${D.news.updated || ""}` +
       (D.support.fetched ? ` · support dates ${D.support.fetched} (endoflife.date)` : "") + (D.breaches.fetched ? ` · breaches ${D.breaches.fetched} (Have I Been Pwned)` : ""))];
 }
@@ -1118,6 +1156,9 @@ Promise.all([getJSON("products.json"), getJSON("kev-slim.json"), getJSON("news.j
     S.seenOpen = JSON.parse(JSON.stringify(store.get(KEY_SEEN, null)));
     pingCheck();
     navStart();
+    return loadUnlocks();
+  })
+  .then(() => {
     render();
     dailyCount();
   })
