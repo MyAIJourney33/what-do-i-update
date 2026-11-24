@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-23",
+ "updated": "2026-11-24",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -27,12 +27,21 @@
   "CVE-2026-124194": {
    "title": "Update Outlook",
    "why": "Hackers are using an Outlook flaw that can let something risky happen without asking you first. Install the latest Office update.",
-   "source": "CISA, added Nov 10, 2026"
+   "source": "Microsoft Security Update Guide, Nov 10, 2026; CISA, added Nov 10, 2026",
+   "fixed": "Office LTSC 2024 16.0.17932.21140, Office LTSC 2021 16.0.14334.21048, or newer; Microsoft 365 apps: the Nov 10, 2026 security update",
+   "links": [
+    "https://learn.microsoft.com/en-us/officeupdates/microsoft365-apps-security-updates"
+   ]
   },
   "CVE-2026-96951": {
    "title": "Run Windows Update and restart",
    "why": "Hackers are using a Windows flaw to get around a built-in security protection. The fix comes through Windows Update.",
-   "source": "CISA, added Oct 13, 2026"
+   "source": "Microsoft Security Update Guide, Oct 13, 2026 (KB5127648, KB5126657); CISA, added Oct 13, 2026",
+   "fixed": "Windows 11 build 26100.9711 (24H2), 26200.9711 (25H2) or 22631.7652 (23H2); Windows 10 build 19045.7807 (22H2); or newer",
+   "links": [
+    "https://support.microsoft.com/help/5127648",
+    "https://support.microsoft.com/help/5126657"
+   ]
   },
   "CVE-2024-27834": {
    "title": "Make sure your Apple devices are up to date",
@@ -55,6 +64,22 @@
   }
  },
  "items": [
+  {
+   "id": "chrome-158-2026-11",
+   "date": "2026-11-23",
+   "title": "Chrome fixes a critical flaw; restart to finish",
+   "affects": [
+    "chrome"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Not a hack. Google fixed a critical Chrome flaw and hasn't said anyone is using it. Google's fix is Chrome 158.0.8127.88 on computers and 158.0.8127.92 on Android. Chrome updates itself; check Settings › About Chrome and restart if it asks.",
+   "if_not": "Nothing for you to do.",
+   "source": "Chrome Releases blog, Nov 23, 2026",
+   "links": [
+    "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01734282054.html",
+    "https://chromereleases.googleblog.com/2026/11/chrome-for-android-update_0411169060.html"
+   ]
+  },
   {
    "id": "cleverbridge-2026-11",
    "date": "2026-11-20",
