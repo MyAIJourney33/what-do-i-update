@@ -295,7 +295,14 @@ function cardDate(a) {
   if (a.kind === "eol") return "Last added " + fmtShort(a.entries.map(e => e.added).sort().pop());
   return null;
 }
-const fmtDate = iso => iso ? new Date(iso.slice(0, 10) + "T00:00:00").toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" }) : "";
+// A full timestamp (builtAt is UTC, e.g. "2026-11-24T00:07:44Z") is shown in the phone's own time zone; a plain
+// date ("2026-11-23") is shown as that calendar day. Cutting a UTC stamp to 10 characters showed tomorrow's date every evening.
+const fmtDate = iso => {
+  if (!iso) return "";
+  const full = iso.length > 10 ? new Date(iso) : null;
+  const d = full && !isNaN(full) ? full : new Date(iso.slice(0, 10) + "T00:00:00");
+  return d.toLocaleDateString(undefined, { month: "short", day: "numeric", year: "numeric" });
+};
 const productById = id => D.products.find(p => p.id === id);
 const norm = s => s.toLowerCase().replace(/[^a-z0-9+]+/g, " ").trim();
 // A device also covers the software it runs (a Surface runs Windows and Edge).
@@ -712,7 +719,7 @@ function refreshSetup() {
   btn.disabled = !(list().devices.length || list().custom.length);
 }
 const agreed = () => (store.get(KEY_TERMS, null) || {}).v === TERMS_VERSION;
-function agree() { store.set(KEY_TERMS, { v: TERMS_VERSION, on: new Date().toISOString().slice(0, 10) }); }
+function agree() { store.set(KEY_TERMS, { v: TERMS_VERSION, on: isoDay() }); }
 // A real checkbox with its label; the button it controls stays off until it's ticked.
 function agreeBox(btn) {
   btn.disabled = true;
