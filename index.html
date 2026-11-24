@@ -326,7 +326,8 @@ function computeAlerts() {
     const words = own || plain;
     const a = { id: e.cve, kind: "kev", entry: e, hit, names, plain, confidence: "confirmed",
       title: words ? words.title : "Update " + names.join(", "),
-      why: words ? words.why : "Hackers are using a flaw in " + names.join(" and ") + ". Install the latest update." };
+      why: words ? words.why : "Hackers are using a flaw in " + names.join(" and ") + ". Install the latest update.",
+      fixed: words && words.fixed ? words.fixed : "" };
     if (e.replace) { if (age <= REPLACE_DAYS) for (const id of hit) (oldModels[id] = oldModels[id] || []).push(e); }
     else if (age <= DO_NOW_DAYS) now.push(a);
     else if (age <= THIS_WEEK_DAYS) week.push(a);
@@ -547,6 +548,7 @@ function viewDetail() {
   const steps = a.hit.map(id => productById(id)).filter(Boolean);
   const out = [el("button", { type: "button", class: "back", onclick: () => goBack("alerts") }, "‹ Alerts"),
     el("h1", {}, a.title), el("p", { class: "sub" }, a.why)];
+  if (a.fixed) out.push(el("p", { class: "small", style: "margin-top:8px" }, el("b", {}, "Fixed in: "), a.fixed));
   if (a.confidence) out.push(el("p", { class: "small", style: "margin-top:8px" }, el("span", { class: "badge " + CONF[a.confidence][0], style: "margin-left:0" }, CONF[a.confidence][1]), " ",
     { confirmed: "The U.S. government lists this as being used in real attacks.", reported: "Reported by the maker or major news; not yet on the government list.", heads: "Worth knowing; not an emergency." }[a.confidence]));
   if (a.kind === "eol") {
@@ -1140,6 +1142,9 @@ function viewSettings() {
       el("p", { class: "small" }, "This app downloads the same public alert lists for everyone and checks them against your lists on this phone. No accounts, no tracking: nothing that identifies you or lists what you own ever leaves this phone, and we never send download links."),
       ...[].concat(countBox() || []),
       el("a", { href: "privacy.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read our privacy and terms ›")),
+    el("div", { class: "box" }, el("h3", {}, "How we work"),
+      el("p", { class: "small" }, "Where alerts come from, how we decide Do now or This week, and every mistake we've corrected."),
+      el("a", { href: "how-we-work.html", class: "linkbtn", style: "display:inline-flex;align-items:center;text-decoration:none" }, "Read how we work ›")),
     el("button", { type: "button", class: "btn secondary", onclick: () => {
       P = { active: "Me", lists: { Me: { devices: [], custom: [], models: {} } } }; S.done = {}; S.checks = {}; S.used.clear();
       saveProfiles(); store.set(KEY_FIXED, []); store.set(KEY_DONE, {}); store.set(KEY_UNLOCK, []); S.unlocked = new Set(); store.set(KEY_CHECKS, {}); store.set(KEY_BREACHES, []); store.set(KEY_SEEN, {}); store.set(KEY_COUNTED, ""); store.set(KEY_TERMS, null); store.set(KEY_INTRO, false); S.seenOpen = null; S.ping = null; go("welcome"); } }, "Erase everything on this phone"),

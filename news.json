@@ -21,7 +21,8 @@
    },
    "links": [
     "https://bleepingcomputer.com/news/security/google-patches-eighth-chrome-zero-day-exploited-in-attacks-this-year"
-   ]
+   ],
+   "fixed": "Chrome 157.0.8103.50 or newer"
   },
   "CVE-2026-124194": {
    "title": "Update Outlook",
@@ -36,12 +37,21 @@
   "CVE-2024-27834": {
    "title": "Make sure your Apple devices are up to date",
    "why": "An older Apple and Safari flaw is now being used by hackers. If your iPhone, iPad or Mac is on the latest version, you're already protected.",
-   "source": "CISA, added Nov 4, 2026"
+   "source": "CISA, added Nov 4, 2026; Apple security notes, May 13, 2024",
+   "fixed": "iOS and iPadOS 17.5 (16.7.8 on older models), macOS Sonoma 14.5, Safari 17.5, watchOS 10.5 and tvOS 17.5, or anything newer",
+   "links": [
+    "https://support.apple.com/120905",
+    "https://support.apple.com/120896"
+   ]
   },
   "CVE-2024-10441": {
    "title": "Update your Synology drive",
    "why": "Hackers are using a flaw in Synology's software to take over drives remotely. Install the latest update from the drive's Control Panel.",
-   "source": "CISA, added Nov 18, 2026"
+   "source": "CISA, added Nov 18, 2026; Synology advisory SA-24:20",
+   "fixed": "DSM 7.2.2-72806-1, 7.2.1-69057-6, 7.2-64570-4, 7.1.1-42962-7 or 6.2.4-25556-8, or anything newer",
+   "links": [
+    "https://www.synology.com/en-global/security/advisory/Synology_SA_24_20"
+   ]
   }
  },
  "items": [

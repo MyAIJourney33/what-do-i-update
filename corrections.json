@@ -1,0 +1,15 @@
+{
+ "about": "Public corrections log, shown on how-we-work.html. Newest first. Add an entry whenever an alert, date or answer we showed was wrong.",
+ "corrections": [
+  {
+   "date": "2026-11-23",
+   "what": "The \"alerts updated\" date and the date on device pages showed the next day in the evening.",
+   "fix": "Dates now follow the clock on your phone, and the pages use Eastern time. Alert content was not affected."
+  },
+  {
+   "date": "2026-11-22",
+   "what": "The Do now and This week counters still counted alerts you had marked done, and a done mark on one person's list showed on everyone's.",
+   "fix": "Counters now skip items you marked done, and each person's marks are kept separately. Alert content was not affected."
+  }
+ ]
+}
