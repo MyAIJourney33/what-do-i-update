@@ -1,0 +1,10 @@
+{
+ "about": "Public corrections log, shown on how-we-work.html. Newest first. Add an entry whenever an alert, date or answer we showed was wrong.",
+ "corrections": [
+  {
+   "date": "2026-11-23",
+   "what": "The \"alerts updated\" date and the date on device pages showed the next day in the evening.",
+   "fix": "Dates now follow the clock on your phone, and the pages use Eastern time. Alert content was not affected."
+  }
+ ]
+}
