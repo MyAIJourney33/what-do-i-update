@@ -48,7 +48,10 @@
    "title": "Update your Synology drive",
    "why": "Hackers are using a flaw in Synology's software to take over drives remotely. Install the latest update from the drive's Control Panel.",
    "source": "CISA, added Nov 18, 2026; Synology advisory SA-24:20",
-   "fixed": "DSM 7.2.2-72806-1, 7.2.1-69057-6, 7.2-64570-4, 7.1.1-42962-7 or 6.2.4-25556-8, or anything newer"
+   "fixed": "DSM 7.2.2-72806-1, 7.2.1-69057-6, 7.2-64570-4, 7.1.1-42962-7 or 6.2.4-25556-8, or anything newer",
+   "links": [
+    "https://www.synology.com/en-global/security/advisory/Synology_SA_24_20"
+   ]
   }
  },
  "items": [
