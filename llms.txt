@@ -4,7 +4,7 @@
 
 Alerts come from CISA's Known Exploited Vulnerabilities catalog (flaws used in real attacks), refreshed hourly. News items lead with the maker's or a government's own notice; items not yet confirmed by the company or an agency are labeled Unconfirmed. We never send download links.
 
-Data updated Nov 23, 2026.
+Data updated Nov 24, 2026.
 
 ## Current alerts
 
