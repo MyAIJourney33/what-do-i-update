@@ -74,11 +74,11 @@
    "verdict": "heads_up",
    "if_affected": "If you use 1Password: a hack exposed some customers' names, emails and account details. 1Password says vaults and passwords are safe and you don't need to update anything. It warns of fake invite or account recovery emails and says it will never ask for your password or Secret Key.",
    "if_not": "Nothing for you to do.",
-   "source": "BleepingComputer, Nov 25, 2026; TechCrunch, Nov 25, 2026; 1Password statement, Nov 25, 2026",
+   "source": "1Password, Nov 25, 2026; BleepingComputer, Nov 25, 2026; TechCrunch, Nov 25, 2026",
    "links": [
+    "https://1password.com/blog/update-on-nov-2026-security-incident",
     "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/",
-    "https://techcrunch.com/2026/11/25/1password-said-hackers-broke-into-its-internal-systems-but-customer-passwords-are-safe/",
-    "https://1password.com/blog/update-on-nov-2026-security-incident"
+    "https://techcrunch.com/2026/11/25/1password-said-hackers-broke-into-its-internal-systems-but-customer-passwords-are-safe/"
    ]
   },
   {
