@@ -18,6 +18,7 @@ Data updated Nov 25, 2026.
 
 - [Unclassified CIA system reported hacked](https://whatdoiupdate.com/news/cia-odni-2026-11.html): Heads up. Not home devices. Nov 24, 2026.
 - [Chrome fixes a critical flaw; restart to finish](https://whatdoiupdate.com/news/chrome-158-2026-11.html): Heads up. Affects: Chrome. Nov 23, 2026.
+- [GL.iNet routers hacked through its cloud service](https://whatdoiupdate.com/news/glinet-goodcloud-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
 - [FBI police database reported hacked](https://whatdoiupdate.com/news/fbi-ncic-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
 - [Software checkout firm says card numbers were stolen](https://whatdoiupdate.com/news/cleverbridge-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
 - [Hackers got into a USDA farm payment system](https://whatdoiupdate.com/news/usda-2026-11.html): Heads up (unconfirmed). Not home devices. Nov 19, 2026.
