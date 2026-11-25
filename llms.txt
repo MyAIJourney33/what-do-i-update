@@ -16,6 +16,7 @@ Data updated Nov 24, 2026.
 
 ## News
 
+- [Unclassified CIA system reported hacked](https://whatdoiupdate.com/news/cia-odni-2026-11.html): Heads up. Not home devices. Nov 24, 2026.
 - [Chrome fixes a critical flaw; restart to finish](https://whatdoiupdate.com/news/chrome-158-2026-11.html): Heads up. Affects: Chrome. Nov 23, 2026.
 - [FBI police database reported hacked](https://whatdoiupdate.com/news/fbi-ncic-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
 - [Software checkout firm says card numbers were stolen](https://whatdoiupdate.com/news/cleverbridge-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
@@ -23,7 +24,7 @@ Data updated Nov 24, 2026.
 - [Chase says a vendor leak exposed emails](https://whatdoiupdate.com/news/chase-vendor-2026-11.html): Heads up. Affects: Bank or credit union. Nov 19, 2026.
 - [Cheap no-name TV boxes used in record ad fraud](https://whatdoiupdate.com/news/badbox-2026-11.html): Heads up. Not home devices. Nov 19, 2026.
 - [Bank and airline outages, Nov 12–17](https://whatdoiupdate.com/news/outage-wave-2026-11.html): Heads up (unconfirmed). Affects: Bank or credit union. Nov 17, 2026.
-- [Apple Pay, iCloud and the App Store went down](https://whatdoiupdate.com/news/apple-outage-2026-11.html): Heads up (unconfirmed). Affects: iPhone, iPad, Mac, Apple Watch, Apple TV. Nov 17, 2026.
+- [Apple Pay, iCloud and the App Store went down](https://whatdoiupdate.com/news/apple-outage-2026-11.html): Heads up. Affects: iPhone, iPad, Mac, Apple Watch, Apple TV. Nov 17, 2026.
 - [Microsoft 365 down for almost 24 hours](https://whatdoiupdate.com/news/m365-outage-2026-11.html): Heads up. Affects: Outlook.com / Microsoft 365 account, Outlook (desktop app). Nov 12, 2026.
 - [Black Friday scam texts and fake stores](https://whatdoiupdate.com/news/holiday-scams-2026-11.html): Heads up. Affects: Amazon account, Bank or credit union. Nov 10, 2026.
 - [U.S. warns of hacks on store freezers](https://whatdoiupdate.com/news/freezers-2026-11.html): Heads up. Not home devices. Nov 5, 2026.
