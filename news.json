@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -91,6 +91,20 @@
    "links": [
     "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01734282054.html",
     "https://chromereleases.googleblog.com/2026/11/chrome-for-android-update_0411169060.html"
+   ]
+  },
+  {
+   "id": "glinet-goodcloud-2026-11",
+   "date": "2026-11-20",
+   "title": "GL.iNet routers hacked through its cloud service",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Only for GL.iNet routers and KVM boxes. GL.iNet says hackers used its GoodCloud remote service to put malware on some devices. It says to install the latest security firmware for your model from the device's admin page.",
+   "source": "GL.iNet security notices, Nov 20, 2026 (updated Nov 23); BleepingComputer, Nov 22, 2026",
+   "links": [
+    "https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20",
+    "https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/"
    ]
   },
   {
