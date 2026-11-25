@@ -4,13 +4,13 @@
 
 Alerts come from CISA's Known Exploited Vulnerabilities catalog (flaws used in real attacks), refreshed hourly. News items lead with the maker's or a government's own notice; items not yet confirmed by the company or an agency are labeled Unconfirmed. We never send download links.
 
-Data updated Nov 24, 2026.
+Data updated Nov 25, 2026.
 
 ## Current alerts
 
 - [Update your Synology drive](https://whatdoiupdate.com/alerts/update-your-synology-drive-cve-2024-10441.html): Do now: hackers are using this flaw. Affects Home storage drive (Synology, QNAP). Added Nov 18, 2026.
-- [Update Chrome and restart it](https://whatdoiupdate.com/alerts/update-chrome-and-restart-it-cve-2026-125350.html): Do now: hackers are using this flaw. Affects Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi. Added Nov 10, 2026.
-- [Update Outlook](https://whatdoiupdate.com/alerts/update-outlook-cve-2026-124194.html): Do now: hackers are using this flaw. Affects Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app). Added Nov 10, 2026.
+- [Update Chrome and restart it](https://whatdoiupdate.com/alerts/update-chrome-and-restart-it-cve-2026-125350.html): Update this week: hackers are using this flaw. Affects Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi. Added Nov 10, 2026.
+- [Update Outlook](https://whatdoiupdate.com/alerts/update-outlook-cve-2026-124194.html): Update this week: hackers are using this flaw. Affects Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app). Added Nov 10, 2026.
 - [Make sure your Apple devices are up to date](https://whatdoiupdate.com/alerts/make-sure-your-apple-devices-are-up-to-date-cve-2024-27834.html): Update this week: hackers are using this flaw. Affects iPhone, iPad, Apple Watch, Apple TV, Mac, Safari. Added Nov 4, 2026.
 - [Run Windows Update and restart](https://whatdoiupdate.com/alerts/run-windows-update-and-restart-cve-2026-96951.html): Update this week: hackers are using this flaw. Affects Windows PC. Added Oct 13, 2026.
 
@@ -41,9 +41,9 @@ Data updated Nov 24, 2026.
 - [Android phone (any brand)](https://whatdoiupdate.com/devices/android.html): update this week
 - [Apple TV](https://whatdoiupdate.com/devices/apple-tv.html): update this week
 - [Apple Watch](https://whatdoiupdate.com/devices/apple-watch.html): update this week
-- [Brave, Opera or Vivaldi](https://whatdoiupdate.com/devices/other-chromium.html): update now
-- [Chrome](https://whatdoiupdate.com/devices/chrome.html): update now
-- [Chromebook](https://whatdoiupdate.com/devices/chromebook.html): update now
+- [Brave, Opera or Vivaldi](https://whatdoiupdate.com/devices/other-chromium.html): update this week
+- [Chrome](https://whatdoiupdate.com/devices/chrome.html): update this week
+- [Chromebook](https://whatdoiupdate.com/devices/chromebook.html): update this week
 - [D-Link camera or recorder](https://whatdoiupdate.com/devices/camera-dlink.html): no urgent update
 - [D-Link router](https://whatdoiupdate.com/devices/router-dlink.html): no urgent update
 - [Dahua camera or recorder](https://whatdoiupdate.com/devices/camera-dahua.html): no urgent update
@@ -54,13 +54,13 @@ Data updated Nov 24, 2026.
 - [Home storage drive (Synology, QNAP)](https://whatdoiupdate.com/devices/nas.html): update now
 - [Java](https://whatdoiupdate.com/devices/java.html): no urgent update
 - [Mac](https://whatdoiupdate.com/devices/mac.html): update this week
-- [Microsoft Edge](https://whatdoiupdate.com/devices/edge.html): update now
-- [Microsoft Office (Word, Excel, PowerPoint)](https://whatdoiupdate.com/devices/office.html): update now
-- [Microsoft Surface](https://whatdoiupdate.com/devices/surface.html): update now
+- [Microsoft Edge](https://whatdoiupdate.com/devices/edge.html): update this week
+- [Microsoft Office (Word, Excel, PowerPoint)](https://whatdoiupdate.com/devices/office.html): update this week
+- [Microsoft Surface](https://whatdoiupdate.com/devices/surface.html): update this week
 - [Motorola phone](https://whatdoiupdate.com/devices/motorola.html): update this week
 - [Netgear router](https://whatdoiupdate.com/devices/router-netgear.html): no urgent update
 - [Notepad++](https://whatdoiupdate.com/devices/notepad-plus.html): no urgent update
-- [Outlook (desktop app)](https://whatdoiupdate.com/devices/outlook.html): update now
+- [Outlook (desktop app)](https://whatdoiupdate.com/devices/outlook.html): update this week
 - [Remote access app (TeamViewer, AnyDesk, ScreenConnect)](https://whatdoiupdate.com/devices/remote-access.html): no urgent update
 - [Safari](https://whatdoiupdate.com/devices/safari.html): update this week
 - [Samsung Galaxy](https://whatdoiupdate.com/devices/samsung-galaxy.html): update this week
