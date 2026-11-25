@@ -65,6 +65,19 @@
  },
  "items": [
   {
+   "id": "cia-odni-2026-11",
+   "date": "2026-11-24",
+   "title": "Unclassified CIA system reported hacked",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A spy agency's unclassified research system, not your devices. Nothing to update. The CIA declined to comment.",
+   "source": "CyberScoop, Nov 24, 2026",
+   "links": [
+    "https://cyberscoop.com/cia-odni-osint-data-breach/"
+   ]
+  },
+  {
    "id": "chrome-158-2026-11",
    "date": "2026-11-23",
    "title": "Chrome fixes a critical flaw; restart to finish",
@@ -182,9 +195,9 @@
    "verdict": "heads_up",
    "if_affected": "An outage after a bad update at Apple, not a hack. Nothing to update on your devices. Ignore texts or calls saying your Apple ID is locked and asking for a code.",
    "if_not": "Nothing for you to do.",
-   "source": "ABC News live updates, Nov 17, 2026; AP via ABC7, Nov 17, 2026",
-   "reported_by": "local news",
+   "source": "Apple statement via TechCrunch, Nov 17, 2026; AP via ABC7, Nov 17, 2026",
    "links": [
+    "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
     "https://abc7.com/story/apple-joins-parade-technology-hiccups-recent-days/20048749/"
    ]
   },
