@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-25",
+ "updated": "2026-11-26",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -64,6 +64,19 @@
   }
  },
  "items": [
+  {
+   "id": "todoist-2026-11",
+   "date": "2026-11-25",
+   "title": "Todoist says hackers took some users' emails",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Only if you use the Todoist to-do app: a hack exposed emails, scrambled passwords and sign-up dates for about 6% of customers. Todoist asked those affected to reset their password and change it anywhere else they used the same one.",
+   "source": "TechCrunch, Nov 25, 2026",
+   "links": [
+    "https://techcrunch.com/2026/11/25/todoist-confirms-6-of-customers-details-were-stolen-in-data-breach/"
+   ]
+  },
   {
    "id": "1password-2026-11",
    "date": "2026-11-25",
