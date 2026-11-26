@@ -16,6 +16,7 @@ Data updated Nov 26, 2026.
 
 ## News
 
+- [Todoist says hackers took some users' emails](https://whatdoiupdate.com/news/todoist-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
 - [1Password says hackers took customer names and emails](https://whatdoiupdate.com/news/1password-2026-11.html): Heads up. Affects: Password manager (1Password, Bitwarden, LastPass, iCloud Keychain). Nov 25, 2026.
 - [Unclassified CIA system reported hacked](https://whatdoiupdate.com/news/cia-odni-2026-11.html): Heads up. Not home devices. Nov 24, 2026.
 - [Chrome fixes a critical flaw; restart to finish](https://whatdoiupdate.com/news/chrome-158-2026-11.html): Heads up. Affects: Chrome. Nov 23, 2026.
