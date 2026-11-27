@@ -65,6 +65,32 @@
  },
  "items": [
   {
+   "id": "airforce-cloudone-2026-11",
+   "date": "2026-11-27",
+   "title": "Air Force cloud system reported hacked",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A military computer system, not your devices. Nothing to update. Reuters couldn't tell whether any data was taken, and the Air Force says it doesn't comment on specific systems.",
+   "source": "Reuters, Nov 27, 2026",
+   "links": [
+    "https://www.reuters.com/world/hackers-breach-us-air-force-flagship-cloud-one-computing-platform-2026-11-27/"
+   ]
+  },
+  {
+   "id": "sap-2026-11",
+   "date": "2026-11-26",
+   "title": "Business software maker SAP confirms a cyberattack",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Software big companies run on, not your devices. Nothing to update. SAP says it found no sign that customers' business data was accessed.",
+   "source": "BleepingComputer, Nov 26, 2026",
+   "links": [
+    "https://www.bleepingcomputer.com/news/security/sap-confirms-security-incident-after-suspicious-github-activity/"
+   ]
+  },
+  {
    "id": "usatoday-2026-11",
    "date": "2026-11-26",
    "title": "Hackers claim they took 166M USA Today records",

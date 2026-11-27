@@ -16,7 +16,9 @@ Data updated Nov 27, 2026.
 
 ## News
 
+- [Air Force cloud system reported hacked](https://whatdoiupdate.com/news/airforce-cloudone-2026-11.html): Heads up. Not home devices. Nov 27, 2026.
 - [Hackers claim they took 166M USA Today records](https://whatdoiupdate.com/news/usatoday-2026-11.html): Heads up (unconfirmed). Not home devices. Nov 26, 2026.
+- [Business software maker SAP confirms a cyberattack](https://whatdoiupdate.com/news/sap-2026-11.html): Heads up. Not home devices. Nov 26, 2026.
 - [Todoist says hackers took some users' emails](https://whatdoiupdate.com/news/todoist-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
 - [Treasury's financial crimes office says it was breached](https://whatdoiupdate.com/news/fincen-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
 - [Allstate's website and app have been down for days](https://whatdoiupdate.com/news/allstate-outage-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
