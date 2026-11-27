@@ -95,6 +95,19 @@
    ]
   },
   {
+   "id": "allstate-outage-2026-11",
+   "date": "2026-11-25",
+   "title": "Allstate's website and app have been down for days",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Only if you have Allstate insurance: its website and app have been down since Nov 23. Allstate hasn't said why. It says it is still handling claims by phone and at local offices, and you won't lose coverage or pay late fees if the outage blocks a payment.",
+   "source": "TechCrunch, Nov 25, 2026",
+   "links": [
+    "https://techcrunch.com/2026/11/25/allstate-suffers-multi-day-tech-outage-ahead-of-thanksgiving/"
+   ]
+  },
+  {
    "id": "cia-odni-2026-11",
    "date": "2026-11-24",
    "title": "Unclassified CIA system reported hacked",
@@ -209,6 +222,22 @@
     "https://www.bleepingcomputer.com/news/security/vendor-data-breach-exposes-chase-visa-mastercard-customer-info/",
     "https://abcnews.com/US/jpmorgan-chase-reports-cyberattack-party-service-providers/story?id=138287705",
     "https://www.kold.com/2026/11/19/chase-bank-announces-cyberattack-says-hackers-may-have-obtained-customers-personal-information/"
+   ]
+  },
+  {
+   "id": "synology-dsm-2026-11",
+   "date": "2026-11-19",
+   "title": "Synology fixes two critical flaws in its home drives",
+   "affects": [
+    "nas"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Not a hack: Synology hasn't said anyone is using these flaws. It says to update DSM to 7.4.1-90080-2 or 7.3.2-86009-6 or newer (Control Panel › Update). On DSM 7.1 and BeeStation, where no full fix is out yet, Synology says to turn off the OAuth Service package.",
+   "if_not": "Nothing for you to do.",
+   "source": "Synology security advisories SA-26:21 and SA-26:20, Nov 19, 2026 (updated Nov 26)",
+   "links": [
+    "https://www.synology.com/security/advisory/Synology_SA_26_21",
+    "https://www.synology.com/security/advisory/Synology_SA_26_20"
    ]
   },
   {
