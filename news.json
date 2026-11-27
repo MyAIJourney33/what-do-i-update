@@ -108,6 +108,34 @@
    "reach": "maybe"
   },
   {
+   "id": "bostonsci-2026-11",
+   "date": "2026-11-25",
+   "title": "Boston Scientific says hackers took some personal data",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "If Boston Scientific sends you a breach letter: hackers tricked staff by phone and downloaded data in May. The company says Social Security numbers and financial details weren't included, and its medical devices and remote monitoring weren't affected. It says to be wary of messages urging quick action.",
+   "if_not": "Nothing for you to do.",
+   "source": "California Attorney General breach list (Boston Scientific notice), Nov 25, 2026",
+   "links": [
+    "https://oag.ca.gov/ecrime/databreach/reports/sb24-633449"
+   ],
+   "reach": "maybe"
+  },
+  {
+   "id": "sees-2026-11",
+   "date": "2026-11-25",
+   "title": "See's Candies says stolen files reached the dark web",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "If See's Candies sends you a breach letter: hackers hit its network in April and posted some stolen files with personal details on the dark web. See's offers free Experian monitoring and says never give personal details in reply to messages about it.",
+   "if_not": "Nothing for you to do.",
+   "source": "California Attorney General breach list (See's Candies notice), Nov 25, 2026",
+   "links": [
+    "https://oag.ca.gov/ecrime/databreach/reports/sb24-633435"
+   ],
+   "reach": "maybe"
+  },
+  {
    "id": "todoist-2026-11",
    "date": "2026-11-25",
    "title": "Todoist says hackers took some users' emails",
@@ -166,6 +194,34 @@
     "https://thehackernews.com/2026/11/us-treasurys-fincen-takes-some-systems.html",
     "https://www.nextgov.com/cybersecurity/2026/11/treasurys-financial-crimes-bureau-takes-systems-offline-after-hack/417442/"
    ]
+  },
+  {
+   "id": "barclays-2026-11",
+   "date": "2026-11-24",
+   "title": "Barclays says hackers took card applicants' SSNs",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "If you applied for a Barclays credit card (it issues many store and travel cards): hackers broke into its application-status site and took names, contact details, birth dates and Social Security numbers. Barclays says existing accounts weren't affected. It's offering those it writes to free Experian identity monitoring.",
+   "if_not": "Nothing for you to do.",
+   "source": "California Attorney General breach list (Barclays Bank Delaware notice), Nov 24, 2026",
+   "links": [
+    "https://oag.ca.gov/ecrime/databreach/reports/sb24-633397"
+   ],
+   "reach": "maybe"
+  },
+  {
+   "id": "bestegg-2026-11",
+   "date": "2026-11-24",
+   "title": "Best Egg loan site hacked; SSNs and bank numbers taken",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "If you have a Best Egg loan: hackers got into its Financial Health site and took some customers' names, birth dates, Social Security numbers and the bank account number used for loan payments. Best Egg says it hasn't seen fraud on accounts and offers free Experian identity monitoring.",
+   "if_not": "Nothing for you to do.",
+   "source": "California Attorney General breach list (Best Egg notice), Nov 24, 2026",
+   "links": [
+    "https://oag.ca.gov/ecrime/databreach/reports/sb24-633388"
+   ],
+   "reach": "maybe"
   },
   {
    "id": "cia-odni-2026-11",

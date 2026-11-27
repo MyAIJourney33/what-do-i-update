@@ -20,10 +20,14 @@ Data updated Nov 27, 2026.
 - [Hackers claim they took 166M USA Today records](https://whatdoiupdate.com/news/usatoday-2026-11.html): Heads up (unconfirmed). Might affect you. Nov 26, 2026.
 - [Business software maker SAP confirms a cyberattack](https://whatdoiupdate.com/news/sap-2026-11.html): Heads up. Might affect you. Nov 26, 2026.
 - [Todoist says hackers took some users' emails](https://whatdoiupdate.com/news/todoist-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
+- [See's Candies says stolen files reached the dark web](https://whatdoiupdate.com/news/sees-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
 - [Treasury's financial crimes office says it was breached](https://whatdoiupdate.com/news/fincen-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
+- [Boston Scientific says hackers took some personal data](https://whatdoiupdate.com/news/bostonsci-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
 - [Allstate's website and app have been down for days](https://whatdoiupdate.com/news/allstate-outage-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
 - [1Password says hackers took customer names and emails](https://whatdoiupdate.com/news/1password-2026-11.html): Heads up. Affects: Password manager (1Password, Bitwarden, LastPass, iCloud Keychain). Nov 25, 2026.
 - [Unclassified CIA system reported hacked](https://whatdoiupdate.com/news/cia-odni-2026-11.html): Heads up. Not home devices. Nov 24, 2026.
+- [Best Egg loan site hacked; SSNs and bank numbers taken](https://whatdoiupdate.com/news/bestegg-2026-11.html): Heads up. Might affect you. Nov 24, 2026.
+- [Barclays says hackers took card applicants' SSNs](https://whatdoiupdate.com/news/barclays-2026-11.html): Heads up. Might affect you. Nov 24, 2026.
 - [Chrome fixes a critical flaw; restart to finish](https://whatdoiupdate.com/news/chrome-158-2026-11.html): Heads up. Affects: Chrome. Nov 23, 2026.
 - [GL.iNet routers hacked through its cloud service](https://whatdoiupdate.com/news/glinet-goodcloud-2026-11.html): Heads up. Might affect you. Nov 20, 2026.
 - [FBI police database reported hacked](https://whatdoiupdate.com/news/fbi-ncic-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
@@ -37,9 +41,6 @@ Data updated Nov 27, 2026.
 - [Microsoft 365 down for almost 24 hours](https://whatdoiupdate.com/news/m365-outage-2026-11.html): Heads up. Affects: Outlook.com / Microsoft 365 account, Outlook (desktop app). Nov 12, 2026.
 - [Black Friday scam texts and fake stores](https://whatdoiupdate.com/news/holiday-scams-2026-11.html): Heads up. Affects: Amazon account, Bank or credit union. Nov 10, 2026.
 - [U.S. warns of hacks on store freezers](https://whatdoiupdate.com/news/freezers-2026-11.html): Heads up. Not home devices. Nov 5, 2026.
-- [Android's November update fixes a no-tap flaw](https://whatdoiupdate.com/news/android-nov-2026.html): Heads up. Affects: Android phone (any brand), Samsung Galaxy, Google Pixel. Nov 3, 2026.
-- [$6.3 billion stolen from Binance](https://whatdoiupdate.com/news/binance-2026-10.html): Heads up. Affects: Crypto exchange (Coinbase, Binance, Kraken…). Oct 29, 2026.
-- [Google Cloud outage in London](https://whatdoiupdate.com/news/gcloud-london-2026-10.html): Heads up. Not home devices. Oct 20, 2026.
 
 ## Do I need to update? (one page per device, checked daily)
 
