@@ -108,6 +108,21 @@
    ]
   },
   {
+   "id": "fincen-2026-11",
+   "date": "2026-11-25",
+   "title": "Treasury's financial crimes office says it was breached",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A Treasury system banks use to report suspicious activity, not your devices. Nothing to update. FinCEN says someone got unauthorized access to some of its systems and it took some offline as a precaution. It hasn't said what data was reached.",
+   "source": "Nextgov/FCW, Nov 25, 2026; ABC News, Nov 25, 2026",
+   "reported_by": "a government tech news site",
+   "links": [
+    "https://www.nextgov.com/cybersecurity/2026/11/treasurys-financial-crimes-bureau-takes-systems-offline-after-hack/417442/",
+    "https://abcnews.com/US/treasurys-fincen-cybersecurity-incident-includes-unauthorized-access-systems/story?id=138432822"
+   ]
+  },
+  {
    "id": "cia-odni-2026-11",
    "date": "2026-11-24",
    "title": "Unclassified CIA system reported hacked",
