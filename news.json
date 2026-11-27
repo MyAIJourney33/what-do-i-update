@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-26",
+ "updated": "2026-11-27",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -65,6 +65,20 @@
  },
  "items": [
   {
+   "id": "usatoday-2026-11",
+   "date": "2026-11-26",
+   "title": "Hackers claim they took 166M USA Today records",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A hacker group's claim about USA Today's publisher, not your devices. Nothing to update. No breach is confirmed. If you have a USA Today account, expect fake account or payment emails; the FTC says to contact companies through a number or website you know is real.",
+   "source": "Forbes, Nov 26, 2026",
+   "reported_by": "a business news site",
+   "links": [
+    "https://www.forbes.com/sites/larsdaniel/2026/11/26/usa-today-data-breach-claim-hackers-say-they-have-166-million-records/"
+   ]
+  },
+  {
    "id": "todoist-2026-11",
    "date": "2026-11-25",
    "title": "Todoist says hackers took some users' emails",
@@ -115,11 +129,11 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "A Treasury system banks use to report suspicious activity, not your devices. Nothing to update. FinCEN says someone got unauthorized access to some of its systems and it took some offline as a precaution. It hasn't said what data was reached.",
-   "source": "Nextgov/FCW, Nov 25, 2026; ABC News, Nov 25, 2026",
-   "reported_by": "a government tech news site",
+   "source": "The Register, Nov 25, 2026; The Hacker News, Nov 25, 2026; Nextgov/FCW, Nov 25, 2026",
    "links": [
-    "https://www.nextgov.com/cybersecurity/2026/11/treasurys-financial-crimes-bureau-takes-systems-offline-after-hack/417442/",
-    "https://abcnews.com/US/treasurys-fincen-cybersecurity-incident-includes-unauthorized-access-systems/story?id=138432822"
+    "https://www.theregister.com/security/2026/11/25/us-treasury-financial-crimes-unit-becomes-latest-fed-breach-victim/5312165",
+    "https://thehackernews.com/2026/11/us-treasurys-fincen-takes-some-systems.html",
+    "https://www.nextgov.com/cybersecurity/2026/11/treasurys-financial-crimes-bureau-takes-systems-offline-after-hack/417442/"
    ]
   },
   {
@@ -180,6 +194,19 @@
    ]
   },
   {
+   "id": "fbi-ncic-2026-11",
+   "date": "2026-11-20",
+   "title": "FBI police database reported hacked",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "A law enforcement database, not your devices. Nothing to update. Real FBI agents never call demanding money; hang up on anyone who does.",
+   "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026",
+   "links": [
+    "https://www.ic3.gov/PSA/2026/PSA260917"
+   ]
+  },
+  {
    "id": "badbox-2026-11",
    "date": "2026-11-19",
    "title": "Cheap no-name TV boxes used in record ad fraud",
@@ -191,35 +218,6 @@
    "links": [
     "https://www.ic3.gov/PSA/2025/PSA250605",
     "https://www.martechcube.com/?p=327632"
-   ]
-  },
-  {
-   "id": "holiday-scams-2026-11",
-   "date": "2026-11-10",
-   "title": "Black Friday scam texts and fake stores",
-   "affects": [
-    "amazon-account",
-    "bank"
-   ],
-   "verdict": "heads_up",
-   "if_affected": "Not a hack, just scam season. Texts about a missed delivery or a redelivery fee are fake: track packages in the store's own app. No real company asks you to pay with gift cards. Forward scam texts to 7726.",
-   "if_not": "Nothing to update. Delivery scam texts are everywhere this season; forward them to 7726.",
-   "source": "Massachusetts Office of Consumer Affairs, Nov 10, 2026",
-   "links": [
-    "https://www.mass.gov/news/outsmart-scammers-this-holiday-season"
-   ]
-  },
-  {
-   "id": "fbi-ncic-2026-11",
-   "date": "2026-11-20",
-   "title": "FBI police database reported hacked",
-   "affects": [],
-   "verdict": "heads_up",
-   "if_affected": "",
-   "if_not": "A law enforcement database, not your devices. Nothing to update. Real FBI agents never call demanding money; hang up on anyone who does.",
-   "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026",
-   "links": [
-    "https://www.ic3.gov/PSA/2026/PSA260917"
    ]
   },
   {
@@ -263,10 +261,11 @@
    "verdict": "heads_up",
    "if_affected": "",
    "if_not": "A government payment system for farmers, not home devices. Nothing to update. If you get USDA payments, check any message about your account with your local office.",
-   "source": "NBC News, Nov 20, 2026; Nextgov/FCW, Nov 2026",
+   "source": "Nextgov/FCW, Nov 2026; DTN, Nov 24, 2026",
    "reported_by": "a government tech news site",
    "links": [
-    "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/"
+    "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/",
+    "https://www.dtnpf.com/agriculture/web/ag/columns/washington-insider/article/2026/11/24/usda-cybersecurity-incident-leaves-4"
    ]
   },
   {
@@ -299,9 +298,9 @@
    "verdict": "heads_up",
    "if_affected": "Banks, Schwab, United and the FAA all had outages. Every company that gave a cause blamed a technical fault, not an attack. An outage doesn't move your money. If you get a call or text 'fixing' your account, hang up and call the number on your card.",
    "if_not": "Nothing for you to do.",
-   "source": "FOX 4 News (FOX Television Stations), Nov 17, 2026; FourWeekMBA outage tally, Nov 2026",
-   "reported_by": "local news",
+   "source": "Associated Press via PBS NewsHour, Nov 16, 2026; FOX 4 News (FOX Television Stations), Nov 17, 2026",
    "links": [
+    "https://www.pbs.org/newshour/nation/customers-at-major-banks-are-experiencing-issues-accessing-their-accounts",
     "https://www.fox4news.com/news/airline-bank-outage-reason-tech-glitch-cyber-attack"
    ]
   },
@@ -319,6 +318,22 @@
    "source": "Microsoft incident MO1550821, via BleepingComputer, Nov 12, 2026",
    "links": [
     "https://bleepingcomputer.com/news/microsoft/massive-microsoft-365-outage-disrupts-outlook-teams-copilot-worldwide"
+   ]
+  },
+  {
+   "id": "holiday-scams-2026-11",
+   "date": "2026-11-10",
+   "title": "Black Friday scam texts and fake stores",
+   "affects": [
+    "amazon-account",
+    "bank"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Not a hack, just scam season. Texts about a missed delivery or a redelivery fee are fake: track packages in the store's own app. No real company asks you to pay with gift cards. Forward scam texts to 7726.",
+   "if_not": "Nothing to update. Delivery scam texts are everywhere this season; forward them to 7726.",
+   "source": "Massachusetts Office of Consumer Affairs, Nov 10, 2026",
+   "links": [
+    "https://www.mass.gov/news/outsmart-scammers-this-holiday-season"
    ]
   },
   {
