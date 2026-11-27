@@ -16,22 +16,22 @@ Data updated Nov 27, 2026.
 
 ## News
 
-- [Air Force cloud system reported hacked](https://whatdoiupdate.com/news/airforce-cloudone-2026-11.html): Heads up. Not home devices. Nov 27, 2026.
-- [Hackers claim they took 166M USA Today records](https://whatdoiupdate.com/news/usatoday-2026-11.html): Heads up (unconfirmed). Not home devices. Nov 26, 2026.
-- [Business software maker SAP confirms a cyberattack](https://whatdoiupdate.com/news/sap-2026-11.html): Heads up. Not home devices. Nov 26, 2026.
-- [Todoist says hackers took some users' emails](https://whatdoiupdate.com/news/todoist-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
+- [Air Force cloud system reported hacked](https://whatdoiupdate.com/news/airforce-cloudone-2026-11.html): Heads up. Might affect you. Nov 27, 2026.
+- [Hackers claim they took 166M USA Today records](https://whatdoiupdate.com/news/usatoday-2026-11.html): Heads up (unconfirmed). Might affect you. Nov 26, 2026.
+- [Business software maker SAP confirms a cyberattack](https://whatdoiupdate.com/news/sap-2026-11.html): Heads up. Might affect you. Nov 26, 2026.
+- [Todoist says hackers took some users' emails](https://whatdoiupdate.com/news/todoist-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
 - [Treasury's financial crimes office says it was breached](https://whatdoiupdate.com/news/fincen-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
-- [Allstate's website and app have been down for days](https://whatdoiupdate.com/news/allstate-outage-2026-11.html): Heads up. Not home devices. Nov 25, 2026.
+- [Allstate's website and app have been down for days](https://whatdoiupdate.com/news/allstate-outage-2026-11.html): Heads up. Might affect you. Nov 25, 2026.
 - [1Password says hackers took customer names and emails](https://whatdoiupdate.com/news/1password-2026-11.html): Heads up. Affects: Password manager (1Password, Bitwarden, LastPass, iCloud Keychain). Nov 25, 2026.
 - [Unclassified CIA system reported hacked](https://whatdoiupdate.com/news/cia-odni-2026-11.html): Heads up. Not home devices. Nov 24, 2026.
 - [Chrome fixes a critical flaw; restart to finish](https://whatdoiupdate.com/news/chrome-158-2026-11.html): Heads up. Affects: Chrome. Nov 23, 2026.
-- [GL.iNet routers hacked through its cloud service](https://whatdoiupdate.com/news/glinet-goodcloud-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
+- [GL.iNet routers hacked through its cloud service](https://whatdoiupdate.com/news/glinet-goodcloud-2026-11.html): Heads up. Might affect you. Nov 20, 2026.
 - [FBI police database reported hacked](https://whatdoiupdate.com/news/fbi-ncic-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
-- [Software checkout firm says card numbers were stolen](https://whatdoiupdate.com/news/cleverbridge-2026-11.html): Heads up. Not home devices. Nov 20, 2026.
-- [Hackers got into a USDA farm payment system](https://whatdoiupdate.com/news/usda-2026-11.html): Heads up (unconfirmed). Not home devices. Nov 19, 2026.
+- [Software checkout firm says card numbers were stolen](https://whatdoiupdate.com/news/cleverbridge-2026-11.html): Heads up. Might affect you. Nov 20, 2026.
+- [Hackers got into a USDA farm payment system](https://whatdoiupdate.com/news/usda-2026-11.html): Heads up (unconfirmed). Might affect you. Nov 19, 2026.
 - [Synology fixes two critical flaws in its home drives](https://whatdoiupdate.com/news/synology-dsm-2026-11.html): Heads up. Affects: Home storage drive (Synology, QNAP). Nov 19, 2026.
 - [Chase says a vendor leak exposed emails](https://whatdoiupdate.com/news/chase-vendor-2026-11.html): Heads up. Affects: Bank or credit union. Nov 19, 2026.
-- [Cheap no-name TV boxes used in record ad fraud](https://whatdoiupdate.com/news/badbox-2026-11.html): Heads up. Not home devices. Nov 19, 2026.
+- [Cheap no-name TV boxes used in record ad fraud](https://whatdoiupdate.com/news/badbox-2026-11.html): Heads up. Might affect you. Nov 19, 2026.
 - [Bank and airline outages, Nov 12–17](https://whatdoiupdate.com/news/outage-wave-2026-11.html): Heads up. Affects: Bank or credit union. Nov 17, 2026.
 - [Apple Pay, iCloud and the App Store went down](https://whatdoiupdate.com/news/apple-outage-2026-11.html): Heads up. Affects: iPhone, iPad, Mac, Apple Watch, Apple TV. Nov 17, 2026.
 - [Microsoft 365 down for almost 24 hours](https://whatdoiupdate.com/news/m365-outage-2026-11.html): Heads up. Affects: Outlook.com / Microsoft 365 account, Outlook (desktop app). Nov 12, 2026.
