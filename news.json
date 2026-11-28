@@ -76,7 +76,8 @@
    "links": [
     "https://thehackernews.com/2026/11/pcloud-password-manager-hit-by-cyber.html"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "airforce-cloudone-2026-11",
@@ -90,7 +91,68 @@
    "links": [
     "https://www.reuters.com/world/hackers-breach-us-air-force-flagship-cloud-one-computing-platform-2026-11-27/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
+  },
+  {
+   "id": "chromeos-lts-2026-11",
+   "date": "2026-11-27",
+   "title": "ChromeOS long-term version gets the Chrome flaw fix",
+   "kind": "fix",
+   "affects": [
+    "chromebook"
+   ],
+   "verdict": "heads_up",
+   "if_affected": "Not a new attack: Google released ChromeOS LTS 150.0.7871.290, the long-term version many school and work Chromebooks run. Google's release notes list the fix for the Chrome flaw hackers are already using.",
+   "if_not": "Nothing for you to do.",
+   "source": "Chrome Releases blog, Nov 27, 2026",
+   "links": [
+    "https://chromereleases.googleblog.com/2026/11/long-term-support-channel-update-for_01009121915.html"
+   ]
+  },
+  {
+   "id": "octopus-2026-11",
+   "date": "2026-11-27",
+   "title": "Hong Kong's Octopus card says hackers took customer data",
+   "kind": "hack",
+   "affects": [],
+   "verdict": "heads_up",
+   "reach": "maybe",
+   "if_affected": "If you have an Octopus card or wallet in Hong Kong: Octopus says hackers got about 7,500 customers' names and photos, and some auto top-up bank details. It says card and bank account numbers weren't involved, and not to share details with messages claiming to be Octopus.",
+   "if_not": "Nothing for you to do.",
+   "source": "Octopus Cards Limited notice, Nov 27, 2026",
+   "links": [
+    "https://www.octopus.com.hk/tc/corporate/media/press-releases/2026/20261127.html"
+   ]
+  },
+  {
+   "id": "lloyds-outage-2026-11",
+   "date": "2026-11-27",
+   "title": "Lloyds and Bank of Scotland apps went down in the UK",
+   "kind": "outage",
+   "affects": [],
+   "verdict": "heads_up",
+   "reach": "maybe",
+   "if_affected": "If you bank with Lloyds or Bank of Scotland: an outage, not a hack. Some customers couldn't use the app or online banking on Friday morning, and both banks said they were aware of it. Nothing to update.",
+   "if_not": "Nothing for you to do.",
+   "source": "The Register, Nov 27, 2026",
+   "links": [
+    "https://www.theregister.com/applications/2026/11/27/lloyds-and-bank-of-scotland-apps-fall-over-on-payday/5312566"
+   ]
+  },
+  {
+   "id": "swiss-ai-attacks-2026-11",
+   "date": "2026-11-27",
+   "title": "Swiss agency says AI-run hacks broke into companies",
+   "kind": "hack",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "",
+   "if_not": "Companies and infrastructure operators in Switzerland, not your devices. Nothing to update.",
+   "source": "The Hacker News, Nov 27, 2026",
+   "links": [
+    "https://thehackernews.com/2026/11/switzerland-confirms-ai-assisted.html"
+   ]
   },
   {
    "id": "sap-2026-11",
@@ -104,7 +166,8 @@
    "links": [
     "https://www.bleepingcomputer.com/news/security/sap-confirms-security-incident-after-suspicious-github-activity/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "usatoday-2026-11",
@@ -119,7 +182,24 @@
    "links": [
     "https://www.forbes.com/sites/larsdaniel/2026/11/26/usa-today-data-breach-claim-hackers-say-they-have-166-million-records/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
+  },
+  {
+   "id": "fifa-2026-11",
+   "date": "2026-11-26",
+   "title": "FIFA says hackers took personal and business data",
+   "kind": "hack",
+   "affects": [],
+   "verdict": "heads_up",
+   "reach": "maybe",
+   "if_affected": "If you have a FIFA account: FIFA says a cyberattack got a limited set of personal and business information. It hasn't said whose data or what kind. It says it's working with law enforcement. Nothing to update.",
+   "if_not": "Nothing for you to do.",
+   "source": "SecurityWeek, Nov 26, 2026; ABC7, Nov 26, 2026",
+   "links": [
+    "https://www.securityweek.com/fifa-says-it-has-been-victim-of-a-cyberattack-accessing-personal-and-business-information/",
+    "https://abc7.com/post/fifa-says-has-been-victim-cyberattack-accessing-personal-business-information/20085852/"
+   ]
   },
   {
    "id": "bostonsci-2026-11",
@@ -133,7 +213,8 @@
    "links": [
     "https://oag.ca.gov/ecrime/databreach/reports/sb24-633449"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "sees-2026-11",
@@ -147,7 +228,8 @@
    "links": [
     "https://oag.ca.gov/ecrime/databreach/reports/sb24-633435"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "todoist-2026-11",
@@ -161,7 +243,8 @@
    "links": [
     "https://techcrunch.com/2026/11/25/todoist-confirms-6-of-customers-details-were-stolen-in-data-breach/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "1password-2026-11",
@@ -178,7 +261,8 @@
     "https://1password.com/blog/update-on-nov-2026-security-incident",
     "https://www.bleepingcomputer.com/news/security/1password-customer-data-stolen-after-employee-github-account-breach/",
     "https://techcrunch.com/2026/11/25/1password-said-hackers-broke-into-its-internal-systems-but-customer-passwords-are-safe/"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "allstate-outage-2026-11",
@@ -192,7 +276,8 @@
    "links": [
     "https://techcrunch.com/2026/11/25/allstate-suffers-multi-day-tech-outage-ahead-of-thanksgiving/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "outage"
   },
   {
    "id": "fincen-2026-11",
@@ -207,6 +292,23 @@
     "https://www.theregister.com/security/2026/11/25/us-treasury-financial-crimes-unit-becomes-latest-fed-breach-victim/5312165",
     "https://thehackernews.com/2026/11/us-treasurys-fincen-takes-some-systems.html",
     "https://www.nextgov.com/cybersecurity/2026/11/treasurys-financial-crimes-bureau-takes-systems-offline-after-hack/417442/"
+   ],
+   "kind": "hack"
+  },
+  {
+   "id": "rbi-claim-2026-11",
+   "date": "2026-11-25",
+   "title": "Hackers claim they hit Burger King's owner",
+   "kind": "hack",
+   "affects": [],
+   "verdict": "heads_up",
+   "reach": "maybe",
+   "if_affected": "If you've contacted Burger King, Tim Hortons, Popeyes or Firehouse Subs customer support: a ransomware group claims it took support records, including names, contacts, birth dates and partial card numbers. The company hasn't confirmed a breach.",
+   "if_not": "Nothing for you to do.",
+   "source": "Cybernews, Nov 2026",
+   "reported_by": "a cybersecurity news site",
+   "links": [
+    "https://cybernews.com/security/burger-king-owner-ransomware-claims/"
    ]
   },
   {
@@ -221,7 +323,8 @@
    "links": [
     "https://oag.ca.gov/ecrime/databreach/reports/sb24-633397"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "bestegg-2026-11",
@@ -235,7 +338,8 @@
    "links": [
     "https://oag.ca.gov/ecrime/databreach/reports/sb24-633388"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "cia-odni-2026-11",
@@ -248,7 +352,8 @@
    "source": "CyberScoop, Nov 24, 2026",
    "links": [
     "https://cyberscoop.com/cia-odni-osint-data-breach/"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "chrome-158-2026-11",
@@ -264,7 +369,8 @@
    "links": [
     "https://chromereleases.googleblog.com/2026/11/stable-channel-update-for-desktop_01734282054.html",
     "https://chromereleases.googleblog.com/2026/11/chrome-for-android-update_0411169060.html"
-   ]
+   ],
+   "kind": "fix"
   },
   {
    "id": "glinet-goodcloud-2026-11",
@@ -279,7 +385,8 @@
     "https://www.gl-inet.com/en-us/blogs/blog/glinet-security-notice-2026-11-20",
     "https://www.bleepingcomputer.com/news/security/hackers-exploit-glinet-cloud-flaw-to-infect-routers-kvm-devices/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "cleverbridge-2026-11",
@@ -294,7 +401,8 @@
     "https://grow.cleverbridge.com/incident-update",
     "https://www.bleepingcomputer.com/news/security/cleverbridge-warns-hackers-stole-credit-card-numbers-cvvs-in-data-breach/"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "fbi-ncic-2026-11",
@@ -307,7 +415,8 @@
    "source": "CNN via BleepingComputer, Nov 20, 2026; FBI IC3 PSA I-091726, Sep 17, 2026",
    "links": [
     "https://www.ic3.gov/PSA/2026/PSA260917"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "badbox-2026-11",
@@ -322,7 +431,8 @@
     "https://www.ic3.gov/PSA/2025/PSA250605",
     "https://www.martechcube.com/?p=327632"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "chase-vendor-2026-11",
@@ -339,7 +449,8 @@
     "https://www.bleepingcomputer.com/news/security/vendor-data-breach-exposes-chase-visa-mastercard-customer-info/",
     "https://abcnews.com/US/jpmorgan-chase-reports-cyberattack-party-service-providers/story?id=138287705",
     "https://www.kold.com/2026/11/19/chase-bank-announces-cyberattack-says-hackers-may-have-obtained-customers-personal-information/"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "synology-dsm-2026-11",
@@ -355,7 +466,8 @@
    "links": [
     "https://www.synology.com/security/advisory/Synology_SA_26_21",
     "https://www.synology.com/security/advisory/Synology_SA_26_20"
-   ]
+   ],
+   "kind": "fix"
   },
   {
    "id": "usda-2026-11",
@@ -371,7 +483,8 @@
     "https://www.nextgov.com/cybersecurity/2026/11/usda-grapples-security-breach-it-staff-take-multiple-systems-offline/417350/",
     "https://www.dtnpf.com/agriculture/web/ag/columns/washington-insider/article/2026/11/24/usda-cybersecurity-incident-leaves-4"
    ],
-   "reach": "maybe"
+   "reach": "maybe",
+   "kind": "hack"
   },
   {
    "id": "apple-outage-2026-11",
@@ -391,7 +504,8 @@
    "links": [
     "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
     "https://abc7.com/story/apple-joins-parade-technology-hiccups-recent-days/20048749/"
-   ]
+   ],
+   "kind": "outage"
   },
   {
    "id": "outage-wave-2026-11",
@@ -407,7 +521,8 @@
    "links": [
     "https://www.pbs.org/newshour/nation/customers-at-major-banks-are-experiencing-issues-accessing-their-accounts",
     "https://www.fox4news.com/news/airline-bank-outage-reason-tech-glitch-cyber-attack"
-   ]
+   ],
+   "kind": "outage"
   },
   {
    "id": "m365-outage-2026-11",
@@ -423,7 +538,8 @@
    "source": "Microsoft incident MO1550821, via BleepingComputer, Nov 12, 2026",
    "links": [
     "https://bleepingcomputer.com/news/microsoft/massive-microsoft-365-outage-disrupts-outlook-teams-copilot-worldwide"
-   ]
+   ],
+   "kind": "outage"
   },
   {
    "id": "holiday-scams-2026-11",
@@ -439,7 +555,8 @@
    "source": "Massachusetts Office of Consumer Affairs, Nov 10, 2026",
    "links": [
     "https://www.mass.gov/news/outsmart-scammers-this-holiday-season"
-   ]
+   ],
+   "kind": "scam"
   },
   {
    "id": "freezers-2026-11",
@@ -452,7 +569,8 @@
    "source": "Reuters, Nov 5, 2026; FBI and CISA warning via BleepingComputer, Nov 5, 2026",
    "links": [
     "https://bleepingcomputer.com/news/security/fbi-cisa-warn-of-cyberattacks-targeting-refrigeration-systems"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "android-nov-2026",
@@ -469,7 +587,8 @@
    "source": "Android Security Bulletin, November 2026 (published Nov 2, 2026)",
    "links": [
     "https://source.android.com/docs/security/bulletin/2026/2026-11-01"
-   ]
+   ],
+   "kind": "fix"
   },
   {
    "id": "binance-2026-10",
@@ -485,7 +604,8 @@
    "links": [
     "https://www.fbi.gov/investigate/cyber/alerts/2026/north-korea-responsible-for-6-billion-binance-attack",
     "https://www.trmlabs.com/resources/blog/north-korea-steals-usd-6-36-billion-from-binance-in-the-largest-hack-in-history"
-   ]
+   ],
+   "kind": "hack"
   },
   {
    "id": "gcloud-london-2026-10",
@@ -499,7 +619,8 @@
    "links": [
     "https://status.cloud.google.com/incidents/Xs2XTHzAVC9YnafnPyzj",
     "https://technologymagazine.com/news/the-google-cloud-outage-what-industry-experts-have-to-say"
-   ]
+   ],
+   "kind": "outage"
   }
  ]
 }

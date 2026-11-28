@@ -39,6 +39,9 @@ p{margin:0}
 .sub{color:var(--body)}
 .note{display:flex;gap:10px;background:var(--blue-bg);color:var(--blue-ink);border-radius:14px;padding:14px 16px;font-size:14px;margin-top:14px}
 .chips{display:flex;flex-wrap:wrap;gap:8px}
+.newstabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 6px}
+.newstabs .chip{min-height:44px;padding:0 14px;font-size:14px}
+.newstabs .chip .n{font-weight:500;opacity:.7}
 .chip{min-height:44px;padding:0 16px;border-radius:999px;border:1.5px solid #CFCCC3;background:#fff;color:var(--ink);font:600 15px Inter,system-ui,sans-serif;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
 .btn{display:flex;align-items:center;justify-content:center;width:100%;min-height:52px;border:none;border-radius:14px;background:var(--blue);color:#fff;font:700 17px Inter,system-ui,sans-serif;cursor:pointer;margin-top:12px}
@@ -113,7 +116,7 @@ ol.intro span{font-size:14px;color:var(--body)}
 </style>
 </head>
 <body>
-<main id="app" aria-live="polite"><p class="sub js-only">Loading…</p><!-- static:start --><div id="static"><h1>Know when something you own gets hacked</h1><p>What Do I Update? is a free app that tells you, in plain English, when a phone, computer, browser, router or app you own has a flaw hackers are using, and exactly where to tap to update it. No account, no tracking: your list stays on your phone.</p><h2>Latest alert: <a href="/alerts/update-your-synology-drive-cve-2024-10441.html">Update your Synology drive</a></h2><p>Hackers are using a flaw in Synology&#x27;s software to take over drives remotely. Install the latest update from the drive&#x27;s Control Panel. <span>(Do now: hackers are using this flaw, added Nov 18, 2026)</span></p><h2>Do I need to update?</h2><p><a href="/devices/7zip.html">7-Zip</a> · <a href="/devices/asus-pc.html">ASUS laptop or desktop</a> · <a href="/devices/router-asus.html">ASUS router</a> · <a href="/devices/adobe-reader.html">Adobe Acrobat / Reader</a> · <a href="/devices/android.html">Android phone (any brand)</a> · <a href="/devices/apple-tv.html">Apple TV</a> · <a href="/devices/apple-watch.html">Apple Watch</a> · <a href="/devices/other-chromium.html">Brave, Opera or Vivaldi</a> · <a href="/devices/chrome.html">Chrome</a> · <a href="/devices/chromebook.html">Chromebook</a> · <a href="/devices/camera-dlink.html">D-Link camera or recorder</a> · <a href="/devices/router-dlink.html">D-Link router</a> · <a href="/devices/camera-dahua.html">Dahua camera or recorder</a> · <a href="/devices/router-draytek.html">DrayTek router</a> · <a href="/devices/firefox.html">Firefox</a> · <a href="/devices/pixel.html">Google Pixel</a> · <a href="/devices/camera-hikvision.html">Hikvision camera or recorder</a> · <a href="/devices/nas.html">Home storage drive (Synology, QNAP)</a> · <a href="/devices/java.html">Java</a> · <a href="/devices/mac.html">Mac</a> · <a href="/devices/">all devices</a></p><h2>Recent alerts</h2><ul class="list"><li><a href="/alerts/update-your-synology-drive-cve-2024-10441.html">Update your Synology drive</a><br><span class="small">Nov 18, 2026 · Do now: hackers are using this flaw · Home storage drive (Synology, QNAP)</span></li><li><a href="/alerts/update-chrome-and-restart-it-cve-2026-125350.html">Update Chrome and restart it</a><br><span class="small">Nov 10, 2026 · Update this week: hackers are using this flaw · Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi</span></li><li><a href="/alerts/update-outlook-cve-2026-124194.html">Update Outlook</a><br><span class="small">Nov 10, 2026 · Update this week: hackers are using this flaw · Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app)</span></li><li><a href="/alerts/make-sure-your-apple-devices-are-up-to-date-cve-2024-27834.html">Make sure your Apple devices are up to date</a><br><span class="small">Nov 4, 2026 · Update this week: hackers are using this flaw · iPhone, iPad, Apple Watch, Apple TV, Mac, Safari</span></li><li><a href="/alerts/run-windows-update-and-restart-cve-2026-96951.html">Run Windows Update and restart</a><br><span class="small">Oct 13, 2026 · Older alert (added Oct 13, 2026): if you haven&#x27;t updated since then, update now · Windows PC</span></li></ul><p><a href="/alerts/">All alerts</a></p><h2>In the news</h2><ul class="list"><li><a href="/news/pcloud-pass-2026-11.html">pCloud says hackers hit its password manager</a><br><span class="small">Nov 28, 2026 · Heads up · Might affect you</span></li><li><a href="/news/airforce-cloudone-2026-11.html">Air Force cloud system reported hacked</a><br><span class="small">Nov 27, 2026 · Heads up · Might affect you</span></li><li><a href="/news/usatoday-2026-11.html">Hackers claim they took 166M USA Today records</a><br><span class="small">Nov 26, 2026 · Heads up (unconfirmed) · Might affect you</span></li><li><a href="/news/sap-2026-11.html">Business software maker SAP confirms a cyberattack</a><br><span class="small">Nov 26, 2026 · Heads up · Might affect you</span></li><li><a href="/news/todoist-2026-11.html">Todoist says hackers took some users&#x27; emails</a><br><span class="small">Nov 25, 2026 · Heads up · Might affect you</span></li><li><a href="/news/sees-2026-11.html">See&#x27;s Candies says stolen files reached the dark web</a><br><span class="small">Nov 25, 2026 · Heads up · Might affect you</span></li></ul><p><a href="/news/">All news</a></p><p>Alert data from CISA's list of flaws used in real attacks, updated Nov 28, 2026. News updated Nov 28, 2026. We lead with the maker's or a government's own notice; news that isn't confirmed yet is labeled Unconfirmed.</p></div><!-- static:end --></main>
+<main id="app" aria-live="polite"><p class="sub js-only">Loading…</p><!-- static:start --><div id="static"><h1>Know when something you own gets hacked</h1><p>What Do I Update? is a free app that tells you, in plain English, when a phone, computer, browser, router or app you own has a flaw hackers are using, and exactly where to tap to update it. No account, no tracking: your list stays on your phone.</p><h2>Latest alert: <a href="/alerts/update-your-synology-drive-cve-2024-10441.html">Update your Synology drive</a></h2><p>Hackers are using a flaw in Synology&#x27;s software to take over drives remotely. Install the latest update from the drive&#x27;s Control Panel. <span>(Do now: hackers are using this flaw, added Nov 18, 2026)</span></p><h2>Do I need to update?</h2><p><a href="/devices/7zip.html">7-Zip</a> · <a href="/devices/asus-pc.html">ASUS laptop or desktop</a> · <a href="/devices/router-asus.html">ASUS router</a> · <a href="/devices/adobe-reader.html">Adobe Acrobat / Reader</a> · <a href="/devices/android.html">Android phone (any brand)</a> · <a href="/devices/apple-tv.html">Apple TV</a> · <a href="/devices/apple-watch.html">Apple Watch</a> · <a href="/devices/other-chromium.html">Brave, Opera or Vivaldi</a> · <a href="/devices/chrome.html">Chrome</a> · <a href="/devices/chromebook.html">Chromebook</a> · <a href="/devices/camera-dlink.html">D-Link camera or recorder</a> · <a href="/devices/router-dlink.html">D-Link router</a> · <a href="/devices/camera-dahua.html">Dahua camera or recorder</a> · <a href="/devices/router-draytek.html">DrayTek router</a> · <a href="/devices/firefox.html">Firefox</a> · <a href="/devices/pixel.html">Google Pixel</a> · <a href="/devices/camera-hikvision.html">Hikvision camera or recorder</a> · <a href="/devices/nas.html">Home storage drive (Synology, QNAP)</a> · <a href="/devices/java.html">Java</a> · <a href="/devices/mac.html">Mac</a> · <a href="/devices/">all devices</a></p><h2>Recent alerts</h2><ul class="list"><li><a href="/alerts/update-your-synology-drive-cve-2024-10441.html">Update your Synology drive</a><br><span class="small">Nov 18, 2026 · Do now: hackers are using this flaw · Home storage drive (Synology, QNAP)</span></li><li><a href="/alerts/update-chrome-and-restart-it-cve-2026-125350.html">Update Chrome and restart it</a><br><span class="small">Nov 10, 2026 · Update this week: hackers are using this flaw · Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi</span></li><li><a href="/alerts/update-outlook-cve-2026-124194.html">Update Outlook</a><br><span class="small">Nov 10, 2026 · Update this week: hackers are using this flaw · Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app)</span></li><li><a href="/alerts/make-sure-your-apple-devices-are-up-to-date-cve-2024-27834.html">Make sure your Apple devices are up to date</a><br><span class="small">Nov 4, 2026 · Update this week: hackers are using this flaw · iPhone, iPad, Apple Watch, Apple TV, Mac, Safari</span></li><li><a href="/alerts/run-windows-update-and-restart-cve-2026-96951.html">Run Windows Update and restart</a><br><span class="small">Oct 13, 2026 · Update this week: hackers are using this flaw · Windows PC</span></li></ul><p><a href="/alerts/">All alerts</a></p><h2>In the news</h2><ul class="list"><li><a href="/news/pcloud-pass-2026-11.html">pCloud says hackers hit its password manager</a><br><span class="small">Nov 28, 2026 · Heads up · Might affect you</span></li><li><a href="/news/swiss-ai-attacks-2026-11.html">Swiss agency says AI-run hacks broke into companies</a><br><span class="small">Nov 27, 2026 · Heads up · Not home devices</span></li><li><a href="/news/octopus-2026-11.html">Hong Kong&#x27;s Octopus card says hackers took customer data</a><br><span class="small">Nov 27, 2026 · Heads up · Might affect you</span></li><li><a href="/news/lloyds-outage-2026-11.html">Lloyds and Bank of Scotland apps went down in the UK</a><br><span class="small">Nov 27, 2026 · Heads up · Might affect you</span></li><li><a href="/news/chromeos-lts-2026-11.html">ChromeOS long-term version gets the Chrome flaw fix</a><br><span class="small">Nov 27, 2026 · Heads up · Affects: Chromebook</span></li><li><a href="/news/airforce-cloudone-2026-11.html">Air Force cloud system reported hacked</a><br><span class="small">Nov 27, 2026 · Heads up · Might affect you</span></li></ul><p><a href="/news/">All news</a></p><p>Alert data from CISA's list of flaws used in real attacks, updated Nov 28, 2026. News updated Nov 28, 2026. We lead with the maker's or a government's own notice; news that isn't confirmed yet is labeled Unconfirmed.</p></div><!-- static:end --></main>
 <nav class="tabs" aria-label="Main" id="tabs" hidden>
 <button type="button" data-view="alerts">
 <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>Alerts</button>
@@ -131,7 +134,7 @@ ol.intro span{font-size:14px;color:var(--body)}
 // Privacy design: everything about the person (their devices, models, checklists, family
 // lists) lives only in this browser. All data files are public and identical for everyone;
 // matching happens here, on the phone. Nothing is ever sent anywhere.
-const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 45, NEWS_DAYS = 45, REPLACE_DAYS = 730;
+const DO_NOW_DAYS = 14, THIS_WEEK_DAYS = 60, NEWS_DAYS = 45, REPLACE_DAYS = 730;
 const KEY_PROFILES = "wdiu.profiles.v1", KEY_OLD_DEVICES = "wdiu.devices.v1", KEY_FIXED = "wdiu.fixed.v1",
       KEY_CHECKS = "wdiu.checks.v1", KEY_BREACHES = "wdiu.breaches.v1", KEY_INTRO = "wdiu.intro.v1", KEY_PUSH = "wdiu.push.v1",
       KEY_SEEN = "wdiu.seen.v1", KEY_COUNTED = "wdiu.counted.v1", KEY_COUNT_OFF = "wdiu.countoff.v1",
@@ -631,47 +634,57 @@ function staleBanner(which) {
   return null;
 }
 
-function viewHeadlines() {
-  const items = [...D.news.items].sort((x, y) => y.date.localeCompare(x.date));
-  const out = [header(), el("h1", {}, "In the news"), el("p", { class: "sub" }, "Big hacks, outages and breaches, with one answer: does it affect you?"),
-    el("p", { class: "small" }, `News last updated ${fmtDate(D.news.updated)} · device alerts checked ${fmtDate(D.kev.builtAt)}`),
-    staleBanner("news"),
-    el("h2", {}, "Recent"),
-    ...items.map(n => {
-      const hit = mine(n.affects);
-      const maybe = !hit.length && n.reach === "maybe";
-      const tone = hit.length || maybe ? (n.verdict === "do_now" ? "now" : "week") : "ok";
-      const label = hit.length ? (n.verdict === "do_now" ? "Do now" : "Heads up") : maybe ? "Might affect you" : "Not you";
-      return el("div", { class: "box" },
-        el("p", { class: "small" }, n.date_label || fmtDate(n.date)),
-        el("h3", { style: "margin:4px 0 8px" }, n.title),
-        el("span", { class: `pill ${tone}` }, icon(tone), label),
-        n.reported_by ? el("span", { class: "badge " + CONF.unconfirmed[0], style: "margin-left:8px" }, CONF.unconfirmed[1]) : null,
-        el("p", { class: "small", style: "margin-top:8px" }, hit.length || maybe ? n.if_affected : n.if_not),
-        unconfirmedNote(n),
-        el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source),
-        sourceLinks(n.links));
-    })];
+// News tab: one switcher at the top instead of long stacked sections. The kinds match KINDS in news_tool.py.
+const NEWS_TABS = [["all", "All"], ["hack", "Hacks & leaks"], ["outage", "Outages"], ["scam", "Scams"], ["fix", "Fixes"], ["breaches", "Breach list"]];
+function newsCard(n) {
+  const hit = mine(n.affects);
+  const maybe = !hit.length && n.reach === "maybe";
+  const tone = hit.length || maybe ? (n.verdict === "do_now" ? "now" : "week") : "ok";
+  const label = hit.length ? (n.verdict === "do_now" ? "Do now" : "Heads up") : maybe ? "Might affect you" : "Not you";
+  return el("div", { class: "box" },
+    el("p", { class: "small" }, n.date_label || fmtDate(n.date)),
+    el("h3", { style: "margin:4px 0 8px" }, n.title),
+    el("span", { class: `pill ${tone}` }, icon(tone), label),
+    n.reported_by ? el("span", { class: "badge " + CONF.unconfirmed[0], style: "margin-left:8px" }, CONF.unconfirmed[1]) : null,
+    el("p", { class: "small", style: "margin-top:8px" }, hit.length || maybe ? n.if_affected : n.if_not),
+    unconfirmedNote(n),
+    el("p", { class: "small", style: "margin-top:6px;color:var(--muted)" }, "Source: " + n.source),
+    sourceLinks(n.links));
+}
+function breachList() {
   // Breach watch: no email needed. The person marks the services they use, on this phone.
   const br = D.breaches.breaches || [];
-  if (br.length) {
-    out.push(el("h2", {}, "Recent data breaches"),
-      el("p", { class: "small" }, "Companies whose customer data leaked recently. Tap \"I use this\" for what to do. We never ask for your email."));
-    for (const b of br.slice(0, 25)) {
-      const used = S.used.has(b.name);
-      out.push(el("div", { class: "box" },
-        el("p", { class: "small" }, `Added ${fmtDate(b.added)} · ${b.count.toLocaleString()} accounts${b.domain ? " · " + b.domain : ""}`),
-        el("h3", { style: "margin:4px 0 6px" }, b.name),
-        el("p", { class: "small" }, "Leaked: " + (b.data.join(", ") || "not stated")),
-        used ? el("p", { class: "pill week", style: "margin-top:10px;display:flex" },
-          /password/i.test(b.data.join(" ")) ? "Change this password now, and anywhere you reused it. Turn on two-step sign-in."
-            : "Watch for scam emails and texts that use your details. Change the password if you reused it.") : null,
-        el("button", { type: "button", class: "linkbtn", "aria-pressed": used ? "true" : "false",
-          onclick: () => { used ? S.used.delete(b.name) : S.used.add(b.name); store.set(KEY_BREACHES, [...S.used]); render(); } }, used ? "I don't use this" : "I use this")));
-    }
-    out.push(el("p", { class: "small", style: "margin-top:10px" }, "Breach list from Have I Been Pwned, used under CC BY 4.0."));
+  if (!br.length) return [el("p", { class: "small" }, "The breach list isn't available right now. Try again later.")];
+  const out = [el("p", { class: "small" }, "Companies whose customer data leaked recently. Tap \"I use this\" for what to do. We never ask for your email.")];
+  for (const b of br.slice(0, 25)) {
+    const used = S.used.has(b.name);
+    out.push(el("div", { class: "box" },
+      el("p", { class: "small" }, `Added ${fmtDate(b.added)} · ${b.count.toLocaleString()} accounts${b.domain ? " · " + b.domain : ""}`),
+      el("h3", { style: "margin:4px 0 6px" }, b.name),
+      el("p", { class: "small" }, "Leaked: " + (b.data.join(", ") || "not stated")),
+      used ? el("p", { class: "pill week", style: "margin-top:10px;display:flex" },
+        /password/i.test(b.data.join(" ")) ? "Change this password now, and anywhere you reused it. Turn on two-step sign-in."
+          : "Watch for scam emails and texts that use your details. Change the password if you reused it.") : null,
+      el("button", { type: "button", class: "linkbtn", "aria-pressed": used ? "true" : "false",
+        onclick: () => { used ? S.used.delete(b.name) : S.used.add(b.name); store.set(KEY_BREACHES, [...S.used]); render(); } }, used ? "I don't use this" : "I use this")));
   }
+  out.push(el("p", { class: "small", style: "margin-top:10px" }, "Breach list from Have I Been Pwned, used under CC BY 4.0."));
   return out;
+}
+function viewHeadlines() {
+  const items = [...D.news.items].sort((x, y) => y.date.localeCompare(x.date));
+  const tab = NEWS_TABS.some(t => t[0] === S.newsTab) ? S.newsTab : "all";
+  const count = k => k === "all" ? items.length : k === "breaches" ? Math.min((D.breaches.breaches || []).length, 25) : items.filter(n => (n.kind || "hack") === k).length;
+  const tabs = el("div", { class: "newstabs", role: "group", "aria-label": "Show news by type" },
+    ...NEWS_TABS.map(([k, name]) => el("button", { type: "button", class: "chip", "aria-pressed": k === tab ? "true" : "false",
+      onclick: () => { S.newsTab = k; render(); } }, name, el("span", { class: "n" }, String(count(k))))));
+  const out = [header(), el("h1", {}, "In the news"), el("p", { class: "sub" }, "Big hacks, outages and breaches, with one answer: does it affect you?"),
+    el("p", { class: "small" }, `News last updated ${fmtDate(D.news.updated)} · device alerts checked ${fmtDate(D.kev.builtAt)}`),
+    tabs, staleBanner("news")];
+  if (tab === "breaches") return out.concat(breachList());
+  const shown = tab === "all" ? items : items.filter(n => (n.kind || "hack") === tab);
+  if (!shown.length) out.push(el("p", { class: "small" }, "Nothing of this type in the news lately."));
+  return out.concat(shown.map(newsCard));
 }
 
 // ---------- My stuff: search, categories, add anything, family lists ----------
@@ -744,9 +757,9 @@ function viewAgree() {
 }
 
 // A real, recent alert for the welcome screen, straight from the live data: the newest flaw on CISA's list
-// (from the last 45 days) that we've written plain English for. Labeled as an example, never as "yours".
+// (from the This week window) that we've written plain English for. Labeled as an example, never as "yours".
 function sampleAlert() {
-  const recent = e => (today() - new Date(e.added + "T00:00:00")) / 86400000 <= 45;
+  const recent = e => (today() - new Date(e.added + "T00:00:00")) / 86400000 <= THIS_WEEK_DAYS;
   const e = (D.kev.entries || []).filter(e => D.news.plain[e.cve] && (e.products || []).length && recent(e))
     .sort((a, b) => b.added.localeCompare(a.added))[0];
   if (!e) return null;
