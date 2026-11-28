@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-27",
+ "updated": "2026-11-28",
  "plain": {
   "CVE-2026-125350": {
    "title": "Update Chrome and restart it",
@@ -64,6 +64,20 @@
   }
  },
  "items": [
+  {
+   "id": "pcloud-pass-2026-11",
+   "date": "2026-11-28",
+   "title": "pCloud says hackers hit its password manager",
+   "affects": [],
+   "verdict": "heads_up",
+   "if_affected": "If you use pCloud Pass: pCloud says a cyberattack exposed a small number of users' emails and someone tried to log in. It says stored passwords stayed encrypted and pCloud's cloud storage wasn't affected. It warns of phishing asking for your Master Password or recovery words.",
+   "if_not": "Nothing for you to do.",
+   "source": "The Hacker News, Nov 28, 2026",
+   "links": [
+    "https://thehackernews.com/2026/11/pcloud-password-manager-hit-by-cyber.html"
+   ],
+   "reach": "maybe"
+  },
   {
    "id": "airforce-cloudone-2026-11",
    "date": "2026-11-27",
