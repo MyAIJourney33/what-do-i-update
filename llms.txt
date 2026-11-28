@@ -4,7 +4,7 @@
 
 Alerts come from CISA's Known Exploited Vulnerabilities catalog (flaws used in real attacks), refreshed hourly. News items lead with the maker's or a government's own notice; items not yet confirmed by the company or an agency are labeled Unconfirmed. We never send download links.
 
-Data updated Nov 27, 2026.
+Data updated Nov 28, 2026.
 
 ## Current alerts
 
@@ -12,7 +12,7 @@ Data updated Nov 27, 2026.
 - [Update Chrome and restart it](https://whatdoiupdate.com/alerts/update-chrome-and-restart-it-cve-2026-125350.html): Update this week: hackers are using this flaw. Affects Chromebook, Chrome, Microsoft Edge, Brave, Opera or Vivaldi. Added Nov 10, 2026.
 - [Update Outlook](https://whatdoiupdate.com/alerts/update-outlook-cve-2026-124194.html): Update this week: hackers are using this flaw. Affects Microsoft Office (Word, Excel, PowerPoint), Outlook (desktop app). Added Nov 10, 2026.
 - [Make sure your Apple devices are up to date](https://whatdoiupdate.com/alerts/make-sure-your-apple-devices-are-up-to-date-cve-2024-27834.html): Update this week: hackers are using this flaw. Affects iPhone, iPad, Apple Watch, Apple TV, Mac, Safari. Added Nov 4, 2026.
-- [Run Windows Update and restart](https://whatdoiupdate.com/alerts/run-windows-update-and-restart-cve-2026-96951.html): Update this week: hackers are using this flaw. Affects Windows PC. Added Oct 13, 2026.
+- [Run Windows Update and restart](https://whatdoiupdate.com/alerts/run-windows-update-and-restart-cve-2026-96951.html): Older alert (added Oct 13, 2026): if you haven't updated since then, update now. Affects Windows PC. Added Oct 13, 2026.
 
 ## News
 
@@ -80,7 +80,7 @@ Data updated Nov 27, 2026.
 - [Ubiquiti (UniFi / AmpliFi)](https://whatdoiupdate.com/devices/router-ubiquiti.html): no urgent update
 - [WhatsApp](https://whatdoiupdate.com/devices/whatsapp.html): no urgent update
 - [WinRAR](https://whatdoiupdate.com/devices/winrar.html): no urgent update
-- [Windows PC](https://whatdoiupdate.com/devices/windows.html): update this week
+- [Windows PC](https://whatdoiupdate.com/devices/windows.html): no urgent update
 - [Zyxel router or modem](https://whatdoiupdate.com/devices/router-zyxel.html): no urgent update
 - [iPad](https://whatdoiupdate.com/devices/ipad.html): update this week
 - [iPhone](https://whatdoiupdate.com/devices/iphone.html): update this week
